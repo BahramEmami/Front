@@ -6,15 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class SignInController {
+    ////////////////////////////////////////// first signUp scene
     @FXML
     private TextField firstNameTextField;
     @FXML
@@ -34,17 +32,67 @@ public class SignInController {
     @FXML
     private Label statusLabel;
 
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String passWord;
-    private String repeatPassword;
+    private String firstName = "";
+    private String lastName = "";
+    private String email = "";
+    private String passWord = "";
+    private String repeatPassword = "";
 
 
     private Stage stage;
     private Scene scene;
     private Parent root;
 
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////Complete part
+    @FXML
+    private TextField additionalNameTextFieldComplete;
+    @FXML
+    private TextField countryTextFieldComplete;
+    @FXML
+    private TextField cityTextFieldComplete;
+    @FXML
+    private DatePicker birthdayDatePickerComplete;
+    @FXML
+    private Button logInButtonComplete;
+    @FXML
+    private Button backButtonComplete;
+    @FXML
+    private Button signUpButtonComplete;
+    @FXML
+    private Label statusLabelComplete;
+    @FXML
+    private TextField userNameTextFieldComplete;
+    @FXML
+    private RadioButton wantToHireRadioComplete;
+    @FXML
+    private RadioButton lookingForJobRadioComplete;
+    @FXML
+    private RadioButton wantToProvideServiceRadioComplete;
+
+    private String additionalNameComplete = "";
+    private String countryComplete = "";
+    private String cityComplete = "";
+    private String birthDateComplete = "";
+    private String userNameComplete = "";
+    private String jobTypeComplete = "";
+
+
+
+    private boolean dateInputExist = false;
+    private boolean isJobType = false;
+
+
+
+
+
+
+    //////////////////////////////////////////////     First
     @FXML
     public void signInPressed(ActionEvent event){
         try {
@@ -77,7 +125,7 @@ public class SignInController {
             }
             else{
                 statusLabel.setText("Success!!");
-                wait(1500);
+                //wait(1500);
                 Parent root = FXMLLoader.load(getClass().getResource("CompleteProfileFXML.fxml"));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
@@ -224,6 +272,88 @@ public class SignInController {
         return hasLetter && hasNumber;
     }
 
+
+
+
+
+
+    //////////////////////////////////////////////////////////complete
+
+    @FXML
+    public void signUpPressedComplete(ActionEvent event) {
+        try {
+            additionalNameComplete = additionalNameTextFieldComplete.getText();
+            countryComplete = countryTextFieldComplete.getText();
+            cityComplete = cityTextFieldComplete.getText();
+            userNameComplete = userNameTextFieldComplete.getText();
+
+
+            if(wantToHireRadioComplete.isSelected()){
+                isJobType = true;
+                jobTypeComplete = "want_to_hired";
+            }
+            else if(lookingForJobRadioComplete.isSelected()){
+                isJobType = true;
+                jobTypeComplete = "looking_for_job";
+            }
+            else if(lookingForJobRadioComplete.isSelected()){
+                isJobType = true;
+                jobTypeComplete = "want_to_provide_service";
+            }
+            else{
+                isJobType = false;
+            }
+
+            try {
+                birthDateComplete = birthdayDatePickerComplete.getValue().toString();
+                dateInputExist = true;
+            } catch (Exception e) {
+                statusLabelComplete.setText("Please fill all fields!");
+                dateInputExist = false;
+
+            }
+
+            if (additionalNameComplete.length() == 0 || countryComplete.length() == 0 || cityComplete.length() == 0 || !dateInputExist || userNameComplete.length() == 0) {
+                statusLabelComplete.setText("Please fill all fields!");
+            }
+            else if(!validUserNameComplete(userNameComplete)){
+                statusLabelComplete.setText("Invalid username format!");
+            }
+            else {
+                statusLabelComplete.setText("Successful!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void backPressedComplete(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("SigninFXML.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void logInPressedComplete(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("LoginFXML.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public boolean validUserNameComplete(String username) {
+        for (int i = 0; i < username.length(); i++) {
+            char c = username.charAt(i);
+            if (!(Character.isLowerCase(c) || Character.isDigit(c) || c == '.' || c == '_')) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 
 
