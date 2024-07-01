@@ -93,4 +93,14 @@ public class CompleteProfileController {
         stage.show();
     }
 
+    public boolean validUserName(String username) {
+        for (int i = 0; i < username.length(); i++) {
+            char c = username.charAt(i);
+            if (!(Character.isLowerCase(c) || Character.isDigit(c) || c == '.' || c == '_')) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
