@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #66EBCD;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.StartController">
+   <children>
+      <TextField alignment="CENTER" editable="false" layoutX="177.0" layoutY="76.0" prefHeight="97.0" prefWidth="346.0" style="-fx-background-color: #00FFBD1F;" text="Welcome to linkedIn">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font>
+      </TextField>
+      <TextField alignment="CENTER" layoutX="141.0" layoutY="207.0" prefHeight="86.0" prefWidth="418.0" style="-fx-background-color: #00FFBD1F;" text="In  order to continue please press the buton bellow">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </TextField>
+      <Button fx:id="ContinueButton" layoutX="260.0" layoutY="293.0" mnemonicParsing="false" onAction="#continuePressed" prefHeight="50.0" prefWidth="179.0" style="-fx-background-color: #00AEFF;" text="Continue">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

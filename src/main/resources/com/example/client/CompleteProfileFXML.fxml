@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.CompleteProfileController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0">
+         <right>
+            <AnchorPane prefHeight="497.6" prefWidth="205.2" style="-fx-background-color: #00FFBD1F;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="logInButton" layoutX="73.0" layoutY="424.0" mnemonicParsing="false" onAction="#logInPressed" prefHeight="33.0" prefWidth="59.0" style="-fx-background-color: #66EBCD;" text="Login">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="30.0" layoutY="392.0" text="Already have an account?">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../logo3.png" />
+                     </image>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                  </ImageView>
+                  <Label alignment="CENTER" layoutX="7.0" layoutY="200.0" prefHeight="100.0" prefWidth="205.0" text="Signing Up!" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </right>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="486.4" style="-fx-background-color: #66EBCD;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="32.0" prefHeight="40.0" prefWidth="138.0" style="-fx-border-color: #393939; -fx-border-width: 2px 2px 2px 2px;" text="Sign Up" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Italic" size="25.0" />
+                     </font>
+                  </Label>
+                  <VBox layoutX="187.0" layoutY="131.0" prefHeight="287.0" prefWidth="250.0" spacing="30.0">
+                     <children>
+                        <TextField fx:id="additionalNameTextField" prefHeight="33.2" prefWidth="250.0" style="-fx-background-color: #00AEFF;" />
+                        <TextField fx:id="countryTextField" prefHeight="33.2" prefWidth="250.0" style="-fx-background-color: #00AEFF;" />
+                        <TextField fx:id="cityTextField" prefHeight="33.2" prefWidth="250.0" style="-fx-background-color: #00AEFF;" />
+                        <DatePicker fx:id="birthdayDatePicker" prefHeight="33.2" prefWidth="250.0" style="-fx-background-color: #00AEFF;" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="22.0" layoutY="131.0" prefHeight="287.0" prefWidth="136.0" spacing="30.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Additional name">
+                           <font>
+                              <Font name="System Bold Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Country">
+                           <font>
+                              <Font name="System Bold Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="City">
+                           <font>
+                              <Font name="System Bold Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Birthday">
+                           <font>
+                              <Font name="System Bold Italic" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Button fx:id="signUpButton" layoutX="235.0" layoutY="442.0" mnemonicParsing="false" onAction="#signUpPressed" prefHeight="33.0" prefWidth="153.0" style="-fx-background-color: #01DCFF;" text="Sign up">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="backButton" layoutX="22.0" layoutY="19.0" mnemonicParsing="false" onAction="#backPressed" prefHeight="30.4" prefWidth="53.6" style="-fx-background-color: #00654D;" text="Back" textFill="#66ebcd" />
+                  <Label fx:id="statusLabel" alignment="CENTER" layoutX="187.0" layoutY="84.0" prefHeight="33.0" prefWidth="250.0" textFill="RED">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
