@@ -12,7 +12,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class LoginController {
 
@@ -63,31 +67,27 @@ public class LoginController {
 
     @FXML
     public void logIn(ActionEvent event) {
-        try{
+        try {
 
             //puts input in email or username
             //userNameOrEmail(emailOrUsername);
 
 
-
             userName = userNameTextField.getText();
             password = passwordField.getText();
             //emailOrUsername = getEmailOrUsername();
-            if(password.length() == 0 || userName.length() == 0){
+            if (password.length() == 0 || userName.length() == 0) {
                 statusLabel.setText("Please fill all fields!");
-            }
-            else if(!validUserName(userName)){
+            } else if (!validUserName(userName)) {
                 statusLabel.setText("Invalid username format!");
-            }
-            else if(!validPass(password)){
+            } else if (!validPass(password)) {
                 statusLabel.setText("Invalid password format!");
-            }
-            else if(logInStatus() == 1){
+            } else if (logInStatus(userName, password) == 1) {
                 statusLabel.setText("Successfully entered!");
-                //System.out.println(emailOrUsername + " " + password);
-            }
-            else{
+            } else if (logInStatus(userName, password) == 0) {
                 statusLabel.setText("Wrong password or email or userID");
+            } else if (logInStatus(userName, password) == -1) {
+                statusLabel.setText("Error");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,7 +113,7 @@ public class LoginController {
     }
 
 
-    public boolean validUserName(String username){
+    public boolean validUserName(String username) {
         for (int i = 0; i < username.length(); i++) {
             char c = username.charAt(i);
             if (!(Character.isLowerCase(c) || Character.isDigit(c) || c == '.' || c == '_')) {
@@ -123,7 +123,7 @@ public class LoginController {
         return true;
     }
 
-    public boolean validPass(String password){
+    public boolean validPass(String password) {
         if (password.length() < 8) {
             return false;
         }
@@ -141,7 +141,7 @@ public class LoginController {
 
             // If both conditions are met, no need to check further
             if (hasLetter && hasNumber) {
-                return true;
+                return hasLetter && hasNumber;
             }
         }
 
@@ -149,27 +149,49 @@ public class LoginController {
     }
 
 
-    public void userNameOrEmail(String input){
-        if(input.contains("@")){
+    public void userNameOrEmail(String input) {
+        if (input.contains("@")) {
             email = input;
-        }
-        else{
+        } else {
             userName = input;
         }
     }
 
 
+    public int logInStatus(String userName, String password) throws IOException {
 
-    public int logInStatus(){
-        return 1;
+        //"http://localhost:8080"/login/email/password
+        URL url = new URL("http://localhost:8080/" + "login/" + userName + "/" + password);
+        HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
+
+        if (tempConnection.getResponseCode() == 200) {//go to home page
+            return 1;
+        } else if (tempConnection.getResponseCode() == 400) {
+            return 0;
+        } else
+            return -1;
+
+//
+//        tempConnection.setRequestMethod("GET");
+//        BufferedReader in = new BufferedReader(new InputStreamReader(tempConnection.getInputStream()));
+//        String outline;
+//        StringBuffer tempResponse = new StringBuffer();
+//        while ((outline = in.readLine()) != null) {
+//            tempResponse.append(outline);
+//        }
+//        in.close();
+//        String response = tempResponse.toString();
+//
+//          if ( (tempConnection.getResponseCode() == 400) && (response.equals("Wrong input"))) {
+//            statusLabel.setText("Incorrect Username or Password");
+//            return 0;
+//        } else if ( (tempConnection.getResponseCode() == 400) && (response.equals("Error"))) {
+//            statusLabel.setText("Error in login user");
+//            return 0;
+//        } else {
+//            statusLabel.setText(("Crashed"));
+//            return 0;
+//        }
     }
-
-
-
-
-
-
-
-
 
 }

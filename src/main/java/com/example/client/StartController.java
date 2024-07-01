@@ -21,6 +21,8 @@ public class StartController {
 
     public void continuePressed(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("LoginFXML.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("SigninFXML.fxml"));
+
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
