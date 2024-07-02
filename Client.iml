@@ -25,5 +25,9 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.8.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.8.1" level="project" />
     <orderEntry type="library" name="lib" level="application" />
+    <orderEntry type="library" name="openjfx-22.0.1_windows-x64_bin-sdk" level="application" />
+    <orderEntry type="library" name="openjfx-22.0" level="project" />
+    <orderEntry type="library" name="javafx-swt" level="project" />
+    <orderEntry type="library" name="javafx.web" level="project" />
   </component>
 </module>
