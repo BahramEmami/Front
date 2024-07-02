@@ -14,7 +14,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.SignInController">
    <right>
-      <AnchorPane prefHeight="497.6" prefWidth="205.2" style="-fx-background-color: #525DFE;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="497.6" prefWidth="205.2" style="-fx-background-color: #B351FA;" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="logInButton" layoutX="73.0" layoutY="424.0" mnemonicParsing="false" onAction="#logInPressed" prefHeight="33.0" prefWidth="59.0" style="-fx-background-color: #FFFFFF;" text="Login">
                <font>
@@ -25,7 +25,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="35.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@pics/icons8-linkedin-256.png" />
                </image>
@@ -42,45 +42,51 @@
       </AnchorPane>
    </right>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="486.4" style="-fx-background-color: #C985FA;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="486.4" style="-fx-background-color: #87CEF0;" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="32.0" prefHeight="40.0" prefWidth="138.0" text="Sign Up" textAlignment="CENTER" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="32.0" prefHeight="40.0" prefWidth="138.0" text="Sign Up" textAlignment="CENTER">
                <font>
-                  <Font name="System Italic" size="25.0" />
+                  <Font name="System Bold Italic" size="25.0" />
                </font>
             </Label>
-            <VBox layoutX="187.0" layoutY="131.0" prefHeight="287.0" prefWidth="250.0" spacing="30.0">
+            <VBox layoutX="187.0" layoutY="72.0" prefHeight="360.0" prefWidth="250.0" spacing="30.0">
                <children>
                   <TextField fx:id="firstNameTextField" prefHeight="33.2" prefWidth="250.0" promptText="exm. Bahram" style="-fx-background-color: #FFFFFF;" />
                   <TextField fx:id="lastNameTextField" prefHeight="33.2" prefWidth="250.0" promptText="exm. Emami" style="-fx-background-color: #FFFFFF;" />
                   <TextField fx:id="emailTextField" prefHeight="33.2" prefWidth="250.0" promptText="exm. abc@gmail.com" style="-fx-background-color: #FFFFFF;" />
                   <PasswordField fx:id="passWordPassField" prefHeight="33.2" prefWidth="250.0" promptText="exm. bB1234" style="-fx-background-color: #FFFFFF;" />
                   <PasswordField fx:id="repeatPasswordPassField" prefHeight="33.2" prefWidth="250.0" promptText="exm. bB1234" style="-fx-background-color: #FFFFFF;" />
+                  <TextField fx:id="userNameTextField" prefHeight="33.2" prefWidth="250.0" promptText="exm. imbee" />
                </children>
             </VBox>
-            <VBox layoutX="22.0" layoutY="131.0" prefHeight="287.0" prefWidth="136.0" spacing="30.0">
+            <VBox layoutX="22.0" layoutY="72.0" prefHeight="363.0" prefWidth="136.0" spacing="30.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="First name" textFill="WHITE">
+                  <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="First name">
                      <font>
                         <Font name="System Bold Italic" size="15.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Family name" textFill="WHITE">
+                  <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Family name">
                      <font>
                         <Font name="System Bold Italic" size="15.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Email" textFill="WHITE">
+                  <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Email">
                      <font>
                         <Font name="System Bold Italic" size="15.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Password" textFill="WHITE">
+                  <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Password">
                      <font>
                         <Font name="System Bold Italic" size="15.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Reapeat password" textFill="WHITE">
+                  <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Reapeat password">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Username">
                      <font>
                         <Font name="System Bold Italic" size="15.0" />
                      </font>
@@ -91,8 +97,8 @@
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></Button>
-            <Button fx:id="backButton" layoutX="420.0" layoutY="17.0" mnemonicParsing="false" onAction="#backPressed" prefHeight="30.4" prefWidth="53.6" style="-fx-background-color: #FFFFFF;" text="Back" textFill="#af75dc" />
-            <Label fx:id="statusLabel" alignment="CENTER" layoutX="187.0" layoutY="84.0" prefHeight="33.0" prefWidth="250.0" textFill="#00aeff">
+            <Button fx:id="backButton" layoutX="420.0" layoutY="17.0" mnemonicParsing="false" onAction="#backPressed" prefHeight="30.4" prefWidth="53.6" style="-fx-background-color: #FFFFFF;" text="Back" />
+            <Label fx:id="statusLabel" alignment="CENTER" layoutX="14.0" layoutY="13.0" prefHeight="33.0" prefWidth="250.0" textFill="#b351fa">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
