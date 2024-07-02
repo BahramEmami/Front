@@ -56,12 +56,6 @@ public class SignInController {
     @FXML
     private TextField additionalNameTextFieldComplete;
     @FXML
-    private TextField countryTextFieldComplete;
-    @FXML
-    private TextField cityTextFieldComplete;
-    @FXML
-    private DatePicker birthdayDatePickerComplete;
-    @FXML
     private Button logInButtonComplete;
     @FXML
     private Button backButtonComplete;
@@ -78,14 +72,11 @@ public class SignInController {
     private RadioButton wantToProvideServiceRadioComplete;
 
     private String additionalNameComplete = "";
-    private String countryComplete = "";
-    private String cityComplete = "";
-    private String birthDateComplete = "";
+
 
     private String jobTypeComplete = "looking_for_job";
 
 
-    private boolean dateInputExist = false;
     private boolean isJobType = false;
 
 
@@ -316,14 +307,7 @@ public class SignInController {
                 isJobType = false;
             }
 
-            try {
-                birthDateComplete = birthdayDatePickerComplete.getValue().toString();
-                dateInputExist = true;
-            } catch (Exception e) {
-                statusLabelComplete.setText("Please fill all fields!");
-                dateInputExist = false;
 
-            }
 
             if (additionalNameComplete.length() == 0) {
                 statusLabelComplete.setText("Please fill all fields!");
