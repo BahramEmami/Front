@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
@@ -54,34 +53,43 @@
                         <Font name="System Bold Italic" size="25.0" />
                      </font>
                   </Label>
-                  <VBox layoutX="187.0" layoutY="131.0" prefHeight="287.0" prefWidth="250.0" spacing="30.0">
+                  <VBox layoutX="187.0" layoutY="131.0" prefHeight="287.0" prefWidth="250.0" spacing="70.0">
                      <children>
                         <TextField fx:id="additionalNameTextFieldComplete" prefHeight="33.2" prefWidth="250.0" promptText="exm. beilc" style="-fx-background-color: #FFFFFF;" />
-                        <TextField fx:id="countryTextFieldComplete" prefHeight="33.2" prefWidth="250.0" promptText="exm. Iran" style="-fx-background-color: #FFFFFF;" />
-                        <TextField fx:id="cityTextFieldComplete" prefHeight="33.2" prefWidth="250.0" promptText="exm. Tehran" style="-fx-background-color: #FFFFFF;" />
-                        <DatePicker fx:id="birthdayDatePickerComplete" prefHeight="33.2" prefWidth="250.0" style="-fx-background-color: #00AEFF;" />
+                        <VBox prefHeight="86.0" prefWidth="147.0" spacing="10.0">
+                           <children>
+                              <RadioButton fx:id="wantToHireRadioComplete" mnemonicParsing="false" prefHeight="33.2" prefWidth="200.0" text="want to hire">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="workType" />
+                                 </toggleGroup>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="lookingForJobRadioComplete" mnemonicParsing="false" prefHeight="33.2" prefWidth="200.0" text="looking for job" toggleGroup="$workType">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="wantToProvideServiceRadioComplete" mnemonicParsing="false" prefHeight="33.2" prefWidth="200.0" text="want to provide service" toggleGroup="$workType">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </RadioButton>
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
-                  <VBox layoutX="22.0" layoutY="131.0" prefHeight="287.0" prefWidth="136.0" spacing="30.0">
+                  <VBox layoutX="22.0" layoutY="131.0" prefHeight="287.0" prefWidth="136.0" spacing="105.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Additional name">
                            <font>
                               <Font name="System Bold Italic" size="15.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Country">
+                        <Label alignment="CENTER" prefHeight="25.0" prefWidth="148.0" text="Wrok type" textAlignment="CENTER">
                            <font>
-                              <Font name="System Bold Italic" size="15.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="City">
-                           <font>
-                              <Font name="System Bold Italic" size="15.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Birthday">
-                           <font>
-                              <Font name="System Bold Italic" size="15.0" />
+                              <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
                      </children>
@@ -95,21 +103,6 @@
                   <Label fx:id="statusLabelComplete" alignment="CENTER" layoutX="187.0" layoutY="84.0" prefHeight="33.0" prefWidth="250.0" textFill="#b351fa">
                      <font>
                         <Font name="System Bold" size="21.0" />
-                     </font>
-                  </Label>
-                  <VBox layoutX="29.0" layoutY="41.0" prefHeight="86.0" prefWidth="147.0" spacing="10.0" AnchorPane.topAnchor="41.0">
-                     <children>
-                        <RadioButton fx:id="wantToHireRadioComplete" mnemonicParsing="false" text="want to hire">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="workType" />
-                           </toggleGroup></RadioButton>
-                        <RadioButton fx:id="lookingForJobRadioComplete" mnemonicParsing="false" text="looking for job" toggleGroup="$workType" />
-                        <RadioButton fx:id="wantToProvideServiceRadioComplete" mnemonicParsing="false" prefHeight="18.0" prefWidth="146.0" text="want to provide service" toggleGroup="$workType" />
-                     </children>
-                  </VBox>
-                  <Label layoutX="29.0" layoutY="10.0" prefHeight="25.0" prefWidth="148.0" text="Wrok type" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
                </children>

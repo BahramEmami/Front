@@ -9,6 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.sql.Date;
+import java.sql.Date;
+import java.time.LocalDate;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -39,12 +43,12 @@ public class SignInController {
     @FXML
     private TextField userNameTextField;
 
-    private String firstName = "";
-    private String lastName = "";
-    private String email = "";
-    private String passWord = "";
-    private String repeatPassword = "";
-    private String userName = "";
+    private static String firstName = "";
+    private static String lastName = "";
+    private static String email = "";
+    private static String passWord = "";
+    private static String repeatPassword = "";
+    private static String userName = "";
 
 
     private Stage stage;
@@ -71,13 +75,13 @@ public class SignInController {
     @FXML
     private RadioButton wantToProvideServiceRadioComplete;
 
-    private String additionalNameComplete = "";
+    private static String additionalNameComplete = "";
 
 
-    private String jobTypeComplete = "looking_for_job";
+    private static String jobTypeComplete = "";
 
 
-    private boolean isJobType = false;
+    private static boolean isJobType = false;
 
 
     //////////////////////////////////////////////     First
@@ -254,16 +258,10 @@ public class SignInController {
         JSONObject json = new JSONObject();
         json.put("id", userName);
         json.put("email", email);
-        json.put("firstname", firstName);
-        json.put("lastname", lastName);
-        json.put("password", passWord);
-        json.put("additionalname", additionalNameComplete);
-        json.put("joindate", 123);
-        json.put("worktype", jobTypeComplete);
 
-        URL url = new URL("http://localhost:8080/" + "user");
+        URL url = new URL("http://localhost:8080/" + "user/" + "creating1");
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
-        tempConnection.setRequestMethod("POST");
+        tempConnection.setRequestMethod("GET");
         tempConnection.setDoOutput(true);
         tempConnection.getOutputStream().write(json.toString().getBytes());
         tempConnection.getOutputStream().close();
@@ -289,9 +287,6 @@ public class SignInController {
         try {
 
             additionalNameComplete = additionalNameTextFieldComplete.getText();
-            jobTypeComplete = "";
-
-
 
 
             if (wantToHireRadioComplete.isSelected()) {
@@ -300,7 +295,7 @@ public class SignInController {
             } else if (lookingForJobRadioComplete.isSelected()) {
                 isJobType = true;
                 jobTypeComplete = "looking_for_job";
-            } else if (lookingForJobRadioComplete.isSelected()) {
+            } else if (wantToProvideServiceRadioComplete.isSelected()) {
                 isJobType = true;
                 jobTypeComplete = "want_to_provide_service";
             } else {
@@ -308,12 +303,11 @@ public class SignInController {
             }
 
 
+            if (additionalNameComplete.length() == 0 || !isJobType) {
+                statusLabelComplete.setText("Please fill completely!");
+            }
 
-            if (additionalNameComplete.length() == 0) {
-                statusLabelComplete.setText("Please fill all fields!");
-            } else if (!(wantToHireRadioComplete.isSelected()) && !(wantToProvideServiceRadioComplete.isSelected()) && !(lookingForJobRadioComplete.isSelected())) {
-                statusLabel.setText("Please select a WorkType!");
-            } else {
+            else {
                 int signInStatusCompleted1 = signInStatusCompleted();
                 if (signInStatusCompleted1 == 1) {
                     statusLabelComplete.setText("Account Successfully Created!");
@@ -367,20 +361,19 @@ public class SignInController {
     public int signInStatusCompleted() throws IOException {
 
         //"http://localhost:8080"/login/email/password
-
         JSONObject json = new JSONObject();
         json.put("id", userName);
         json.put("email", email);
-        json.put("firstname", firstName);
-        json.put("lastname", lastName);
+        json.put("first_name", firstName);
+        json.put("last_name", lastName);
         json.put("password", passWord);
-        json.put("additionalname", additionalNameComplete);
-        json.put("joindate", 123);
-        json.put("worktype", jobTypeComplete);
+        json.put("additional_name", additionalNameComplete);
+        json.put("join_date", Date.valueOf(LocalDate.now()));
+        json.put("work_type", jobTypeComplete);
 
-        URL url = new URL("http://localhost:8080/" + "user");
+        URL url = new URL("http://localhost:8080/" + "user/" + "creating2");
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
-        tempConnection.setRequestMethod("POST");
+        tempConnection.setRequestMethod("GET");
         tempConnection.setDoOutput(true);
         tempConnection.getOutputStream().write(json.toString().getBytes());
         tempConnection.getOutputStream().close();
