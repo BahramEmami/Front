@@ -45,24 +45,6 @@ public class LoginController {
 
     private String email = "";
 
-   /* @FXML
-    public void getEmailOrUsername(ActionEvent event){
-        try{
-            emailOrUsername = userNameTextField.getText();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void getPassword(ActionEvent event) {
-        try {
-            password = passwordField.getText();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
 
     @FXML
     public void logIn(ActionEvent event) {
@@ -79,59 +61,65 @@ public class LoginController {
             password = passwordField.getText();
 
 
-            if (userName != null) {
-                int returnLogInStatusId = logInStatus(userName, password);
+            if (!userName.contains("@")) {
+
                 if (password.length() == 0 || userName.length() == 0) {
                     statusLabel.setText("Please fill all fields!");
                 } else if (!validUserName(userName)) {
                     statusLabel.setText("Invalid username format!");
                 } else if (!validPass(password)) {
                     statusLabel.setText("Invalid password format!");
-                } else if (returnLogInStatusId == 1) {
-                    statusLabel.setText("Successfully entered!");
-                    /**
-                     *
-                     *
-                     * method next into profile
-                     *
-                     *
-                     */
-                } else if (returnLogInStatusId == -1) {
-                    statusLabel.setText("Wrong password");
-                } else if (returnLogInStatusId == -2) {
-                    statusLabel.setText("Username not found");
-                } else if (returnLogInStatusId == 0) {
-                    statusLabel.setText("Error");
+                } else {
+                    int returnLogInStatusId = logInStatus(userName, password);
+                    if (returnLogInStatusId == 1) {
+                        statusLabel.setText("Successfully entered!");
+                        /**
+                         * Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
+                         *         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                         *         scene = new Scene(root);
+                         *         stage.setScene(scene);
+                         *         stage.show();
+                         */
+                    } else if (returnLogInStatusId == -1) {
+                        statusLabel.setText("Wrong password!");
+                    } else if (returnLogInStatusId == -2) {
+                        statusLabel.setText("Username not found!!");
+                    } else if (returnLogInStatusId == 0) {
+                        statusLabel.setText("Error!!!");
+                    }
                 }
             }
-            if (email != null) {
-                int returnLogInStatusEmail = logInStatusEmail(email, password);
+            if (email.contains("@")) {
                 if (password.length() == 0 || email.length() == 0) {
                     statusLabel.setText("Please fill all fields!");
                 } else if (!isValidEmail(email)) {
                     statusLabel.setText("Invalid email format!");
                 } else if (!validPass(password)) {
                     statusLabel.setText("Invalid password format!");
-                }
-                else if (returnLogInStatusEmail == 1) {
-                    statusLabel.setText("Successfully entered!\n    GOOD LUCK ;)");
-                    /**
-                     *
-                     *
-                     * method next into profile
-                     *
-                     *
-                     */
-                } else if (returnLogInStatusEmail == -1) {
-                    statusLabel.setText("Wrong password!");
-                } else if (returnLogInStatusEmail == -2) {
-                    statusLabel.setText("Email not found!!");
-                } else if (returnLogInStatusEmail == 0) {
-                    statusLabel.setText("Error!!!");
+                } else {
+                    int returnLogInStatusEmail = logInStatusEmail(email, password);
+                    if (returnLogInStatusEmail == 1) {
+                        statusLabel.setText("Successfully entered!");
+//                        wait(3000);
+                        /**
+                         * Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
+                         *         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                         *         scene = new Scene(root);
+                         *         stage.setScene(scene);
+                         *         stage.show();
+                         */
+                    } else if (returnLogInStatusEmail == -1) {
+                        statusLabel.setText("Wrong password!");
+                    } else if (returnLogInStatusEmail == -2) {
+                        statusLabel.setText("Email not found!!");
+                    } else if (returnLogInStatusEmail == 0) {
+                        statusLabel.setText("Error!!!");
+                    }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
+            statusLabel.setText("Error 404");
         }
     }
 
@@ -261,20 +249,12 @@ public class LoginController {
     }
 
 
-    public void userNameOrEmail(String input) {
-        if (input.contains("@")) {
-            email = input;
-        } else {
-            userName = input;
-        }
-    }
-
-
     public int logInStatus(String userName, String password) throws IOException {
 
         //"http://localhost:8080"/login/email/password
         URL url = new URL("http://localhost:8080/" + "login/" + userName + "/" + password);
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
+        tempConnection.setRequestMethod("GET");
 
         if (tempConnection.getResponseCode() == 200) {//go to home page
             return 1;
@@ -293,6 +273,7 @@ public class LoginController {
         //"http://localhost:8080"/login/email/password
         URL url = new URL("http://localhost:8080/" + "login/" + email + "/" + password);
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
+        tempConnection.setRequestMethod("GET");
 
         if (tempConnection.getResponseCode() == 200) {//go to home page
             return 1;
