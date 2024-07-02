@@ -26,24 +26,24 @@ public class LoginController {
 
 
     @FXML
-    public TextField userNameTextField;
+    private TextField userNameTextField;
     @FXML
-    public PasswordField passwordField;
+    private PasswordField passwordField;
     @FXML
-    public Button logInButton;
+    private Button logInButton;
     @FXML
-    public Button signInButton;
+    private Button signInButton;
     @FXML
-    public Label statusLabel;
+    private Label statusLabel;
     @FXML
     private Button backButton;
 
 
-    private String password;
+    private String password = "";
 
-    private String userName = null;
+    private String userName = "";
 
-    private String email = null;
+    private String email = "";
 
    /* @FXML
     public void getEmailOrUsername(ActionEvent event){

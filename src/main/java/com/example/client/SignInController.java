@@ -34,12 +34,15 @@ public class SignInController {
     private Button signInButton;
     @FXML
     private Label statusLabel;
+    @FXML
+    private TextField userNameTextField;
 
     private String firstName = "";
     private String lastName = "";
     private String email = "";
     private String passWord = "";
     private String repeatPassword = "";
+    private String userName = "";
 
 
     private Stage stage;
@@ -64,8 +67,7 @@ public class SignInController {
     private Button signUpButtonComplete;
     @FXML
     private Label statusLabelComplete;
-    @FXML
-    private TextField userNameTextFieldComplete;
+
     @FXML
     private RadioButton wantToHireRadioComplete;
     @FXML
@@ -77,7 +79,7 @@ public class SignInController {
     private String countryComplete = "";
     private String cityComplete = "";
     private String birthDateComplete = "";
-    private String userNameComplete = "";
+
     private String jobTypeComplete = "";
 
 
@@ -94,9 +96,10 @@ public class SignInController {
             email = emailTextField.getText();
             passWord = passWordPassField.getText();
             repeatPassword = repeatPasswordPassField.getText();
+            userName = userNameTextField.getText();
 
             int signInStatus1 = signInStatus();
-            if (firstName.length() == 0 || lastName.length() == 0 || email.length() == 0 || passWord.length() == 0 || repeatPassword.length() == 0) {
+            if (firstName.length() == 0 || lastName.length() == 0 || email.length() == 0 || passWord.length() == 0 || repeatPassword.length() == 0 || userName.length() == 0) {
                 statusLabel.setText("Please fill all fields!!");
             } else if (!isValidEmail(email)) {
                 statusLabel.setText("Enter a valid email!!");
@@ -111,7 +114,9 @@ public class SignInController {
             }*/
             else if (!validPass(passWord)) {
                 statusLabel.setText("Enter a valid pass");
-            } else if (signInStatus1 == 1) {
+            } else if (!validUserNameComplete(userName)) {
+                statusLabelComplete.setText("Invalid username format!");
+            }else if (signInStatus1 == 1) {
                 statusLabel.setText("DONE");
                 //wait(1500);
                 Parent root = FXMLLoader.load(getClass().getResource("CompleteProfileFXML.fxml"));
@@ -292,7 +297,7 @@ public class SignInController {
             additionalNameComplete = additionalNameTextFieldComplete.getText();
             countryComplete = countryTextFieldComplete.getText();
             cityComplete = cityTextFieldComplete.getText();
-            userNameComplete = userNameTextFieldComplete.getText();
+            //userNameComplete = userNameTextFieldComplete.getText();
 
             int signInStatusCompleted1 = signInStatusCompleted();
 
@@ -318,13 +323,13 @@ public class SignInController {
 
             }
 
-            if (additionalNameComplete.length() == 0 || countryComplete.length() == 0 || cityComplete.length() == 0 || !dateInputExist || userNameComplete.length() == 0) {
+            if (additionalNameComplete.length() == 0 || countryComplete.length() == 0 || cityComplete.length() == 0 || !dateInputExist) {
                 statusLabelComplete.setText("Please fill all fields!");
             } else if (!(wantToHireRadioComplete.isSelected()) && !(wantToProvideServiceRadioComplete.isSelected()) && !(lookingForJobRadioComplete.isSelected())) {
-                statusLabel.setText("Please select an action!");
-            } else if (!validUserNameComplete(userNameComplete)) {
-                statusLabelComplete.setText("Invalid username format!");
-            } else if (signInStatusCompleted1 == 1) {
+                statusLabel.setText("Please select a WorkType!");
+            }
+
+            else if (signInStatusCompleted1 == 1) {
                 statusLabelComplete.setText("Successful!\nCongratulations on creating your account! Wishing you even greater creations in the future.");
             } else if (signInStatusCompleted1 == 0){
                 statusLabelComplete.setText("Error!!!");
