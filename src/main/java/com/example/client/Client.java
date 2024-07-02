@@ -13,8 +13,8 @@ public class Client extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("StartFXML.fxml"));
-            //Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("StartFXML.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("EducationFXML.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();

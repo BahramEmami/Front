@@ -100,14 +100,13 @@ public class LoginController {
                     int returnLogInStatusEmail = logInStatusEmail(email, password);
                     if (returnLogInStatusEmail == 1) {
                         statusLabel.setText("Successfully entered!");
-//                        wait(3000);
-                        /**
-                         * Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
-                         *         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                         *         scene = new Scene(root);
-                         *         stage.setScene(scene);
-                         *         stage.show();
-                         */
+//
+                        Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
+                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+
                     } else if (returnLogInStatusEmail == -1) {
                         statusLabel.setText("Wrong password!");
                     } else if (returnLogInStatusEmail == -2) {
