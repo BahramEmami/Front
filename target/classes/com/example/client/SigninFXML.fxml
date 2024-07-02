@@ -14,7 +14,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.SignInController">
    <right>
-      <AnchorPane prefHeight="497.6" prefWidth="205.2" style="-fx-background-color: #00AEFF;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="497.6" prefWidth="205.2" style="-fx-background-color: #525DFE;" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="logInButton" layoutX="73.0" layoutY="424.0" mnemonicParsing="false" onAction="#logInPressed" prefHeight="33.0" prefWidth="59.0" style="-fx-background-color: #FFFFFF;" text="Login">
                <font>
@@ -27,7 +27,7 @@
             </Label>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@pics/icons8-linkedin-150.png" />
+                  <Image url="@pics/icons8-linkedin-256.png" />
                </image>
                <effect>
                   <InnerShadow />
@@ -42,7 +42,7 @@
       </AnchorPane>
    </right>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="486.4" style="-fx-background-color: #08589F;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="486.4" style="-fx-background-color: #C985FA;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="32.0" prefHeight="40.0" prefWidth="138.0" text="Sign Up" textAlignment="CENTER" textFill="WHITE">
                <font>
@@ -91,7 +91,7 @@
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></Button>
-            <Button fx:id="backButton" layoutX="420.0" layoutY="17.0" mnemonicParsing="false" onAction="#backPressed" prefHeight="30.4" prefWidth="53.6" style="-fx-background-color: #FFFFFF;" text="Back" textFill="#08589f" />
+            <Button fx:id="backButton" layoutX="420.0" layoutY="17.0" mnemonicParsing="false" onAction="#backPressed" prefHeight="30.4" prefWidth="53.6" style="-fx-background-color: #FFFFFF;" text="Back" textFill="#af75dc" />
             <Label fx:id="statusLabel" alignment="CENTER" layoutX="187.0" layoutY="84.0" prefHeight="33.0" prefWidth="250.0" textFill="#00aeff">
                <font>
                   <Font name="System Bold" size="21.0" />
