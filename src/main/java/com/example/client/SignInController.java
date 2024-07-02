@@ -10,6 +10,9 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class SignInController {
     ////////////////////////////////////////// first signUp scene
@@ -44,12 +47,7 @@ public class SignInController {
     private Parent root;
 
 
-
-
-
-
-
-/////////////////////////////////////////////////////////////////////////Complete part
+    /////////////////////////////////////////////////////////////////////////Complete part
     @FXML
     private TextField additionalNameTextFieldComplete;
     @FXML
@@ -83,18 +81,13 @@ public class SignInController {
     private String jobTypeComplete = "";
 
 
-
     private boolean dateInputExist = false;
     private boolean isJobType = false;
 
 
-
-
-
-
     //////////////////////////////////////////////     First
     @FXML
-    public void signInPressed(ActionEvent event){
+    public void signInPressed(ActionEvent event) {
         try {
             firstName = firstNameTextField.getText();
             lastName = lastNameTextField.getText();
@@ -102,40 +95,38 @@ public class SignInController {
             passWord = passWordPassField.getText();
             repeatPassword = repeatPasswordPassField.getText();
 
-            if(firstName.length() == 0 || lastName.length() == 0 || email.length() == 0 || passWord.length() == 0 || repeatPassword.length() == 0){
+            int signInStatus1 = signInStatus();
+            if (firstName.length() == 0 || lastName.length() == 0 || email.length() == 0 || passWord.length() == 0 || repeatPassword.length() == 0) {
                 statusLabel.setText("Please fill all fields!!");
-            }
-            else if(!isValidEmail(email)){
+            } else if (!isValidEmail(email)) {
                 statusLabel.setText("Enter a valid email!!");
-            }
-            else if(!sameRepeatedPass()){
+            } else if (!sameRepeatedPass()) {
                 statusLabel.setText("Repeated Pass is wrong!! ");
             }
-            /*else if(!emailIsUnique()){
-                statusLabel.setText("Your email has already added!!");
-            }*/
             /*else if(!validName()){
                 statusLabel.setText("Enter a valid firstname!!");
             }*/
             /*else if(!validLastName()){
                 statusLabel.setText("Enter a valid lastname");
             }*/
-            else if(!validPass(passWord)){
+            else if (!validPass(passWord)) {
                 statusLabel.setText("Enter a valid pass");
-            }
-            else{
-                statusLabel.setText("Success!!");
+            } else if (signInStatus1 == 1) {
+                statusLabel.setText("DONE");
                 //wait(1500);
                 Parent root = FXMLLoader.load(getClass().getResource("CompleteProfileFXML.fxml"));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
+            } else if (signInStatus1 == -1) {
+                statusLabel.setText("Duplicated Id!\nTRY AGAIN");
+            } else if (signInStatus1 == -2) {
+                statusLabel.setText("Duplicated Email!!\nTRY AGAIN");
+            } else if (signInStatus1 == 0) {
+                statusLabel.setText("ERROR!!!\nTRY AGAIN");
             }
-
-
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -188,12 +179,12 @@ public class SignInController {
         }
 
         // Check that '@' is not at the start or end
-        if (atIndex == 0 || atIndex == email.length() - 1){
+        if (atIndex == 0 || atIndex == email.length() - 1) {
             return false;
         }
 
         // Check that '.' is not at the start or end
-        if (dotIndex == 0 || dotIndex == email.length() - 1){
+        if (dotIndex == 0 || dotIndex == email.length() - 1) {
             return false;
         }
 
@@ -229,8 +220,8 @@ public class SignInController {
         return tldValid;
     }
 
-    public boolean sameRepeatedPass(){
-        if(passWord.equals(repeatPassword)){
+    public boolean sameRepeatedPass() {
+        if (passWord.equals(repeatPassword)) {
             return true;
         }
         return false;
@@ -272,9 +263,24 @@ public class SignInController {
         return hasLetter && hasNumber;
     }
 
+    public int signInStatus() throws IOException {
 
+        //"http://localhost:8080"/login/email/password
 
+        URL url = new URL("http://localhost:8080/" + "user");
+        HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
 
+        if (tempConnection.getResponseCode() == 200) {//go to home page
+            return 1;
+        } else if (tempConnection.getResponseCode() == 401) {
+            return -1;
+        } else if (tempConnection.getResponseCode() == 402) {
+            return -2;
+        } else if (tempConnection.getResponseCode() == 400) {
+            return 0;
+        } else// nothing
+            return 10;
+    }
 
 
     //////////////////////////////////////////////////////////complete
@@ -282,25 +288,24 @@ public class SignInController {
     @FXML
     public void signUpPressedComplete(ActionEvent event) {
         try {
+
             additionalNameComplete = additionalNameTextFieldComplete.getText();
             countryComplete = countryTextFieldComplete.getText();
             cityComplete = cityTextFieldComplete.getText();
             userNameComplete = userNameTextFieldComplete.getText();
 
+            int signInStatusCompleted1 = signInStatusCompleted();
 
-            if(wantToHireRadioComplete.isSelected()){
+            if (wantToHireRadioComplete.isSelected()) {
                 isJobType = true;
                 jobTypeComplete = "want_to_hired";
-            }
-            else if(lookingForJobRadioComplete.isSelected()){
+            } else if (lookingForJobRadioComplete.isSelected()) {
                 isJobType = true;
                 jobTypeComplete = "looking_for_job";
-            }
-            else if(lookingForJobRadioComplete.isSelected()){
+            } else if (lookingForJobRadioComplete.isSelected()) {
                 isJobType = true;
                 jobTypeComplete = "want_to_provide_service";
-            }
-            else{
+            } else {
                 isJobType = false;
             }
 
@@ -315,12 +320,14 @@ public class SignInController {
 
             if (additionalNameComplete.length() == 0 || countryComplete.length() == 0 || cityComplete.length() == 0 || !dateInputExist || userNameComplete.length() == 0) {
                 statusLabelComplete.setText("Please fill all fields!");
-            }
-            else if(!validUserNameComplete(userNameComplete)){
+            } else if (!(wantToHireRadioComplete.isSelected()) && !(wantToProvideServiceRadioComplete.isSelected()) && !(lookingForJobRadioComplete.isSelected())) {
+                statusLabel.setText("Please select an action!");
+            } else if (!validUserNameComplete(userNameComplete)) {
                 statusLabelComplete.setText("Invalid username format!");
-            }
-            else {
-                statusLabelComplete.setText("Successful!");
+            } else if (signInStatusCompleted1 == 1) {
+                statusLabelComplete.setText("Successful!\nCongratulations on creating your account! Wishing you even greater creations in the future.");
+            } else if (signInStatusCompleted1 == 0){
+                statusLabelComplete.setText("Error!!!");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -356,6 +363,19 @@ public class SignInController {
     }
 
 
+    public int signInStatusCompleted() throws IOException {
+        //"http://localhost:8080"/login/email/password
+
+        URL url = new URL("http://localhost:8080/" + "user");
+        HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
+
+        if (tempConnection.getResponseCode() == 200) {//go to home page
+            return 1;
+        }else if (tempConnection.getResponseCode() == 400) {
+            return 0;
+        } else// nothing
+            return 10;
+    }
 
 
 }

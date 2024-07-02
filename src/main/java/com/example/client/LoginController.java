@@ -114,7 +114,7 @@ public class LoginController {
                     statusLabel.setText("Invalid password format!");
                 }
                 else if (returnLogInStatusEmail == 1) {
-                    statusLabel.setText("Successfully entered!");
+                    statusLabel.setText("Successfully entered!\n    GOOD LUCK ;)");
                     /**
                      *
                      *
@@ -123,11 +123,11 @@ public class LoginController {
                      *
                      */
                 } else if (returnLogInStatusEmail == -1) {
-                    statusLabel.setText("Wrong password");
+                    statusLabel.setText("Wrong password!");
                 } else if (returnLogInStatusEmail == -2) {
-                    statusLabel.setText("Email not found");
+                    statusLabel.setText("Email not found!!");
                 } else if (returnLogInStatusEmail == 0) {
-                    statusLabel.setText("Error");
+                    statusLabel.setText("Error!!!");
                 }
             }
         } catch (Exception e) {
