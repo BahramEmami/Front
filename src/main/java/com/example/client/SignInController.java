@@ -14,6 +14,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.json.JSONObject;
+
 public class SignInController {
     ////////////////////////////////////////// first signUp scene
     @FXML
@@ -80,7 +82,7 @@ public class SignInController {
     private String cityComplete = "";
     private String birthDateComplete = "";
 
-    private String jobTypeComplete = "";
+    private String jobTypeComplete = "looking_for_job";
 
 
     private boolean dateInputExist = false;
@@ -98,44 +100,40 @@ public class SignInController {
             repeatPassword = repeatPasswordPassField.getText();
             userName = userNameTextField.getText();
 
-            int signInStatus1 = signInStatus();
+
             if (firstName.length() == 0 || lastName.length() == 0 || email.length() == 0 || passWord.length() == 0 || repeatPassword.length() == 0 || userName.length() == 0) {
                 statusLabel.setText("Please fill all fields!!");
             } else if (!isValidEmail(email)) {
                 statusLabel.setText("Enter a valid email!!");
             } else if (!sameRepeatedPass()) {
                 statusLabel.setText("Repeated Pass is wrong!! ");
-            }
-            /*else if(!validName()){
-                statusLabel.setText("Enter a valid firstname!!");
-            }*/
-            /*else if(!validLastName()){
-                statusLabel.setText("Enter a valid lastname");
-            }*/
-            else if (!validPass(passWord)) {
+            } else if (!validPass(passWord)) {
                 statusLabel.setText("Enter a valid pass");
             } else if (!validUserNameComplete(userName)) {
                 statusLabelComplete.setText("Invalid username format!");
-            }else if (signInStatus1 == 1) {
-                statusLabel.setText("DONE");
-                //wait(1500);
-                Parent root = FXMLLoader.load(getClass().getResource("CompleteProfileFXML.fxml"));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } else if (signInStatus1 == -1) {
-                statusLabel.setText("Duplicated Id!\nTRY AGAIN");
-            } else if (signInStatus1 == -2) {
-                statusLabel.setText("Duplicated Email!!\nTRY AGAIN");
-            } else if (signInStatus1 == 0) {
-                statusLabel.setText("ERROR!!!\nTRY AGAIN");
+            } else {
+                int signInStatus1 = signInStatus();
+                if (signInStatus1 == 1) {
+                    statusLabel.setText("DONE ->");
+//                    wait(3000);
+                    Parent root = FXMLLoader.load(getClass().getResource("CompleteProfileFXML.fxml"));
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } else if (signInStatus1 == -1) {
+                    statusLabel.setText("Duplicated Id! TRY AGAIN");
+                } else if (signInStatus1 == -2) {
+                    statusLabel.setText("Duplicated Email!! TRY AGAIN");
+                } else if (signInStatus1 == 0) {
+                    statusLabel.setText("ERROR!!! TRY AGAIN");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
+            statusLabel.setText("Error 404");
         }
     }
-
 
     @FXML
     public void backPressed(ActionEvent event) throws IOException {
@@ -233,16 +231,6 @@ public class SignInController {
     }
 
 
-    /*public boolean emailIsUnique(){
-        return true;
-    }*/
-    /*public boolean validName(){
-    return true;
-    }
-    public boolean validLastName(){
-        return true;
-    }*/
-
     public boolean validPass(String password) {
         if (password.length() < 8) {
             return false;
@@ -272,8 +260,23 @@ public class SignInController {
 
         //"http://localhost:8080"/login/email/password
 
+        JSONObject json = new JSONObject();
+        json.put("id", userName);
+        json.put("email", email);
+        json.put("firstname", firstName);
+        json.put("lastname", lastName);
+        json.put("password", passWord);
+        json.put("additionalname", additionalNameComplete);
+        json.put("joindate", 123);
+        json.put("worktype", jobTypeComplete);
+
         URL url = new URL("http://localhost:8080/" + "user");
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
+        tempConnection.setRequestMethod("POST");
+        tempConnection.setDoOutput(true);
+        tempConnection.getOutputStream().write(json.toString().getBytes());
+        tempConnection.getOutputStream().close();
+
 
         if (tempConnection.getResponseCode() == 200) {//go to home page
             return 1;
@@ -295,11 +298,10 @@ public class SignInController {
         try {
 
             additionalNameComplete = additionalNameTextFieldComplete.getText();
-            countryComplete = countryTextFieldComplete.getText();
-            cityComplete = cityTextFieldComplete.getText();
-            //userNameComplete = userNameTextFieldComplete.getText();
+            jobTypeComplete = "";
 
-            int signInStatusCompleted1 = signInStatusCompleted();
+
+
 
             if (wantToHireRadioComplete.isSelected()) {
                 isJobType = true;
@@ -323,19 +325,29 @@ public class SignInController {
 
             }
 
-            if (additionalNameComplete.length() == 0 || countryComplete.length() == 0 || cityComplete.length() == 0 || !dateInputExist) {
+            if (additionalNameComplete.length() == 0) {
                 statusLabelComplete.setText("Please fill all fields!");
             } else if (!(wantToHireRadioComplete.isSelected()) && !(wantToProvideServiceRadioComplete.isSelected()) && !(lookingForJobRadioComplete.isSelected())) {
                 statusLabel.setText("Please select a WorkType!");
-            }
-
-            else if (signInStatusCompleted1 == 1) {
-                statusLabelComplete.setText("Successful!\nCongratulations on creating your account! Wishing you even greater creations in the future.");
-            } else if (signInStatusCompleted1 == 0){
-                statusLabelComplete.setText("Error!!!");
+            } else {
+                int signInStatusCompleted1 = signInStatusCompleted();
+                if (signInStatusCompleted1 == 1) {
+                    statusLabelComplete.setText("Account Successfully Created!");
+//                    wait(3000);
+                    /**
+                     * Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
+                     *         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                     *         scene = new Scene(root);
+                     *         stage.setScene(scene);
+                     *         stage.show();
+                     */
+                } else if (signInStatusCompleted1 == 0) {
+                    statusLabelComplete.setText("Error!!!");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
+            statusLabel.setText("Error 404");
         }
     }
 
@@ -369,14 +381,29 @@ public class SignInController {
 
 
     public int signInStatusCompleted() throws IOException {
+
         //"http://localhost:8080"/login/email/password
+
+        JSONObject json = new JSONObject();
+        json.put("id", userName);
+        json.put("email", email);
+        json.put("firstname", firstName);
+        json.put("lastname", lastName);
+        json.put("password", passWord);
+        json.put("additionalname", additionalNameComplete);
+        json.put("joindate", 123);
+        json.put("worktype", jobTypeComplete);
 
         URL url = new URL("http://localhost:8080/" + "user");
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
+        tempConnection.setRequestMethod("POST");
+        tempConnection.setDoOutput(true);
+        tempConnection.getOutputStream().write(json.toString().getBytes());
+        tempConnection.getOutputStream().close();
 
         if (tempConnection.getResponseCode() == 200) {//go to home page
             return 1;
-        }else if (tempConnection.getResponseCode() == 400) {
+        } else if (tempConnection.getResponseCode() == 400) {
             return 0;
         } else// nothing
             return 10;

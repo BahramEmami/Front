@@ -18,7 +18,7 @@
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0">
          <right>
-            <AnchorPane prefHeight="497.6" prefWidth="205.2" style="-fx-background-color: #00AEFF;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="497.6" prefWidth="205.2" style="-fx-background-color: #B351FA;" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="logInButtonComplete" layoutX="73.0" layoutY="424.0" mnemonicParsing="false" onAction="#logInPressedComplete" prefHeight="33.0" prefWidth="59.0" style="-fx-background-color: #FFFFFF;" text="Login">
                      <font>
@@ -30,9 +30,9 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="35.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../icons8-linkedin-150.png" />
+                        <Image url="@pics/icons8-linkedin-256.png" />
                      </image>
                      <effect>
                         <InnerShadow />
@@ -47,11 +47,11 @@
             </AnchorPane>
          </right>
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="486.4" style="-fx-background-color: #08589F;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="200.0" prefWidth="486.4" style="-fx-background-color: #87CEF0;" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="32.0" prefHeight="40.0" prefWidth="138.0" text="Sign Up" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="32.0" prefHeight="40.0" prefWidth="138.0" text="Sign Up" textAlignment="CENTER">
                      <font>
-                        <Font name="System Italic" size="25.0" />
+                        <Font name="System Bold Italic" size="25.0" />
                      </font>
                   </Label>
                   <VBox layoutX="187.0" layoutY="131.0" prefHeight="287.0" prefWidth="250.0" spacing="30.0">
@@ -60,32 +60,26 @@
                         <TextField fx:id="countryTextFieldComplete" prefHeight="33.2" prefWidth="250.0" promptText="exm. Iran" style="-fx-background-color: #FFFFFF;" />
                         <TextField fx:id="cityTextFieldComplete" prefHeight="33.2" prefWidth="250.0" promptText="exm. Tehran" style="-fx-background-color: #FFFFFF;" />
                         <DatePicker fx:id="birthdayDatePickerComplete" prefHeight="33.2" prefWidth="250.0" style="-fx-background-color: #00AEFF;" />
-                        <TextField fx:id="userNameTextFieldComplete" prefHeight="33.2" prefWidth="250.0" promptText="exm. imbe" style="-fx-background-color: #FFFFFF;" />
                      </children>
                   </VBox>
                   <VBox layoutX="22.0" layoutY="131.0" prefHeight="287.0" prefWidth="136.0" spacing="30.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Additional name" textFill="WHITE">
+                        <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Additional name">
                            <font>
                               <Font name="System Bold Italic" size="15.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Country" textFill="WHITE">
+                        <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Country">
                            <font>
                               <Font name="System Bold Italic" size="15.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="City" textFill="WHITE">
+                        <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="City">
                            <font>
                               <Font name="System Bold Italic" size="15.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Birthday" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold Italic" size="15.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="User Name" textFill="WHITE">
+                        <Label alignment="CENTER" prefHeight="33.2" prefWidth="136.0" text="Birthday">
                            <font>
                               <Font name="System Bold Italic" size="15.0" />
                            </font>
@@ -97,26 +91,27 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="backButtonComplete" layoutX="420.0" layoutY="17.0" mnemonicParsing="false" onAction="#backPressedComplete" prefHeight="30.4" prefWidth="53.6" style="-fx-background-color: #FFFFFF;" text="Back" textFill="#08589f" />
-                  <Label fx:id="statusLabelComplete" alignment="CENTER" layoutX="187.0" layoutY="84.0" prefHeight="33.0" prefWidth="250.0" textFill="#00aeff">
+                  <Button fx:id="backButtonComplete" layoutX="420.0" layoutY="17.0" mnemonicParsing="false" onAction="#backPressedComplete" prefHeight="30.4" prefWidth="53.6" style="-fx-background-color: #FFFFFF;" text="Back" />
+                  <Label fx:id="statusLabelComplete" alignment="CENTER" layoutX="187.0" layoutY="84.0" prefHeight="33.0" prefWidth="250.0" textFill="#b351fa">
                      <font>
                         <Font name="System Bold" size="21.0" />
                      </font>
                   </Label>
                   <VBox layoutX="29.0" layoutY="41.0" prefHeight="86.0" prefWidth="147.0" spacing="10.0" AnchorPane.topAnchor="41.0">
                      <children>
-                        <RadioButton fx:id="wantToHireRadioComplete" mnemonicParsing="false" text="want to hire" textFill="WHITE">
+                        <RadioButton fx:id="wantToHireRadioComplete" mnemonicParsing="false" text="want to hire">
                            <toggleGroup>
                               <ToggleGroup fx:id="workType" />
                            </toggleGroup></RadioButton>
-                        <RadioButton fx:id="lookingForJobRadioComplete" mnemonicParsing="false" text="looking for job" textFill="WHITE" toggleGroup="$workType" />
-                        <RadioButton fx:id="wantToProvideServiceRadioComplete" mnemonicParsing="false" prefHeight="18.0" prefWidth="146.0" text="want to provide service" textFill="WHITE" toggleGroup="$workType" />
+                        <RadioButton fx:id="lookingForJobRadioComplete" mnemonicParsing="false" text="looking for job" toggleGroup="$workType" />
+                        <RadioButton fx:id="wantToProvideServiceRadioComplete" mnemonicParsing="false" prefHeight="18.0" prefWidth="146.0" text="want to provide service" toggleGroup="$workType" />
                      </children>
                   </VBox>
-                  <Label layoutX="29.0" layoutY="10.0" prefHeight="25.0" prefWidth="148.0" text="Wrok type" textAlignment="CENTER" textFill="WHITE">
+                  <Label layoutX="29.0" layoutY="10.0" prefHeight="25.0" prefWidth="148.0" text="Wrok type" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="16.0" />
-                     </font></Label>
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </center>
