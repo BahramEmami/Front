@@ -9,8 +9,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class ContactViewController {
@@ -37,12 +41,15 @@ public class ContactViewController {
     @FXML
     private TextField addressTexField;
 
+    private static final String id = "";
     private static String profileURL = "";
     private static String shareEmail = "";
     private static String phoneNumber = "";
     private static String phoneType = "";
     private static String birthdate = "";
+    private static String birthdatePolicy = "";
     private static String address = "";
+    private static String instantMessage = "";
     /////////////
     @FXML
     private ImageView backToContactViewButton;
@@ -67,6 +74,7 @@ public class ContactViewController {
 
 
     private static boolean isPhoneTypeSelected = false;
+    private static boolean isBirthdatePolicy = false;
     private static boolean isBirhdaySelected = false;
 
     @FXML
@@ -77,6 +85,7 @@ public class ContactViewController {
         stage.setScene(scene);
         stage.show();
     }
+
     @FXML
     public void backToProfilePressed(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
@@ -110,6 +119,7 @@ public class ContactViewController {
 
     }
 
+
     @FXML
     private void backToContactViewPressed(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("ContactViewFXML.fxml"));
@@ -127,46 +137,90 @@ public class ContactViewController {
         stage.setScene(scene);
         stage.show();
 
-        if(profileURLTexFieldEdit.getText().length() != 0){
-            profileURL = profileURLTexFieldEdit.getText();
-        }
-        profileURLTexField.setText(profileURL);
-        if(shareEmailTexFieldEdit.getText().length() != 0){
-            shareEmail = shareEmailTexFieldEdit.getText();
-        }
-        shareEmailTexField.setText(shareEmail);
-        shareEmailTexField.setText(shareEmail);
-        if(phoneNumberTexFieldEdit.getText().length() != 0){
-            phoneNumber = phoneNumberTexFieldEdit.getText();
-        }
-        phoneNumberTexField.setText(phoneNumber);
-        if(homeRadioButton.isSelected()){
-            phoneType = "home";
-            phoneTypeTexField.setText(phoneType);
-            isPhoneTypeSelected = true;
-        }
-        else if (workRadioButton.isSelected()) {
-            phoneType = "work";
-            phoneTypeTexField.setText(phoneType);
-            isPhoneTypeSelected = true;
-        }
-        else if (mobileRadioButton.isSelected()) {
-            phoneType = "mobile";
-            phoneTypeTexField.setText(phoneType);
-            isPhoneTypeSelected = true;
-        }
-        if(addressTexFieldEdit.getText().length() != 0){
-            address = addressTexFieldEdit.getText();
-        }
-        addressTexField.setText(address);
-
         try {
-            birthdate = birthDateTexFieldEdit.getValue().toString();
-            isBirhdaySelected = true;
+            profileURLTexField.setText(profileURL);
+
+            shareEmail = shareEmailTexFieldEdit.getText();
+
+            shareEmailTexField.setText(shareEmail);
+
+            phoneNumber = phoneNumberTexFieldEdit.getText();
+
+            phoneNumberTexField.setText(phoneNumber);
+
+            if (homeRadioButton.isSelected()) {
+                phoneType = "home";
+                phoneTypeTexField.setText(phoneType);
+                isPhoneTypeSelected = true;
+            } else if (workRadioButton.isSelected()) {
+                phoneType = "work";
+                phoneTypeTexField.setText(phoneType);
+                isPhoneTypeSelected = true;
+            } else if (mobileRadioButton.isSelected()) {
+                phoneType = "mobile";
+                phoneTypeTexField.setText(phoneType);
+                isPhoneTypeSelected = true;
+            }
+
+            if (.isSelected()) {
+                phoneType = "me";
+                .setText(birthdatePolicy);
+                isBirthdatePolicy = true;
+            } else if (.isSelected()) {
+                phoneType = "contacts";
+                .setText(birthdatePolicy);
+                isBirthdatePolicy = true;
+            } else if (.isSelected()) {
+                phoneType = "everyone";
+                .setText(birthdatePolicy);
+                isBirthdatePolicy = true;
+            }
+
+            address = addressTexFieldEdit.getText();
+
+            addressTexField.setText(address);
+
+            try {
+                birthdate = birthDateTexFieldEdit.getValue().toString();
+                isBirhdaySelected = true;
+            } catch (Exception e) {
+                isBirhdaySelected = false;
+            }
+            birthDateTexField.setText(birthdate);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            System.out.println("error123123");
         }
-        catch (Exception e){
-            isBirhdaySelected = false;
-        }
-        birthDateTexField.setText(birthdate);
+    }
+    public int editContact() throws IOException {
+
+        //"http://localhost:8080"/login/email/password
+
+        JSONObject json = new JSONObject();
+        json.put("id", id);
+        json.put("profile_url", profileURL);
+        json.put("email", shareEmail);
+        json.put("phone_number", phoneNumber);
+        json.put("phone_type", phoneType);
+        json.put("birth_date", birthdate);
+        json.put("birthday_policy", birthdatePolicy);
+        json.put("address", address);
+        json.put("instant_message", instantMessage);
+
+        URL url = new URL("http://localhost:8080/" + "contact/" + "edit");
+        HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
+        tempConnection.setRequestMethod("GET");
+        tempConnection.setDoOutput(true);
+        tempConnection.getOutputStream().write(json.toString().getBytes());
+        tempConnection.getOutputStream().close();
+
+        if (tempConnection.getResponseCode() == 200) {//go to home page
+            return 1;
+        } else if (tempConnection.getResponseCode() == 400) {
+            return 0;
+        } else if (tempConnection.getResponseCode() == 404) {
+            return -1;
+        } else// nothing
+            return 10;
     }
 }
