@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.ContactViewController">
    <children>
       <AnchorPane prefHeight="400.0" prefWidth="600.0">
@@ -44,7 +43,7 @@
                <bottom>
                   <AnchorPane prefHeight="430.0" prefWidth="200.0" style="-fx-background-color: #87CEF0;" BorderPane.alignment="CENTER">
                      <children>
-                        <VBox layoutX="150.0" layoutY="69.0" prefHeight="280.0" prefWidth="500.0" spacing="20.0" style="-fx-border-color: #B351FA; -fx-border-width: 2px 2px 2px 0px; -fx-border-radius: 10;">
+                        <VBox layoutX="150.0" layoutY="54.0" prefHeight="357.0" prefWidth="500.0" spacing="20.0" style="-fx-border-color: #B351FA; -fx-border-width: 2px 2px 2px 0px; -fx-border-radius: 10;">
                            <children>
                               <TextField fx:id="profileURLTexFieldEdit" prefHeight="26.0" prefWidth="479.0" style="-fx-background-color: #FFFFFF;" />
                               <TextField fx:id="shareEmailTexFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" />
@@ -73,12 +72,40 @@
                               </HBox>
                               <DatePicker fx:id="birthDayDatePickerEdit" />
                               <TextField fx:id="addressTexFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" />
+                              <TextField fx:id="instantMessageTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="200.0" spacing="30.0">
+                                 <children>
+                                    <RadioButton fx:id="justMeRadioButton" mnemonicParsing="false" selected="true" text="just me">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="BirthdayView" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="myContactsRadioButton" mnemonicParsing="false" text="my contacts" toggleGroup="$BirthdayView">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </RadioButton>
+                                    <RadioButton fx:id="myNetWorkRadioButton" mnemonicParsing="false" text="my network" toggleGroup="$BirthdayView">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </RadioButton>
+                                    <RadioButton fx:id="everyOneRadioButton" mnemonicParsing="false" text="every one" toggleGroup="$BirthdayView">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </RadioButton>
+                                 </children>
+                              </HBox>
                            </children>
                            <padding>
                               <Insets top="10.0" />
                            </padding>
                         </VBox>
-                        <VBox layoutX="50.0" layoutY="69.0" prefHeight="279.0" prefWidth="100.0" spacing="20.0" style="-fx-border-color: #B351FA; -fx-border-width: 2px 0px 2px 2px; -fx-border-radius: 10;" AnchorPane.topAnchor="69.0">
+                        <VBox layoutX="50.0" layoutY="54.0" prefHeight="358.0" prefWidth="100.0" spacing="20.0" style="-fx-border-color: #B351FA; -fx-border-width: 2px 0px 2px 2px; -fx-border-radius: 10;" AnchorPane.topAnchor="54.0">
                            <children>
                               <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="Profile url">
                                  <font>
@@ -106,6 +133,16 @@
                                  </font>
                               </Label>
                               <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="Address">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="Instant message">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="Birthday view">
                                  <font>
                                     <Font name="System Bold Italic" size="12.0" />
                                  </font>

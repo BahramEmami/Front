@@ -36,6 +36,8 @@ public class ContactViewController {
     private TextField birthDateTexField;
     @FXML
     private TextField addressTexField;
+    @FXML
+    private TextField instantMessageTextField;
 
     private static String profileURL = "";
     private static String shareEmail = "";
@@ -43,6 +45,8 @@ public class ContactViewController {
     private static String phoneType = "";
     private static String birthdate = "";
     private static String address = "";
+    private static String instantMessage = "";
+    private static String birthdayPolicy = "";
     /////////////
     @FXML
     private ImageView backToContactViewButton;
@@ -64,6 +68,16 @@ public class ContactViewController {
     private DatePicker birthDateTexFieldEdit;
     @FXML
     private TextField addressTexFieldEdit;
+    @FXML
+    private TextField instantMessageTextFieldEdit;
+    @FXML
+    private RadioButton justMeRadioButton;
+    @FXML
+    private RadioButton myContactsRadioButton;
+    @FXML
+    private RadioButton myNetWorkRadioButton;
+    @FXML
+    private RadioButton everyOneRadioButton;
 
 
     private static boolean isPhoneTypeSelected = false;
@@ -107,6 +121,8 @@ public class ContactViewController {
         /////////////////////////////////////////////////////////////////////////////
 
         addressTexFieldEdit.setText(address);
+        instantMessageTextFieldEdit.setText(instantMessage);
+
 
     }
 
@@ -134,7 +150,6 @@ public class ContactViewController {
         if(shareEmailTexFieldEdit.getText().length() != 0){
             shareEmail = shareEmailTexFieldEdit.getText();
         }
-        shareEmailTexField.setText(shareEmail);
         shareEmailTexField.setText(shareEmail);
         if(phoneNumberTexFieldEdit.getText().length() != 0){
             phoneNumber = phoneNumberTexFieldEdit.getText();
@@ -168,5 +183,18 @@ public class ContactViewController {
             isBirhdaySelected = false;
         }
         birthDateTexField.setText(birthdate);
+
+        if(justMeRadioButton.isSelected()){
+            birthdayPolicy = "just_me";
+        }
+        else if (myContactsRadioButton.isSelected()) {
+            birthdayPolicy = "my_contacts";
+        }
+        else if (myNetWorkRadioButton.isSelected()) {
+            birthdayPolicy = "my_network";
+        }
+        else if (everyOneRadioButton.isSelected()) {
+            birthdayPolicy = "every_one";
+        }
     }
 }

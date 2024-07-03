@@ -37,7 +37,7 @@
          <bottom>
             <AnchorPane prefHeight="430.0" prefWidth="200.0" style="-fx-background-color: #87CEF0;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox layoutX="150.0" layoutY="69.0" prefHeight="280.0" prefWidth="500.0" spacing="20.0" style="-fx-border-color: #B351FA; -fx-border-width: 2px 2px 2px 0px; -fx-border-radius: 10;">
+                  <VBox layoutX="150.0" layoutY="54.0" prefHeight="342.0" prefWidth="500.0" spacing="20.0" style="-fx-border-color: #B351FA; -fx-border-width: 2px 2px 2px 0px; -fx-border-radius: 10;">
                      <children>
                         <TextField fx:id="profileURLTexField" editable="false" prefHeight="26.0" prefWidth="479.0" style="-fx-background-color: transparent;" />
                         <TextField fx:id="shareEmailTexField" editable="false" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: transparent;" />
@@ -45,12 +45,13 @@
                         <TextField fx:id="phoneTypeTexField" editable="false" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: transparent;" />
                         <TextField fx:id="birthDateTexField" editable="false" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: transparent;" />
                         <TextField fx:id="addressTexField" editable="false" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: transparent;" />
+                        <TextField fx:id="instantMessageTextField" editable="false" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: transparent;" />
                      </children>
                      <padding>
                         <Insets top="10.0" />
                      </padding>
                   </VBox>
-                  <VBox layoutX="50.0" layoutY="69.0" prefHeight="279.0" prefWidth="100.0" spacing="20.0" style="-fx-border-color: #B351FA; -fx-border-width: 2px 0px 2px 2px; -fx-border-radius: 10;" AnchorPane.topAnchor="69.0">
+                  <VBox layoutX="50.0" layoutY="54.0" prefHeight="344.0" prefWidth="100.0" spacing="20.0" style="-fx-border-color: #B351FA; -fx-border-width: 2px 0px 2px 2px; -fx-border-radius: 10;" AnchorPane.topAnchor="54.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="Profile url">
                            <font>
@@ -78,6 +79,11 @@
                            </font>
                         </Label>
                         <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="Address">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="Instant message">
                            <font>
                               <Font name="System Bold Italic" size="12.0" />
                            </font>
