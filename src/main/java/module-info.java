@@ -7,4 +7,5 @@ module com.example.client {
 
     opens com.example.client to javafx.fxml;
     exports com.example.client;
+
 }
