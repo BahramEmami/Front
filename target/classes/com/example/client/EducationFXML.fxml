@@ -11,12 +11,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.EducationController">
    <top>
       <AnchorPane prefHeight="81.2" prefWidth="700.0" style="-fx-background-color: #B351FA;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="614.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logoEdit" fitHeight="70.0" fitWidth="70.0" layoutX="614.0" layoutY="2.0" onMouseClicked="#logoPressed" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@pics/unnamed.png" />
                </image>
@@ -29,6 +28,16 @@
             <ImageView fx:id="backToProfileButton" fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@pics/icons8-back-100.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="editEducationButton" fitHeight="40.0" fitWidth="40.0" layoutX="500.0" layoutY="21.0" onMouseClicked="#editPressed" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@pics/icons8-edit-100.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="addEducationButton" fitHeight="40.0" fitWidth="40.0" layoutX="160.0" layoutY="21.0" onMouseClicked="#addPressed" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@pics/icons8-add-100.png" />
                </image>
             </ImageView>
          </children>

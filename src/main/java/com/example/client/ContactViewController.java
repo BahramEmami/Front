@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -40,6 +41,8 @@ public class ContactViewController {
     private TextField birthDateTexField;
     @FXML
     private TextField addressTexField;
+    @FXML
+    private TextField instantMessageTextField;
 
     private static final String id = "";
     private static String profileURL = "";
@@ -71,6 +74,17 @@ public class ContactViewController {
     private DatePicker birthDateTexFieldEdit;
     @FXML
     private TextField addressTexFieldEdit;
+    @FXML
+    private TextField instantMessageTextFieldEdit;
+    @FXML
+    private RadioButton justMeRadioButton;
+    @FXML
+    private RadioButton myContactsRadioButton;
+    @FXML
+    private RadioButton myNetworkRadioButton;
+    @FXML
+    private RadioButton everyOneRadioButton;
+
 
 
     private static boolean isPhoneTypeSelected = false;
@@ -116,6 +130,7 @@ public class ContactViewController {
         /////////////////////////////////////////////////////////////////////////////
 
         addressTexFieldEdit.setText(address);
+        instantMessageTextFieldEdit.setText(instantMessage);
 
     }
 
@@ -162,22 +177,24 @@ public class ContactViewController {
                 isPhoneTypeSelected = true;
             }
 
-            if (.isSelected()) {
-                phoneType = "me";
-                .setText(birthdatePolicy);
-                isBirthdatePolicy = true;
-            } else if (.isSelected()) {
-                phoneType = "contacts";
-                .setText(birthdatePolicy);
-                isBirthdatePolicy = true;
-            } else if (.isSelected()) {
-                phoneType = "everyone";
-                .setText(birthdatePolicy);
-                isBirthdatePolicy = true;
+            if(justMeRadioButton.isSelected()){
+                birthdatePolicy = "just_me";
+            }
+            else if(myContactsRadioButton.isSelected()){
+                birthdatePolicy = "my_contacts";
+            }
+            else if(myNetworkRadioButton.isSelected()){
+                birthdatePolicy = "my_network";
+            }
+            else if(everyOneRadioButton.isSelected()){
+                birthdatePolicy = "every_one";
             }
 
-            address = addressTexFieldEdit.getText();
+            instantMessage = instantMessageTextFieldEdit.getText();
+            instantMessageTextField.setText(instantMessage);
 
+
+            address = addressTexFieldEdit.getText();
             addressTexField.setText(address);
 
             try {
@@ -192,6 +209,8 @@ public class ContactViewController {
             System.out.println("error123123");
         }
     }
+
+
     public int editContact() throws IOException {
 
         //"http://localhost:8080"/login/email/password
