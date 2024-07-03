@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,8 +11,125 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.ProfileController">
-   <bottom>
-      <AnchorPane prefHeight="430.0" prefWidth="200.0" style="-fx-background-color: #87CEF0;" BorderPane.alignment="CENTER">
+   <top>
+      <AnchorPane prefHeight="70.0" prefWidth="700.0" style="-fx-background-color: #6C0A0A;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="2.0" prefHeight="45.0" prefWidth="598.0" spacing="45.0" AnchorPane.bottomAnchor="25.200000000000003" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="88.0" AnchorPane.topAnchor="2.0">
+               <children>
+                  <Button fx:id="homeButton" mnemonicParsing="false" onAction="#homePressed" prefHeight="40.0" prefWidth="26.0" style="-fx-background-color: #FFAAAA;">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pics/icons8-home-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="myNetworkButton" mnemonicParsing="false" onAction="#myNetWorkPressed" prefHeight="40.0" prefWidth="26.0" style="-fx-background-color: #FFAAAA;">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pics/icons8-connection-100.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="newPostButton" mnemonicParsing="false" onAction="#newPostPressed" prefHeight="40.0" prefWidth="26.0" style="-fx-background-color: #FFAAAA;">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pics/icons8-post-64.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="jobsButton" mnemonicParsing="false" onAction="#jobsPressed" prefHeight="40.0" prefWidth="26.0" style="-fx-background-color: #FFAAAA;">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pics/icons8-jobs-58.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="messageButton" mnemonicParsing="false" onAction="#messagePressed" prefHeight="40.0" prefWidth="26.0" style="-fx-background-color: #FFAAAA;">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pics/icons8-message-100.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="settingButton" mnemonicParsing="false" onAction="#settingPressed" prefHeight="40.0" prefWidth="26.0" style="-fx-background-color: #FFAAAA;">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pics/icons8-setting-100.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="signOutButton" mnemonicParsing="false" onAction="#signOutPressed" prefHeight="40.0" prefWidth="26.0" style="-fx-background-color: #FFAAAA;">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pics/icons8-sign-out-100.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <Label layoutX="15.0" layoutY="49.0" text="Home" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="83.0" layoutY="49.0" text="My Network" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="295.0" layoutY="49.0" text="Jobs" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="185.0" layoutY="49.0" text="New Post" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="371.0" layoutY="49.0" text="Message" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="467.0" layoutY="49.0" text="Setting" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="550.0" layoutY="49.0" text="Sigin Out" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Button layoutX="634.0" layoutY="6.0" mnemonicParsing="false" prefWidth="0.0" style="-fx-background-color: #6C0A0A;">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@pics/icons8-linkedin-240(2).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="430.0" prefWidth="200.0" style="-fx-background-color: #FFAAAA;" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="titleImageImageView" fitHeight="101.0" fitWidth="700.0" pickOnBounds="true">
                <image>
@@ -22,159 +141,120 @@
                   <Image url="@pics/icons8-linkedin-256.png" />
                </image>
             </ImageView>
-            <AnchorPane fx:id="educationSeaMore" layoutX="50.0" layoutY="170.0" onMouseClicked="#educationSeaMorePressed" prefHeight="60.0" prefWidth="600.0" style="-fx-border-color: #B351FA; -fx-border-radius: 20;">
+            <AnchorPane layoutX="50.0" layoutY="229.0" prefHeight="30.0" prefWidth="600.0" style="-fx-border-color: #6C0A0A; -fx-border-radius: 20; -fx-border-width: 2px 2px 2px 2px;">
                <children>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@pics/icons8-education-100.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="74.0" layoutY="15.0" prefHeight="30.0" prefWidth="150.0" text="Educations">
+                  <Label layoutX="74.0" layoutY="10.0" prefHeight="30.0" prefWidth="150.0" text="Educations">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <Label layoutX="420.0" layoutY="15.0" prefHeight="30.0" prefWidth="85.0" text="Sea more ...">
+                  <Button fx:id="educationSeaMore" layoutX="440.0" layoutY="5.0" mnemonicParsing="false" onAction="#educationSeaMorePressed" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #FFAAAA;" text="See more...">
                      <font>
-                        <Font name="System Bold Italic" size="16.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
-                  </Label>
+                  </Button>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="connectWithMeSeaMore" layoutX="50.0" layoutY="244.0" onMouseClicked="#connectWithMeSeaPressed" prefHeight="60.0" prefWidth="600.0" style="-fx-border-color: #B351FA; -fx-border-radius: 20;">
+            <AnchorPane layoutX="50.0" layoutY="293.0" prefHeight="30.0" prefWidth="600.0" style="-fx-border-color: #6C0A0A; -fx-border-radius: 20; -fx-border-width: 2px 2px 2px 2px;">
                <children>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@pics/icons8-connection-100.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="74.0" layoutY="15.0" prefHeight="30.0" prefWidth="150.0" text="Connect with me">
+                  <Label layoutX="74.0" layoutY="10.0" prefHeight="30.0" prefWidth="150.0" text="Connect with me">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <Label layoutX="420.0" layoutY="14.0" prefHeight="30.0" prefWidth="85.0" text="Sea more ...">
+                  <Button fx:id="connectWithMeSeaMore" layoutX="440.0" layoutY="5.0" mnemonicParsing="false" onAction="#connectWithMeSeaPressed" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #FFAAAA;" text="See more...">
                      <font>
-                        <Font name="System Bold Italic" size="16.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
-                  </Label>
+                  </Button>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="myJobsSeaMore" layoutX="50.0" layoutY="315.0" onMouseClicked="#myJobsSeaPressed" prefHeight="60.0" prefWidth="600.0" style="-fx-border-color: #B351FA; -fx-border-radius: 20;">
+            <AnchorPane layoutX="50.0" layoutY="357.0" prefHeight="30.0" prefWidth="600.0" style="-fx-border-color: #6C0A0A; -fx-border-radius: 20; -fx-border-width: 2px 2px 2px 2px;">
                <children>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@pics/icons8-group-of-companies-80.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="74.0" layoutY="15.0" prefHeight="30.0" prefWidth="150.0" text="My Jobs">
+                  <Label layoutX="74.0" layoutY="10.0" prefHeight="30.0" prefWidth="150.0" text="My Jobs">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <Label layoutX="420.0" layoutY="15.0" prefHeight="30.0" prefWidth="85.0" text="Sea more ...">
+                  <Button fx:id="myJobsSeaMore" layoutX="440.0" layoutY="5.0" mnemonicParsing="false" onAction="#myJobsSeaPressed" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #FFAAAA;" text="See more...">
                      <font>
-                        <Font name="System Bold Italic" size="16.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
-                  </Label>
+                  </Button>
                </children>
             </AnchorPane>
-         </children>
-      </AnchorPane>
-   </bottom>
-   <top>
-      <AnchorPane prefHeight="70.0" prefWidth="700.0" style="-fx-background-color: #B351FA;" BorderPane.alignment="CENTER">
-         <children>
-            <HBox layoutX="33.0" layoutY="14.0" prefHeight="50.0" prefWidth="581.0" spacing="45.0" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="86.0" AnchorPane.topAnchor="14.0">
+            <AnchorPane fx:id="myJobsSeaMore1" layoutX="50.0" layoutY="165.0" onMouseClicked="#myJobsSeaPressed" prefHeight="30.0" prefWidth="600.0" style="-fx-border-color: #6C0A0A; -fx-border-radius: 20; -fx-border-width: 2px 2px 2px 2px;">
                <children>
-                  <ImageView fx:id="homeButton" fitHeight="30.0" fitWidth="60.0" onMouseClicked="#homePressed" pickOnBounds="true" preserveRatio="true">
+                  <Label layoutX="74.0" layoutY="10.0" prefHeight="30.0" prefWidth="106.0" text="User Name :">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@pics/icons8-home-50.png" />
+                        <Image url="@pics/icons8-username-100.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="myNetworkButton" fitHeight="30.0" fitWidth="60.0" onMouseClicked="#myNetWorkPressed" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@pics/icons8-connection-100.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="newPostButton" fitHeight="30.0" fitWidth="60.0" onMouseClicked="#newPostPressed" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@pics/icons8-post-64.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="jobsButton" fitHeight="30.0" fitWidth="60.0" onMouseClicked="#jobsPressed" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@pics/icons8-jobs-58.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="messageButton" fitHeight="30.0" fitWidth="60.0" onMouseClicked="#messagePressed" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@pics/icons8-message-100.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="settingButton" fitHeight="30.0" fitWidth="60.0" onMouseClicked="#settingPressed" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@pics/icons8-setting-100.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="editProfileButton" fitHeight="30.0" fitWidth="60.0" onMouseClicked="#editProfilePressed" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@pics/icons8-edit-150.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="signOutButton" fitHeight="30.0" fitWidth="60.0" onMouseClicked="#signOutPressed" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@pics/icons8-sign-out-100.png" />
-                     </image>
-                  </ImageView>
+                  <TextField fx:id="userNameTextField" editable="false" layoutX="180.0" layoutY="10.0" prefHeight="30.0" prefWidth="400.0" style="-fx-background-color: #FFAAAA;">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
                </children>
-            </HBox>
-            <Label fx:id="HomeButtonL" layoutX="27.0" layoutY="54.0" onContextMenuRequested="#homePressed" text="HOME">
+            </AnchorPane>
+            <Button fx:id="editProfileButton" layoutX="620.0" layoutY="98.0" mnemonicParsing="false" onAction="#editProfilePressed" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #6C0A0A;">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@pics/icons8-edit-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label layoutX="616.0" layoutY="141.0" text="Edit Profile">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="myNetworkButtonL" layoutX="87.0" layoutY="54.0" onMouseClicked="#myNetWorkPressed" text="My Network">
+            <Button fx:id="editTitleImageButton" layoutX="653.0" layoutY="14.0" mnemonicParsing="false" onAction="#editTitleImagePressed" style="-fx-background-color: #6C0A0A;">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@pics/icons8-mountain-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="editProfileImageButton" layoutX="32.0" layoutY="120.0" mnemonicParsing="false" onAction="#editProfileImagePressed" style="-fx-background-color: #6C0A0A;">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@pics/icons8-user-24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label fx:id="statusLabel" alignment="CENTER" layoutX="230.0" layoutY="112.0" prefHeight="29.0" prefWidth="234.0" textFill="#0149ff">
                <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label fx:id="newPostButtonL" layoutX="176.0" layoutY="54.0" onMouseClicked="#newPostPressed" text="New Post">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label fx:id="jobsButtonL" layoutX="261.0" layoutY="54.0" onMouseClicked="#jobsPressed" text="Jobs">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label fx:id="messageButtonL" layoutX="323.0" layoutY="54.0" onMouseClicked="#messagePressed" text="Message">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label fx:id="editProfileButtonL" layoutX="467.0" layoutY="54.0" onMouseClicked="#editProfilePressed" text="Edit Profile">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="614.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@pics/unnamed.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="settingButtonL" layoutX="405.0" layoutY="54.0" onMouseClicked="#settingPressed" text="Setting">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label fx:id="signOutButtonL" layoutX="549.0" layoutY="54.0" onMouseClicked="#signOutPressed" text="Sign out">
-               <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-   </top>
+   </center>
 </BorderPane>

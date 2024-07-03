@@ -9,10 +9,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class ProfileController {
@@ -21,47 +27,55 @@ public class ProfileController {
     private Parent root;
 
     @FXML
-    private ImageView homeButton;
+    private Button homeButton;
+
     @FXML
-    private Label homeButtonL;
+    private Button myNetworkButton;
+
     @FXML
-    private ImageView myNetworkButton;
+    private Button newPostButton;
+
     @FXML
-    private Label myNetworkButtonL;
+    private Button jobsButton;
+
     @FXML
-    private ImageView newPostButton;
-    @FXML
-    private Label newPostButtonL;
-    @FXML
-    private ImageView jobsButton;
-    @FXML
-    private Label jobsButtonL;
-    @FXML
-    private ImageView messageButton;
-    @FXML
-    private Label messageButtonL;
+    private Button messageButton;
+
     @FXML
     private ImageView titleImageImageView;
     @FXML
     private ImageView profileImageImageview;
     @FXML
-    private ImageView editProfileButton;
+    private Button editProfileButton;
+
     @FXML
-    private Label editProfileButtonL;
+    private Button educationSeaMore;
     @FXML
-    private AnchorPane educationSeaMore;
+    private Button connectWithMeSeaMore;
     @FXML
-    private AnchorPane connectWithMeSeaMore;
+    private Button myJobsSeaMore;
     @FXML
-    private AnchorPane myJobsSeaMore;
+    private Button settingButton;
+
     @FXML
-    private ImageView settingButton;
+    private Button signOutButton;
+
     @FXML
-    private Label settingButtonL;
+    private TextField userNameTextField;
+
     @FXML
-    private ImageView signOutButton;
+    private Button editProfileImageButton;
+
     @FXML
-    private Label signOutButtonL;
+    private Button editTitleImageButton;
+
+    @FXML
+    private Label statusLabel;
+
+    private static Image profileImage = null;
+    private static Image titleImage = null;
+
+    private static String userName;
 
 
     @FXML
@@ -124,6 +138,30 @@ public class ProfileController {
     @FXML
     public void settingPressed(ActionEvent event){
         //go to setting scene
+    }
+
+    @FXML
+    public void editProfileImagePressed(ActionEvent event){
+        try {
+            FileChooser fileChooser = new FileChooser();
+            File file = fileChooser.showOpenDialog(new Stage());
+            profileImage = new Image(new FileInputStream(file));
+            profileImageImageview.setImage(profileImage);
+        } catch (FileNotFoundException fe) {
+            statusLabel.setText("File not found!");
+        }
+    }
+
+    @FXML
+    public void editTitleImagePressed(ActionEvent event) {
+        try {
+            FileChooser fileChooser = new FileChooser();
+            File file = fileChooser.showOpenDialog(new Stage());
+            titleImage = new Image(new FileInputStream(file));
+            titleImageImageView.setImage(titleImage);
+        } catch (FileNotFoundException fe) {
+            statusLabel.setText("File not found!");
+        }
     }
 
 }

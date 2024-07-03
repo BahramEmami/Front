@@ -14,20 +14,20 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.SignInController">
    <right>
-      <AnchorPane prefHeight="497.6" prefWidth="205.2" style="-fx-background-color: #B351FA;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="497.6" prefWidth="205.2" style="-fx-background-color: #6C0A0A;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="logInButton" layoutX="73.0" layoutY="424.0" mnemonicParsing="false" onAction="#logInPressed" prefHeight="33.0" prefWidth="59.0" style="-fx-background-color: #FFFFFF;" text="Login">
+            <Button fx:id="logInButton" layoutX="73.0" layoutY="424.0" mnemonicParsing="false" onAction="#logInPressed" prefHeight="33.0" prefWidth="59.0" style="-fx-background-color: #FFAAAA;" text="Login">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
-            <Label layoutX="30.0" layoutY="392.0" text="Already have an account?">
+            <Label layoutX="30.0" layoutY="392.0" text="Already have an account?" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="35.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@pics/icons8-linkedin-256.png" />
+                  <Image url="@pics/icons8-linkedin-240(1).png" />
                </image>
                <effect>
                   <InnerShadow />
@@ -42,7 +42,7 @@
       </AnchorPane>
    </right>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="486.4" style="-fx-background-color: #87CEF0;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="486.4" style="-fx-background-color: #FFAAAA;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="32.0" prefHeight="40.0" prefWidth="138.0" text="Sign Up" textAlignment="CENTER">
                <font>
@@ -93,7 +93,7 @@
                   </Label>
                </children>
             </VBox>
-            <Button fx:id="signInButton" layoutX="235.0" layoutY="442.0" mnemonicParsing="false" onAction="#signInPressed" prefHeight="35.6" prefWidth="153.0" style="-fx-background-color: #FFFFFF;" text="Sign Up">
+            <Button fx:id="signInButton" layoutX="235.0" layoutY="442.0" mnemonicParsing="false" onAction="#signInPressed" prefHeight="35.6" prefWidth="153.0" style="-fx-background-color: #6C0A0A;" text="Sign Up" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></Button>
