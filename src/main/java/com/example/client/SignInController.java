@@ -311,14 +311,14 @@ public class SignInController {
                 int signInStatusCompleted1 = signInStatusCompleted();
                 if (signInStatusCompleted1 == 1) {
                     statusLabelComplete.setText("Account Successfully Created!");
-//                    wait(3000);
-                    /**
-                     * Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
-                     *         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                     *         scene = new Scene(root);
-                     *         stage.setScene(scene);
-                     *         stage.show();
-                     */
+//
+
+                    Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+
                 } else if (signInStatusCompleted1 == 0) {
                     statusLabelComplete.setText("Error!!!");
                 }
