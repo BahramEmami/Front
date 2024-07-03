@@ -43,7 +43,7 @@
                <bottom>
                   <AnchorPane prefHeight="430.0" prefWidth="200.0" style="-fx-background-color: #87CEF0;" BorderPane.alignment="CENTER">
                      <children>
-                        <VBox layoutX="150.0" layoutY="54.0" prefHeight="338.0" prefWidth="500.0" spacing="20.0" style="-fx-border-color: #B351FA; -fx-border-width: 2px 2px 2px 0px; -fx-border-radius: 10;">
+                        <VBox layoutX="150.0" layoutY="54.0" prefHeight="359.0" prefWidth="500.0" spacing="20.0" style="-fx-border-color: #B351FA; -fx-border-width: 2px 2px 2px 0px; -fx-border-radius: 10;">
                            <children>
                               <TextField fx:id="profileURLTexFieldEdit" prefHeight="26.0" prefWidth="479.0" style="-fx-background-color: #FFFFFF;" />
                               <TextField fx:id="shareEmailTexFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" />
@@ -75,25 +75,20 @@
                               <TextField fx:id="instantMessageTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" />
                               <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="200.0" spacing="30.0">
                                  <children>
-                                    <RadioButton fx:id="justMeRadioButton" mnemonicParsing="false" selected="true" text="just me">
+                                    <RadioButton fx:id="justMeRadioButton" mnemonicParsing="false" text="just me">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                        <toggleGroup>
-                                          <ToggleGroup fx:id="birthdayPolicy" />
+                                          <ToggleGroup fx:id="birthDayPolicy" />
                                        </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton fx:id="myContactsRadioButton" mnemonicParsing="false" text="my contacts" toggleGroup="$birthdayPolicy">
+                                    <RadioButton fx:id="myContactsRadioButton" mnemonicParsing="false" text="my contacts" toggleGroup="$birthDayPolicy">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </RadioButton>
-                                    <RadioButton fx:id="myNetworkRadioButton" mnemonicParsing="false" text="my network" toggleGroup="$birthdayPolicy">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </RadioButton>
-                                    <RadioButton fx:id="everyOneRadioButton" mnemonicParsing="false" text="every one" toggleGroup="$birthdayPolicy">
+                                    <RadioButton fx:id="everyOneRadioButton" mnemonicParsing="false" text="every one" toggleGroup="$birthDayPolicy">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -105,7 +100,7 @@
                               <Insets top="10.0" />
                            </padding>
                         </VBox>
-                        <VBox layoutX="50.0" layoutY="54.0" prefHeight="342.0" prefWidth="100.0" spacing="20.0" style="-fx-border-color: #B351FA; -fx-border-width: 2px 0px 2px 2px; -fx-border-radius: 10;" AnchorPane.topAnchor="54.0">
+                        <VBox layoutX="50.0" layoutY="53.2" prefHeight="358.0" prefWidth="100.0" spacing="20.0" style="-fx-border-color: #B351FA; -fx-border-width: 2px 0px 2px 2px; -fx-border-radius: 10;" AnchorPane.topAnchor="53.0">
                            <children>
                               <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="Profile url">
                                  <font>
@@ -137,7 +132,7 @@
                                     <Font name="System Bold Italic" size="12.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="Instant  Message">
+                              <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="Instant message">
                                  <font>
                                     <Font name="System Bold Italic" size="12.0" />
                                  </font>

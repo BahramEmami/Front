@@ -10,7 +10,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="lib" level="application" />
     <orderEntry type="library" name="openjfx-22.0.1_windows-x64_bin-sdk" level="application" />
     <orderEntry type="library" name="openjfx-22.0" level="project" />
     <orderEntry type="library" name="javafx-swt" level="project" />
@@ -35,5 +34,7 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.15.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.15.0" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains:annotations:24.1.0" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="openjfx-22.01" level="project" />
   </component>
 </module>
