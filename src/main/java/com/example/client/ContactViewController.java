@@ -80,8 +80,7 @@ public class ContactViewController {
     private RadioButton justMeRadioButton;
     @FXML
     private RadioButton myContactsRadioButton;
-    @FXML
-    private RadioButton myNetworkRadioButton;
+
     @FXML
     private RadioButton everyOneRadioButton;
 
@@ -124,7 +123,7 @@ public class ContactViewController {
         //////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////
         ///possible error
-        birthDateTexFieldEdit.setValue(LocalDate.parse(birthdate));
+        //birthDateTexFieldEdit.setValue(LocalDate.parse(birthdate));
         ///////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
@@ -178,16 +177,14 @@ public class ContactViewController {
             }
 
             if(justMeRadioButton.isSelected()){
-                birthdatePolicy = "just_me";
+                birthdatePolicy = "me";
             }
             else if(myContactsRadioButton.isSelected()){
-                birthdatePolicy = "my_contacts";
+                birthdatePolicy = "contacts";
             }
-            else if(myNetworkRadioButton.isSelected()){
-                birthdatePolicy = "my_network";
-            }
+
             else if(everyOneRadioButton.isSelected()){
-                birthdatePolicy = "every_one";
+                birthdatePolicy = "everyone";
             }
 
             instantMessage = instantMessageTextFieldEdit.getText();
