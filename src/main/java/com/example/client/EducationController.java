@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -21,7 +22,7 @@ public class EducationController {
     private Parent root;
 
     @FXML
-    private ImageView backToProfileButton;
+    private Button backToProfileButton;
     @FXML
     private TextField instituteText;
     @FXML
@@ -37,9 +38,9 @@ public class EducationController {
     @FXML
     private TextArea descriptionText;
     @FXML
-    private ImageView addEducationButton;
+    private Button addEducationButton;
     @FXML
-    private ImageView editEducationButton;
+    private Button editEducationButton;
 
     private static String institute = "";
     private static String fieldOfStudy = "";
@@ -50,7 +51,7 @@ public class EducationController {
     private static String description = "";
 
     @FXML
-    private ImageView backToEducationButton;
+    private Button backToEducationButton;
     @FXML
     private TextField instituteTextEdit;
     @FXML
@@ -66,15 +67,15 @@ public class EducationController {
     @FXML
     private TextArea descriptionTextEdit;
     @FXML
-    private ImageView doneEditEducationButton;
+    private Button doneEditEducationButton;
     @FXML
-    private ImageView logo;
+    private Button logo;
     @FXML
-    private ImageView logoEdit;
+    private Button logoEdit;
 
 
     @FXML
-    private ImageView backToEducationButtonAdd;
+    private Button backToEducationButtonAdd;
     @FXML
     private TextField instituteTextAdd;
     @FXML
@@ -90,9 +91,9 @@ public class EducationController {
     @FXML
     private TextArea descriptionTextAdd;
     @FXML
-    private ImageView doneAddEducation;
+    private Button doneAddEducation;
     @FXML
-    private ImageView logoEducationAdd;
+    private Button logoEducationAdd;
 
     private static String instituteAdd= "";
     private static String fieldOfStudyAdd = "";

@@ -24,11 +24,11 @@ public class ContactViewController {
     private Parent root;
 
     @FXML
-    private ImageView logo;
+    private Button logo;
     @FXML
-    private ImageView backToProfileButton;
+    private Button backToProfileButton;
     @FXML
-    private ImageView editContactButton;
+    private Button editContactButton;
     @FXML
     private TextField profileURLTexField;
     @FXML
@@ -55,9 +55,11 @@ public class ContactViewController {
     private static String instantMessage = "";
     /////////////
     @FXML
-    private ImageView backToContactViewButton;
+    private Button backToContactViewButton;
     @FXML
-    private ImageView doneEditButton;
+    private Button doneEditButton;
+    @FXML
+    private Button logoEdit;
     @FXML
     private TextField profileURLTexFieldEdit;
     @FXML

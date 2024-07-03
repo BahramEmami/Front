@@ -6,10 +6,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.StartController">
    <left>
-      <AnchorPane prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: #87CEF0;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: #FFAAAA;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" layoutX="25.0" layoutY="40.0" prefHeight="60.0" prefWidth="300.0" text="Welcome to ">
                <font>
@@ -21,7 +20,7 @@
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
-            <Button fx:id="goToSignInButton" layoutX="87.0" layoutY="370.0" mnemonicParsing="false" onAction="#signInPressed" prefHeight="45.0" prefWidth="175.0" style="-fx-background-color: #B351FA;" text="Sign Up" textFill="WHITE">
+            <Button fx:id="goToSignInButton" layoutX="87.0" layoutY="370.0" mnemonicParsing="false" onAction="#signInPressed" prefHeight="45.0" prefWidth="175.0" style="-fx-background-color: #6C0A0A;" text="Sign Up" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="22.0" />
                </font>
@@ -30,7 +29,7 @@
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: #B351FA;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: #6C0A0A;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" layoutX="25.0" layoutY="40.0" prefHeight="60.0" prefWidth="300.0" text="LinkedIn" textFill="WHITE">
                <font>
@@ -42,7 +41,7 @@
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
-            <Button fx:id="goToLoginButton" layoutX="87.0" layoutY="370.0" mnemonicParsing="false" onAction="#loginPressed" prefHeight="45.0" prefWidth="175.0" style="-fx-background-color: #87CEF0;" text="Login">
+            <Button fx:id="goToLoginButton" layoutX="87.0" layoutY="370.0" mnemonicParsing="false" onAction="#loginPressed" prefHeight="45.0" prefWidth="175.0" style="-fx-background-color: #FFAAAA;" text="Login">
                <font>
                   <Font name="System Bold Italic" size="22.0" />
                </font>
