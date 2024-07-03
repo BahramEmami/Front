@@ -85,7 +85,6 @@ public class ContactViewController {
     private RadioButton everyOneRadioButton;
 
 
-
     private static boolean isPhoneTypeSelected = false;
     private static boolean isBirthdatePolicy = false;
     private static boolean isBirhdaySelected = false;
@@ -119,6 +118,7 @@ public class ContactViewController {
         profileURLTexFieldEdit.setText(profileURL);
         shareEmailTexFieldEdit.setText(shareEmail);
         phoneNumberTexFieldEdit.setText(phoneNumber);
+
         //////////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -176,15 +176,15 @@ public class ContactViewController {
                 isPhoneTypeSelected = true;
             }
 
-            if(justMeRadioButton.isSelected()){
+            if (justMeRadioButton.isSelected()) {
                 birthdatePolicy = "me";
-            }
-            else if(myContactsRadioButton.isSelected()){
+                isBirthdatePolicy = true;
+            } else if (myContactsRadioButton.isSelected()) {
                 birthdatePolicy = "contacts";
-            }
-
-            else if(everyOneRadioButton.isSelected()){
+                isBirthdatePolicy = true;
+            } else if (everyOneRadioButton.isSelected()) {
                 birthdatePolicy = "everyone";
+                isBirthdatePolicy = true;
             }
 
             instantMessage = instantMessageTextFieldEdit.getText();
@@ -201,16 +201,29 @@ public class ContactViewController {
                 isBirhdaySelected = false;
             }
             birthDateTexField.setText(birthdate);
+
+
+            if(editContact() == 1){
+                System.out.println("Done");
+            }
+            else if(editContact() == 0){
+                System.out.println("Wrong input");
+            }
+            else if(editContact() == -1){
+                System.out.println("Error back");
+            }
+
+
         } catch (Exception exception) {
             exception.printStackTrace();
-            System.out.println("error123123");
+            System.out.println("Error123");
         }
     }
 
 
     public int editContact() throws IOException {
 
-        //"http://localhost:8080"/login/email/password
+        //"http://localhost:8080"/contact/edit
 
         JSONObject json = new JSONObject();
         json.put("id", id);
@@ -230,7 +243,7 @@ public class ContactViewController {
         tempConnection.getOutputStream().write(json.toString().getBytes());
         tempConnection.getOutputStream().close();
 
-        if (tempConnection.getResponseCode() == 200) {//go to home page
+        if (tempConnection.getResponseCode() == 200) {      //go to home page
             return 1;
         } else if (tempConnection.getResponseCode() == 400) {
             return 0;
