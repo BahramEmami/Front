@@ -103,6 +103,13 @@ public class EditInfoController {
     @FXML
     public void doneEditPressed(ActionEvent event) throws IOException {
 
+        ////////////////////      set sql save
+
+
+
+
+
+
         if (wantToHireRadioButtonEdit.isSelected()) {
             workType = "want_to_hired";
             isJobTypeSelected = true;
@@ -115,7 +122,7 @@ public class EditInfoController {
         }
 
 
-        if (firstNameTextFieldEdit.getText().length() == 0 || lastNameTextFieldEdit.getText().length() == 0 || emailTextFieldEdit.getText().length() == 0 || countryTextFieldEdit.getText().length() == 0 || cityTextFieldEdit.getText().length() == 0 || additionalTextFieldEdit.getText().length() == 0 || userNameTextFieldEdit.getText().length() == 0 || !isJobTypeSelected) {
+        if (firstNameTextFieldEdit.getText().length() == 0 || lastNameTextFieldEdit.getText().length() == 0 || emailTextFieldEdit.getText().length() == 0 || additionalTextFieldEdit.getText().length() == 0 || userNameTextFieldEdit.getText().length() == 0 || !isJobTypeSelected) {
             statusEditInfoLabel.setText("Fill all fields");
         } else {
             firstName = firstNameTextFieldEdit.getText();
@@ -143,7 +150,7 @@ public class EditInfoController {
                 statusEditInfoLabel.setText("Username exists");
             }
 
-            if (editInfoStatus() == 1) {
+            else if (editInfoStatus() == 1) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewInfoFXML.fxml"));
                 Parent root = loader.load();
 
@@ -202,23 +209,23 @@ public class EditInfoController {
 
     @FXML
     public void logoPressed(ActionEvent event) throws IOException {
-        /*Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();*/
+        stage.show();
         System.out.println("logo");
     }
 
 
     /////////////////////////////////////////////////////
     @FXML
-    public void backToProfilePressed(ActionEvent event) {
-        /*Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
+    public void backToProfilePressed(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();*/
+        stage.show();
         System.out.println("back to profile");
     }
 
@@ -292,8 +299,11 @@ public class EditInfoController {
     }
 
     public boolean validPass(String password) {
-        if (password.length() < 8) {
+        if (password.length() < 8 && password.length() != 0) {
             return false;
+        }
+        else if(password.length() == 0){
+            return true;
         }
 
         boolean hasLetter = false;
@@ -413,6 +423,8 @@ public class EditInfoController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+
+
         //it goes to start scene
         //code to delete account
     }

@@ -152,8 +152,18 @@ public class ProfileController {
 
     /////////////////
 ////////////////
+
     @FXML
     public void educationSeaMorePressed(ActionEvent event) throws IOException {
+
+
+        //////////////////////////////////   get sql show
+
+
+
+
+
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("EducationFXML.fxml"));
         Parent root = loader.load();
 
@@ -190,6 +200,15 @@ public class ProfileController {
 ////////////////
     @FXML
     public void connectWithMeSeaPressed(ActionEvent event) throws IOException {
+
+        //////////////////////      get sql show
+
+
+
+
+
+
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ContactViewFXML.fxml"));
         Parent root = loader.load();
 
@@ -306,5 +325,6 @@ public class ProfileController {
             statusLabel.setText("File not found!");
         }
     }
+
 
 }
