@@ -30,28 +30,29 @@ public class ContactViewController {
     @FXML
     private Button editContactButton;
     @FXML
-    private TextField profileURLTexField;
+     TextField profileURLTexField;
     @FXML
-    private TextField shareEmailTexField;
+     TextField shareEmailTexField;
     @FXML
-    private TextField phoneNumberTexField;
+     TextField phoneNumberTexField;
     @FXML
-    private TextField phoneTypeTexField;
+     TextField phoneTypeTexField;
     @FXML
-    private TextField birthDateTexField;
+     TextField birthDateTexField;
     @FXML
-    private TextField addressTexField;
+     TextField addressTexField;
     @FXML
-    private TextField instantMessageTextField;
+     TextField instantMessageTextField;
 
-    private static String profileURL = " ";
-    private static String shareEmail = " ";
-    private static String phoneNumber = " ";
+    private static String profileURL = "";
+    private static String shareEmail = "";
+    private static String phoneNumber = "";
     private static String phoneType = "mobile";
-    private static String birthdate  ;
+    private static String birthdate = "" ;
+    private static LocalDate localDateBirthDate;/////////////////////////
     private static String birthdatePolicy = "me";
-    private static String address = " ";
-    private static String instantMessage = " ";
+    private static String address = "";
+    private static String instantMessage = "";
     /////////////
     @FXML
     private Button backToContactViewButton;
@@ -71,8 +72,21 @@ public class ContactViewController {
     private RadioButton homeRadioButton;
     @FXML
     private RadioButton workRadioButton;
+
+
+    private static String profileURLEdit = "";
+    private static String shareEmailEdit = "";
+    private static String phoneNumberEdit = "";
+    private static String phoneTypeEdit = "mobile";
+    private static String birthdateEdit = "";
+    private static String birthdatePolicyEdit = "me";
+    private static String addressEdit = "";
+    private static String instantMessageEdit = "";
+    ///////////////////////////
+    //////////////////////////
+    ////////////////////////////
     @FXML
-    private DatePicker birthDateTexFieldEdit;
+    private DatePicker birthDateDatePickerEdit;
     @FXML
     private TextField addressTexFieldEdit;
     @FXML
@@ -84,6 +98,8 @@ public class ContactViewController {
 
     @FXML
     private RadioButton everyOneRadioButton;
+
+
 
 
     private static boolean isPhoneTypeSelected = false;
@@ -110,27 +126,67 @@ public class ContactViewController {
 
     @FXML
     private void editContactPressed(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ContactEditFXML.fxml"));
+        profileURL = profileURLTexField.getText();
+        shareEmail = shareEmailTexField.getText();
+        phoneNumber = phoneNumberTexField.getText();
+        phoneType = phoneTypeTexField.getText();
+        birthdate = birthDateTexField.getText();
+        address = addressTexField.getText();
+        instantMessage = instantMessageTextField.getText();
+
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ContactEditFXML.fxml"));
+        Parent root = loader.load();
+
+        // Get the controller associated with the FXML file
+        ContactViewController controller = loader.getController();
+
+        // Ensure fields are not null
+        if (controller.profileURLTexFieldEdit == null ||
+                controller.shareEmailTexFieldEdit == null ||
+                controller.phoneNumberTexFieldEdit == null ||
+                controller.mobileRadioButton == null ||
+                controller.workRadioButton == null ||
+                controller.homeRadioButton == null ||
+                controller.birthDateDatePickerEdit == null ||
+                controller.addressTexFieldEdit == null ||
+                controller.instantMessageTextFieldEdit == null ||
+                controller.justMeRadioButton == null||
+                controller.myContactsRadioButton == null||
+                controller.everyOneRadioButton == null) {
+            System.out.println("One or more fields are not initialized!");
+            return;
+        }
+
+        // Initialize the stage and scene
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-//
-//        profileURLTexFieldEdit.setText(profileURL);
-//        shareEmailTexFieldEdit.setText(shareEmail);
-//        phoneNumberTexFieldEdit.setText(phoneNumber);
-//
-//        //////////////////////////////////////////////////////////////////////////////////////////////
-//        //////////////////////////////////////////////////////////////////////////////////////////////
-//        ///////////////////////////////////////////////////////////////////////////////////////////////
-//        ///possible error
-//        //birthDateTexFieldEdit.setValue(LocalDate.parse(birthdate));
-//        ///////////////////////////////////////////////////////////////////////////////
-//        /////////////////////////////////////////////////////////////////////////////////
-//        /////////////////////////////////////////////////////////////////////////////
-//
-//        addressTexFieldEdit.setText(address);
-//        instantMessageTextFieldEdit.setText(instantMessage);
+
+
+
+        // Set the fields with existing data
+        controller.profileURLTexFieldEdit.setText(profileURL);
+        controller.shareEmailTexFieldEdit.setText(shareEmail);
+        controller.phoneNumberTexFieldEdit.setText(phoneNumber);
+        if (phoneType.equals("mobile")) {
+            controller.mobileRadioButton.fire();
+        } else if (phoneType.equals("home")) {
+            controller.homeRadioButton.fire();
+        } else if (phoneType.equals("work")) {
+            controller.workRadioButton.fire();
+        }
+        controller.addressTexFieldEdit.setText(address);
+        controller.instantMessageTextFieldEdit.setText(instantMessage);
+        if (birthdatePolicy.equals("me")) {
+            controller.justMeRadioButton.fire();
+        } else if (birthdatePolicy.equals("contacts")) {
+            controller.myContactsRadioButton.fire();
+        } else if (birthdatePolicy.equals("everyone")) {
+            controller.everyOneRadioButton.fire();
+        }
 
     }
 
@@ -143,94 +199,105 @@ public class ContactViewController {
         stage.setScene(scene);
         stage.show();
     }
-
+////////////////////////
+//////////////////////////
+/////////////////////////
+/////////////////////////
+////////////////////////
     @FXML
     private void doneEditPressed(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ContactViewFXML.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
 
-        try {
-
-
-            if (profileURLTexFieldEdit.getText() != null) {
-                profileURL = profileURLTexFieldEdit.getText();
-
-//            profileURLTexField.setText(profileURL);
-            }
-            if (shareEmailTexFieldEdit.getText() != null) {
-                shareEmail = shareEmailTexFieldEdit.getText();
-
-//            shareEmailTexField.setText(shareEmail);
-            }
-            if (phoneNumberTexFieldEdit.getText() != null) {
-                phoneNumber = phoneNumberTexFieldEdit.getText();
-
-//            phoneNumberTexField.setText(phoneNumber);
-            }
-//            if (homeRadioButton.isSelected()) {
-//                phoneType = "home";
-//                phoneTypeTexField.setText(phoneType);
-//                isPhoneTypeSelected = true;
-//            } else if (workRadioButton.isSelected()) {
-//                phoneType = "work";
-//                phoneTypeTexField.setText(phoneType);
-//                isPhoneTypeSelected = true;
-//            } else if (mobileRadioButton.isSelected()) {
-//                phoneType = "mobile";
-//                phoneTypeTexField.setText(phoneType);
-//                isPhoneTypeSelected = true;
-//            }
-//
-//            if (justMeRadioButton.isSelected()) {
-//                birthdatePolicy = "me";
-//                isBirthdatePolicy = true;
-//            } else if (myContactsRadioButton.isSelected()) {
-//                birthdatePolicy = "contacts";
-//                isBirthdatePolicy = true;
-//            } else if (everyOneRadioButton.isSelected()) {
-//                birthdatePolicy = "everyone";
-//                isBirthdatePolicy = true;
-//            }
-
-            if (instantMessageTextFieldEdit.getText() != null) {
-                instantMessage = instantMessageTextFieldEdit.getText();
-//                instantMessageTextField.setText(instantMessage);
-            }
-            if (addressTexFieldEdit.getText() != null) {
-                address = addressTexFieldEdit.getText();
-//                addressTexField.setText(address);
-            }
-
-
-            try {
-                birthdate = birthDateTexFieldEdit.getValue().toString();
-                System.out.println(1);
-                isBirhdaySelected = true;
-            java.sql.Date newBirthDate = birthdate== null ? null : java.sql.Date.valueOf(birthdate);
-            System.out.println(newBirthDate);
-            } catch (Exception e) {
-                e.printStackTrace();
-                isBirhdaySelected = false;
-            }
-            if (editContact() == 1) {
-                System.out.println("Done");
-            } else if (editContact() == 0) {
-                System.out.println("Wrong input");
-            } else if (editContact() == -1) {
-                System.out.println("Error back");
-            } else if (editContact() == -9) {
-                System.out.println("Error JSON");
-            }
-
-
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            System.out.println("Error123");
+        profileURL = profileURLTexFieldEdit.getText();
+        shareEmail = shareEmailTexFieldEdit.getText();
+        phoneNumber = phoneNumberTexFieldEdit.getText();
+        if(mobileRadioButton.isSelected()){
+            phoneType = "mobile";
         }
+        else if(homeRadioButton.isSelected()){
+            phoneType = "home";
+        }
+        else if(workRadioButton.isSelected()){
+            phoneType = "work";
+        }
+        birthdate = birthDateDatePickerEdit.getValue().toString();
+        localDateBirthDate = birthDateDatePickerEdit.getValue();
+        address = addressTexFieldEdit.getText();
+        instantMessage = instantMessageTextFieldEdit.getText();
+
+
+
+        if(editContact() == 1){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ContactViewFXML.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller associated with the FXML file
+            ContactViewController controller = loader.getController();
+
+            // Ensure fields are not null
+            if (controller.profileURLTexField == null ||
+                    controller.shareEmailTexField == null ||
+                    controller.phoneNumberTexField == null ||
+                    controller.phoneTypeTexField == null ||
+                    controller.birthDateTexField == null ||
+                    controller.addressTexField == null ||
+                    controller.instantMessageTextField == null) {
+                System.out.println("One or more fields are not initialized!");
+                return;
+            }
+
+            // Initialize the stage and scene
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+
+            // Set the fields with existing data
+            controller.profileURLTexField.setText(profileURL);
+            controller.shareEmailTexField.setText(shareEmail);
+            controller.phoneNumberTexField.setText(phoneNumber);
+            if (mobileRadioButton.isSelected()) {
+                controller.phoneTypeTexField.setText("mobile");
+            }
+            else if (homeRadioButton.isSelected()) {
+                controller.phoneTypeTexField.setText("home");
+            }
+            else if (workRadioButton.isSelected()) {
+                controller.phoneTypeTexField.setText("work");
+            }
+            controller.addressTexField.setText(address);
+            controller.instantMessageTextField.setText(instantMessage);
+            if (justMeRadioButton.isSelected()) {
+                birthdatePolicy = "me";
+            }
+            else if (myContactsRadioButton.isSelected()) {
+                birthdatePolicy = "contacts";
+            }
+            else if (everyOneRadioButton.isSelected()) {
+                birthdatePolicy = "everyone";
+            }
+        }
+
+
+        else if(editContact() == 0){
+
+        }
+        else if(editContact() == -9){
+
+        }
+        else if(editContact() == -1){
+
+        }
+        else if(editContact() == 10){
+
+        }
+        /////بقیه شرظای لازم از ظرف دیتا بیس رو بزن
     }
+
+    /////////////////////////////
+    /////////////////////////////
+    ////////////////////////////
+    /////////////////////////
 
 
     public int editContact() throws IOException {

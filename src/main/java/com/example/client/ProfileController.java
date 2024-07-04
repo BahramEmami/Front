@@ -61,7 +61,7 @@ public class ProfileController {
     private Button signOutButton;
 
     @FXML
-    private TextField userNameTextField;
+    private Button seeInfoButton;
 
     @FXML
     private Button editProfileImageButton;
@@ -76,6 +76,27 @@ public class ProfileController {
     private static Image titleImage = null;
 
     private final String userName = "";
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////for showing infos in education and contact and info
+    private static String eduInstituteView = "";
+    private static String eduFieldOfStudeView = "";
+    private static String eduGradeView = "";
+    private static String eduActivitiesDoneView = "";
+    private static String eduStartDateView = "";
+    private static String eduFinishDateView = "";
+    private static String eduDescriptionView = "";
+    /*****************************************************/
+    private static String conProfileUrlView = "";
+    private static String conEmailView = "";
+    private static String conPhoneNumberView = "";
+    private static String conPhoneTypeView = "";
+    private static String conBirthdateView = "";
+    private static String conAddressView = "";
+    private static String conInstantMessageView = "";
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////               username fix kon ba text fieldsh
@@ -116,24 +137,87 @@ public class ProfileController {
         //got to myJobsSeaPressed sea more
     }
 
+    /////////////////
+////////////////
     @FXML
     public void educationSeaMorePressed(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("EducationFXML.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EducationFXML.fxml"));
+        Parent root = loader.load();
+
+        // Get the controller associated with the FXML file
+        EducationController controller = loader.getController();
+
+        // Ensure fields are not null
+        if (controller.instituteText == null ||
+                controller.fieldOfStudyText == null ||
+                controller.gradeText == null ||
+                controller.activitiesDoneText == null ||
+                controller.startDateText == null ||
+                controller.finishDateText == null ||
+                controller.descriptionText == null) {
+            System.out.println("One or more fields are not initialized!");
+            return;
+        }
+
+        // Initialize the stage and scene
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
 
+        controller.instituteText.setText(eduInstituteView);
+        controller.fieldOfStudyText.setText(eduFieldOfStudeView);
+        controller.gradeText.setText(eduGradeView);
+        controller.activitiesDoneText.setText(eduActivitiesDoneView);
+        controller.startDateText.setText(eduStartDateView);
+        controller.finishDateText.setText(eduFinishDateView);
+        controller.descriptionText.setText(eduDescriptionView);
+    }
+/////////////////
+////////////////
     @FXML
     public void connectWithMeSeaPressed(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ContactViewFXML.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ContactViewFXML.fxml"));
+        Parent root = loader.load();
+
+        // Get the controller associated with the FXML file
+        ContactViewController controller = loader.getController();
+
+        // Ensure fields are not null
+        if (controller.profileURLTexField == null ||
+                controller.shareEmailTexField == null ||
+                controller.phoneNumberTexField == null ||
+                controller.phoneTypeTexField == null ||
+                controller.birthDateTexField == null ||
+                controller.addressTexField == null ||
+                controller.instantMessageTextField == null) {
+            System.out.println("One or more fields are not initialized!");
+            return;
+        }
+
+        // Initialize the stage and scene
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+
+        controller.profileURLTexField.setText(conProfileUrlView);
+        controller.shareEmailTexField.setText(conEmailView);
+        controller.phoneNumberTexField.setText(conPhoneNumberView);
+        controller.phoneTypeTexField.setText(conPhoneTypeView);
+        controller.birthDateTexField.setText(conBirthdateView);
+        controller.addressTexField.setText(conAddressView);
+        controller.instantMessageTextField.setText(conInstantMessageView);
+    }
+    /////////////////
+////////////////
+    @FXML
+    public void seeInfoPressed(ActionEvent event){
+        //go to see info
     }
 
+////////////////////////
+////////////////////////////
 
     @FXML
     public void signOutPressed(ActionEvent event) throws IOException {

@@ -22,25 +22,25 @@ public class EducationController {
     private Parent root;
 
     @FXML
-    private Button backToProfileButton;
+    Button backToProfileButton;
     @FXML
-    private TextField instituteText;
+     TextField instituteText;
     @FXML
-    private TextField fieldOfStudyText;
+     TextField fieldOfStudyText;
     @FXML
-    private TextField gradeText;
+     TextField gradeText;
     @FXML
-    private TextField activitiesDoneText;
+     TextField activitiesDoneText;
     @FXML
-    private TextField startDateText;
+     TextField startDateText;
     @FXML
-    private TextField finishDateText;
+     TextField finishDateText;
     @FXML
-    private TextArea descriptionText;
+     TextArea descriptionText;
     @FXML
-    private Button addEducationButton;
+     Button addEducationButton;
     @FXML
-    private Button editEducationButton;
+     Button editEducationButton;
 
     private static String institute = "";
     private static String fieldOfStudy = "";
@@ -49,6 +49,7 @@ public class EducationController {
     private static String startDate = "";
     private static String finishDate = "";
     private static String description = "";
+
 
     @FXML
     private Button backToEducationButton;
@@ -125,18 +126,46 @@ public class EducationController {
 
     @FXML
     public void editPressed(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("EducationEdit.fxml"));
+        institute = instituteText.getText();
+        fieldOfStudy = fieldOfStudyText.getText();
+        grade = gradeText.getText();
+        activitiesDone = activitiesDoneText.getText();
+        startDate = startDateText.getText();
+        finishDate = finishDateText.getText();
+        description = descriptionText.getText();
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EducationEdit.fxml"));
+        Parent root = loader.load();
+
+        // Get the controller associated with the FXML file
+        EducationController controller = loader.getController();
+
+        // Ensure fields are not null
+        if (controller.instituteTextEdit == null ||
+                controller.fieldOfStudyTextEdit == null ||
+                controller.gradeTextEdit == null ||
+                controller.activitiesDoneTextEdit == null ||
+                controller.startDateDatePicker == null ||
+                controller.finishDateDatePicker == null ||
+                controller.descriptionTextEdit == null) {
+            System.out.println("One or more fields are not initialized!");
+            return;
+        }
+
+        // Initialize the stage and scene
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
 
-        instituteTextEdit.setText(institute);
-        fieldOfStudyTextEdit.setText(fieldOfStudy);
-        gradeTextEdit.setText(grade);
-        activitiesDoneTextEdit.setText(activitiesDone);
-        descriptionTextEdit.setText(description);
 
+        // Set the fields with existing data
+        controller.instituteTextEdit.setText(institute);
+        controller.fieldOfStudyTextEdit.setText(fieldOfStudy);
+        controller.gradeTextEdit.setText(grade);
+        controller.activitiesDoneTextEdit.setText(activitiesDone);
+        controller.descriptionTextEdit.setText(description);
 
 
     }
@@ -152,41 +181,68 @@ public class EducationController {
 
     @FXML
     public void doneEditPressed(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("EducationFXML.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
-        institute= instituteTextEdit.getText();
-        instituteText.setText(institute);
-
-        fieldOfStudy=fieldOfStudyTextEdit.getText();
-        fieldOfStudyText.setText(fieldOfStudy);
-
+        institute = instituteTextEdit.getText();
+        fieldOfStudy = fieldOfStudyTextEdit.getText();
         grade = gradeTextEdit.getText();
-        gradeText.setText(grade);
-
         activitiesDone = activitiesDoneTextEdit.getText();
-        activitiesDoneText.setText(activitiesDone);
-
-        try{
+        description = descriptionTextEdit.getText();
+        try {
             startDate = startDateDatePicker.getValue().toString();
         }
         catch (Exception e){
             startDate = "";
         }
-        startDateText.setText(startDate);
         try {
             finishDate = finishDateDatePicker.getValue().toString();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             finishDate = "";
         }
-        finishDateText.setText(finishDate);
 
-        description = descriptionTextEdit.getText();
-        descriptionText.setText(description);
+
+        if (editEducation() == 1) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("EducationFXML.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller associated with the FXML file
+            EducationController controller = loader.getController();
+
+            // Ensure fields are not null
+            if (controller.instituteText == null ||
+                    controller.fieldOfStudyText == null ||
+                    controller.gradeText == null ||
+                    controller.activitiesDoneText == null ||
+                    controller.startDateText == null ||
+                    controller.finishDateText == null ||
+                    controller.descriptionText == null) {
+                System.out.println("One or more fields are not initialized!");
+                return;
+            }
+
+            // Initialize the stage and scene
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+
+            // Set the fields with existing data
+            controller.instituteText.setText(institute);
+            controller.fieldOfStudyText.setText(fieldOfStudy);
+            controller.gradeText.setText(grade);
+            controller.activitiesDoneText.setText(activitiesDone);
+            controller.startDateText.setText(startDate);
+            controller.finishDateText.setText(finishDate);
+            controller.descriptionText.setText(description);
+        } else if (editEducation() == 0) {
+
+        } else if (editEducation() == -9) {
+
+        } else if (editEducation() == -1) {
+
+        } else if (editEducation() == 10) {
+
+        }
+        /////بقیه شرظای لازم از ظرف دیتا بیس رو بزن
     }
 
     @FXML
@@ -200,23 +256,28 @@ public class EducationController {
 
     @FXML
     public void doneAddPressed(ActionEvent event){
-        instituteAdd = instituteTextAdd.getText();
-        fieldOfStudyAdd=fieldOfStudyTextAdd.getText();
-        gradeAdd = gradeTextAdd.getText();
-        activitiesDoneAdd = activitiesDoneTextAdd.getText();
+        institute = instituteTextAdd.getText();
+        fieldOfStudy =fieldOfStudyTextAdd.getText();
+        grade = gradeTextAdd.getText();
+        activitiesDone = activitiesDoneTextAdd.getText();
         try {
-            startDateAdd = startDateDatePickerAdd.getValue().toString();
+            startDate = startDateDatePickerAdd.getValue().toString();
         }
         catch (Exception e){
-            startDateAdd = "";
+            startDate = "";
         }
         try {
-            finishDateAdd = finishDateDatePickerAdd.getValue().toString();
+            finishDate = finishDateDatePickerAdd.getValue().toString();
         } catch (Exception e) {
-            finishDateAdd = "";
+            finishDate = "";
         }
-        descriptionAdd = descriptionTextAdd.getText();
+        description = descriptionTextAdd.getText();
 
         /////////then go to add scene
+    }
+
+
+    public int editEducation(){
+        return 1;
     }
 }
