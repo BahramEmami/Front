@@ -59,7 +59,7 @@
                               <TextField fx:id="phoneNumberTexFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" />
                               <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="200.0" spacing="30.0">
                                  <children>
-                                    <RadioButton fx:id="mobileRadioButton" mnemonicParsing="false" text="Mobile">
+                                    <RadioButton fx:id="mobileRadioButton" mnemonicParsing="false" selected="true" text="Mobile">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="PhoneType" />
                                        </toggleGroup>
@@ -79,12 +79,12 @@
                                     </RadioButton>
                                  </children>
                               </HBox>
-                              <DatePicker fx:id="birthDateDatePickerEdit" />
+                              <DatePicker fx:id="birthDayDatePickerEdit" />
                               <TextField fx:id="addressTexFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" />
                               <TextField fx:id="instantMessageTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" />
                               <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="200.0" spacing="30.0">
                                  <children>
-                                    <RadioButton fx:id="justMeRadioButton" mnemonicParsing="false" text="just me">
+                                    <RadioButton fx:id="justMeRadioButton" mnemonicParsing="false" selected="true" text="just me">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
