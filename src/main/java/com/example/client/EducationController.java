@@ -181,6 +181,14 @@ public class EducationController {
 
     @FXML
     public void doneEditPressed(ActionEvent event) throws IOException {
+
+
+
+        ////////////////////       set sql save
+
+
+
+
         institute = instituteTextEdit.getText();
         fieldOfStudy = fieldOfStudyTextEdit.getText();
         grade = gradeTextEdit.getText();
