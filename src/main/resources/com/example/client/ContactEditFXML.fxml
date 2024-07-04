@@ -79,7 +79,7 @@
                                     </RadioButton>
                                  </children>
                               </HBox>
-                              <DatePicker fx:id="birthDayDatePickerEdit" />
+                              <DatePicker fx:id="birthDateDatePickerEdit" />
                               <TextField fx:id="addressTexFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" />
                               <TextField fx:id="instantMessageTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" />
                               <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="200.0" spacing="30.0">
