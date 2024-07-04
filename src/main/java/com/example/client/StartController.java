@@ -23,6 +23,7 @@ public class StartController {
     private Scene scene;
     private Parent root;
 
+
     public void loginPressed(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("LogInFXML.fxml"));
 

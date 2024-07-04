@@ -44,15 +44,14 @@ public class ContactViewController {
     @FXML
     private TextField instantMessageTextField;
 
-    private static final String id = "";
-    private static String profileURL = "";
-    private static String shareEmail = "";
-    private static String phoneNumber = "";
-    private static String phoneType = "";
-    private static String birthdate = "";
-    private static String birthdatePolicy = "";
-    private static String address = "";
-    private static String instantMessage = "";
+    private static String profileURL = " ";
+    private static String shareEmail = " ";
+    private static String phoneNumber = " ";
+    private static String phoneType = "mobile";
+    private static String birthdate  ;
+    private static String birthdatePolicy = "me";
+    private static String address = " ";
+    private static String instantMessage = " ";
     /////////////
     @FXML
     private Button backToContactViewButton;
@@ -116,22 +115,22 @@ public class ContactViewController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
-        profileURLTexFieldEdit.setText(profileURL);
-        shareEmailTexFieldEdit.setText(shareEmail);
-        phoneNumberTexFieldEdit.setText(phoneNumber);
-
-        //////////////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///possible error
-        //birthDateTexFieldEdit.setValue(LocalDate.parse(birthdate));
-        ///////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////
-
-        addressTexFieldEdit.setText(address);
-        instantMessageTextFieldEdit.setText(instantMessage);
+//
+//        profileURLTexFieldEdit.setText(profileURL);
+//        shareEmailTexFieldEdit.setText(shareEmail);
+//        phoneNumberTexFieldEdit.setText(phoneNumber);
+//
+//        //////////////////////////////////////////////////////////////////////////////////////////////
+//        //////////////////////////////////////////////////////////////////////////////////////////////
+//        ///////////////////////////////////////////////////////////////////////////////////////////////
+//        ///possible error
+//        //birthDateTexFieldEdit.setValue(LocalDate.parse(birthdate));
+//        ///////////////////////////////////////////////////////////////////////////////
+//        /////////////////////////////////////////////////////////////////////////////////
+//        /////////////////////////////////////////////////////////////////////////////
+//
+//        addressTexFieldEdit.setText(address);
+//        instantMessageTextFieldEdit.setText(instantMessage);
 
     }
 
@@ -154,65 +153,76 @@ public class ContactViewController {
         stage.show();
 
         try {
-            profileURLTexField.setText(profileURL);
 
-            shareEmail = shareEmailTexFieldEdit.getText();
 
-            shareEmailTexField.setText(shareEmail);
+            if (profileURLTexFieldEdit.getText() != null) {
+                profileURL = profileURLTexFieldEdit.getText();
 
-            phoneNumber = phoneNumberTexFieldEdit.getText();
+//            profileURLTexField.setText(profileURL);
+            }
+            if (shareEmailTexFieldEdit.getText() != null) {
+                shareEmail = shareEmailTexFieldEdit.getText();
 
-            phoneNumberTexField.setText(phoneNumber);
+//            shareEmailTexField.setText(shareEmail);
+            }
+            if (phoneNumberTexFieldEdit.getText() != null) {
+                phoneNumber = phoneNumberTexFieldEdit.getText();
 
-            if (homeRadioButton.isSelected()) {
-                phoneType = "home";
-                phoneTypeTexField.setText(phoneType);
-                isPhoneTypeSelected = true;
-            } else if (workRadioButton.isSelected()) {
-                phoneType = "work";
-                phoneTypeTexField.setText(phoneType);
-                isPhoneTypeSelected = true;
-            } else if (mobileRadioButton.isSelected()) {
-                phoneType = "mobile";
-                phoneTypeTexField.setText(phoneType);
-                isPhoneTypeSelected = true;
+//            phoneNumberTexField.setText(phoneNumber);
+            }
+//            if (homeRadioButton.isSelected()) {
+//                phoneType = "home";
+//                phoneTypeTexField.setText(phoneType);
+//                isPhoneTypeSelected = true;
+//            } else if (workRadioButton.isSelected()) {
+//                phoneType = "work";
+//                phoneTypeTexField.setText(phoneType);
+//                isPhoneTypeSelected = true;
+//            } else if (mobileRadioButton.isSelected()) {
+//                phoneType = "mobile";
+//                phoneTypeTexField.setText(phoneType);
+//                isPhoneTypeSelected = true;
+//            }
+//
+//            if (justMeRadioButton.isSelected()) {
+//                birthdatePolicy = "me";
+//                isBirthdatePolicy = true;
+//            } else if (myContactsRadioButton.isSelected()) {
+//                birthdatePolicy = "contacts";
+//                isBirthdatePolicy = true;
+//            } else if (everyOneRadioButton.isSelected()) {
+//                birthdatePolicy = "everyone";
+//                isBirthdatePolicy = true;
+//            }
+
+            if (instantMessageTextFieldEdit.getText() != null) {
+                instantMessage = instantMessageTextFieldEdit.getText();
+//                instantMessageTextField.setText(instantMessage);
+            }
+            if (addressTexFieldEdit.getText() != null) {
+                address = addressTexFieldEdit.getText();
+//                addressTexField.setText(address);
             }
 
-            if (justMeRadioButton.isSelected()) {
-                birthdatePolicy = "me";
-                isBirthdatePolicy = true;
-            } else if (myContactsRadioButton.isSelected()) {
-                birthdatePolicy = "contacts";
-                isBirthdatePolicy = true;
-            } else if (everyOneRadioButton.isSelected()) {
-                birthdatePolicy = "everyone";
-                isBirthdatePolicy = true;
-            }
-
-            instantMessage = instantMessageTextFieldEdit.getText();
-            instantMessageTextField.setText(instantMessage);
-
-
-            address = addressTexFieldEdit.getText();
-            addressTexField.setText(address);
 
             try {
                 birthdate = birthDateTexFieldEdit.getValue().toString();
+                System.out.println(1);
                 isBirhdaySelected = true;
+            java.sql.Date newBirthDate = birthdate== null ? null : java.sql.Date.valueOf(birthdate);
+            System.out.println(newBirthDate);
             } catch (Exception e) {
+                e.printStackTrace();
                 isBirhdaySelected = false;
             }
-            birthDateTexField.setText(birthdate);
-
-
-            if(editContact() == 1){
+            if (editContact() == 1) {
                 System.out.println("Done");
-            }
-            else if(editContact() == 0){
+            } else if (editContact() == 0) {
                 System.out.println("Wrong input");
-            }
-            else if(editContact() == -1){
+            } else if (editContact() == -1) {
                 System.out.println("Error back");
+            } else if (editContact() == -9) {
+                System.out.println("Error JSON");
             }
 
 
@@ -228,22 +238,61 @@ public class ContactViewController {
         //"http://localhost:8080"/contact/edit
 
         JSONObject json = new JSONObject();
-        json.put("id", id);
+        json.put("id", Client.user.getID());
         json.put("profile_url", profileURL);
         json.put("email", shareEmail);
         json.put("phone_number", phoneNumber);
         json.put("phone_type", phoneType);
-        json.put("birth_date", birthdate);
+        json.put("birth_date", Date.valueOf(birthdate));
         json.put("birthday_policy", birthdatePolicy);
         json.put("address", address);
         json.put("instant_message", instantMessage);
 
-        URL url = new URL("http://localhost:8080/" + "contact/" + "edit");
+        URL url = new URL(GeneralMethods.getFirstOfUrl() + "contact/" + "edit");
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
         tempConnection.setRequestMethod("GET");
+        tempConnection.setRequestProperty("LKN", Client.user.getToken());
         tempConnection.setDoOutput(true);
-        tempConnection.getOutputStream().write(json.toString().getBytes());
-        tempConnection.getOutputStream().close();
+        GeneralMethods.sendResponse(tempConnection, json.toString());
+
+        if (tempConnection.getResponseCode() == 200) {      //go to home page
+            return 1;
+        } else if (tempConnection.getResponseCode() == 400) {
+            return 0;
+        } else if (tempConnection.getResponseCode() == 401) {
+            return -9;
+        } else if (tempConnection.getResponseCode() == 404) {
+            return -1;
+        } else// nothing
+            return 10;
+    }
+
+
+    public int viewContact() throws IOException {
+
+        //"http://localhost:8080"/contact/view
+
+
+        URL url = new URL(GeneralMethods.getFirstOfUrl() + "contact/" + "view");
+        HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
+        tempConnection.setRequestMethod("GET");
+        String token = "";
+        if (tempConnection.getResponseCode() == 200) {
+            String response = GeneralMethods.getResponse(tempConnection);
+            JSONObject jsonObject = new JSONObject(response);
+            token = tempConnection.getHeaderField("LKN");
+
+            String id = jsonObject.isNull("id") ? null : jsonObject.getString("id");
+            String profile_url = jsonObject.isNull("profile_url") ? null : jsonObject.getString("profile_url");
+            String email = jsonObject.isNull("email") ? null : jsonObject.getString("email");
+            String phone_number = jsonObject.isNull("phone_number") ? null : jsonObject.getString("phone_number");
+            String phone_type = jsonObject.isNull("phone_type") ? "mobile" : jsonObject.getString("phone_type");
+            String birth_date = jsonObject.isNull("birth_date") ? null : jsonObject.getString("birth_date");
+            String birthday_policy = jsonObject.isNull("birthday_policy") ? "me" : jsonObject.getString("birthday_policy");
+            String address = jsonObject.isNull("address") ? null : jsonObject.getString("address");
+            String instant_message = jsonObject.isNull("instant_message") ? null : jsonObject.getString("instant_message");
+        }
+
 
         if (tempConnection.getResponseCode() == 200) {      //go to home page
             return 1;

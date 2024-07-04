@@ -11,10 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -65,9 +64,9 @@ public class LoginController {
 
                 if (password.length() == 0 || userName.length() == 0) {
                     statusLabel.setText("Please fill all fields!");
-                } else if (!validUserName(userName)) {
+                } else if (!GeneralMethods.validUserName(userName)) {
                     statusLabel.setText("Invalid username format!");
-                } else if (!validPass(password)) {
+                } else if (!GeneralMethods.validPass(password)) {
                     statusLabel.setText("Invalid password format!");
                 } else {
                     int returnLogInStatusId = logInStatus(userName, password);
@@ -92,14 +91,14 @@ public class LoginController {
             if (email.contains("@")) {
                 if (password.length() == 0 || email.length() == 0) {
                     statusLabel.setText("Please fill all fields!");
-                } else if (!isValidEmail(email)) {
+                } else if (!GeneralMethods.isValidEmail(email)) {
                     statusLabel.setText("Invalid email format!");
-                } else if (!validPass(password)) {
+                } else if (!GeneralMethods.validPass(password)) {
                     statusLabel.setText("Invalid password format!");
                 } else {
                     int returnLogInStatusEmail = logInStatusEmail(email, password);
                     if (returnLogInStatusEmail == 1) {
-                        statusLabel.setText("Successfully entered!");
+//                        statusLabel.setText("Successfully entered!");
                         Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(root);
@@ -140,119 +139,44 @@ public class LoginController {
     }
 
 
-    public boolean validUserName(String username) {
-        for (int i = 0; i < username.length(); i++) {
-            char c = username.charAt(i);
-            if (!(Character.isLowerCase(c) || Character.isDigit(c) || c == '.' || c == '_')) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
-    public static boolean isValidEmail(String email) {
-        // List of recognized email domains
-        String[] validDomains = {
-                "gmail", "yahoo", "hotmail", "outlook", "aol", "icloud", "mail", "yandex", "zoho", "protonmail",
-                "gmx", "lycos", "comcast", "verizon", "att", "sbcglobal", "live", "msn", "me", "mac",
-                "mailinator", "hushmail", "runbox", "lavabit", "fastmail", "tutanota", "inbox", "mail.com"
-        };
-
-        // List of valid top-level domains (TLDs)
-        String[] validTLDs = {
-                ".com", ".org", ".net", ".edu", ".gov", ".mil", ".int", ".us", ".uk", ".ca", ".de", ".fr", ".au", ".ir",
-                ".io", ".tech", ".co", ".biz", ".info", ".mobi", ".site", ".online", ".xyz", ".club", ".space",
-                ".store", ".blog", ".asia", ".africa", ".ru", ".cn", ".jp", ".br", ".mx", ".es", ".it", ".nl", ".se",
-                ".no", ".fi"
-        };
-
-        // Check if the email contains '@'
-        int atIndex = email.indexOf('@');
-        if (atIndex == -1) {
-            return false;
-        }
-
-        // Check if the email contains '.' after '@'
-        int dotIndex = email.indexOf('.', atIndex);
-        if (dotIndex == -1) {
-            return false;
-        }
-
-        // Check that '@' is not at the start or end
-        if (atIndex == 0 || atIndex == email.length() - 1) {
-            return false;
-        }
-
-        // Check that '.' is not at the start or end
-        if (dotIndex == 0 || dotIndex == email.length() - 1) {
-            return false;
-        }
-
-        // Ensure there's something between '@' and '.'
-        if (dotIndex - atIndex < 2) {
-            return false;
-        }
-
-        // Extract the domain part between '@' and '.'
-        String domain = email.substring(atIndex + 1, dotIndex);
-
-        // Check if the extracted domain is in the list of valid domains
-        boolean domainValid = false;
-        for (String validDomain : validDomains) {
-            if (domain.equals(validDomain)) {
-                domainValid = true;
-                break;
-            }
-        }
-        if (!domainValid) {
-            return false;
-        }
-
-        // Check if the email ends with a valid TLD
-        boolean tldValid = false;
-        for (String validTLD : validTLDs) {
-            if (email.endsWith(validTLD)) {
-                tldValid = true;
-                break;
-            }
-        }
-
-        return tldValid;
-    }
-
-    public boolean validPass(String password) {
-        if (password.length() < 8) {
-            return false;
-        }
-
-        boolean hasLetter = false;
-        boolean hasNumber = false;
-
-        for (int i = 0; i < password.length(); i++) {
-            char c = password.charAt(i);
-            if (Character.isLetter(c)) {
-                hasLetter = true;
-            } else if (Character.isDigit(c)) {
-                hasNumber = true;
-            }
-
-            // If both conditions are met, no need to check further
-            if (hasLetter && hasNumber) {
-                return hasLetter && hasNumber;
-            }
-        }
-
-        return hasLetter && hasNumber;
-    }
-
-
     public int logInStatus(String userName, String password) throws IOException {
 
         //"http://localhost:8080"/login/email/password
-        URL url = new URL("http://localhost:8080/" + "login/" + userName + "/" + password);
+        URL url = new URL(GeneralMethods.getFirstOfUrl() + "login/" + userName + "/" + password);
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
         tempConnection.setRequestMethod("GET");
+        if (tempConnection.getResponseCode() == 200) {
+            String token = "";
+            try {
+                String response = GeneralMethods.getResponse(tempConnection);
+                JSONObject jsonObject = new JSONObject(response);
+                token = tempConnection.getHeaderField("LKN");
+
+                String email = jsonObject.isNull("email") ? null : jsonObject.getString("email");
+                String firstName = jsonObject.isNull("first_name") ? null : jsonObject.getString("first_name");
+                String lastName = jsonObject.isNull("last_name") ? null : jsonObject.getString("last_name");
+                String additionalName = jsonObject.isNull("additional_name") ? null : jsonObject.getString("additional_name");
+                String workType = jsonObject.isNull("workType") ? null : jsonObject.getString("workType");
+
+                GeneralMethods.saveUser(userName, email, password, firstName, lastName, additionalName, workType, token);
+
+            } catch (Exception e) {
+                System.out.println("Error JSON");
+                e.printStackTrace();
+            }
+
+//            try {
+//                File file = new File("src/main/resources/assets/token.txt");
+//                FileWriter fileWriter = new FileWriter(file);
+//                fileWriter.write(token);
+//                fileWriter.close();
+//            } catch (IOException e) {
+//                System.out.println("ERROR in saving token");
+//                e.printStackTrace();
+//            }
+
+        }
+
 
         if (tempConnection.getResponseCode() == 200) {//go to home page
             return 1;
@@ -269,10 +193,42 @@ public class LoginController {
     public int logInStatusEmail(String email, String password) throws IOException {
 
         //"http://localhost:8080"/login/email/password
-        URL url = new URL("http://localhost:8080/" + "login/" + email + "/" + password);
+        URL url = new URL(GeneralMethods.getFirstOfUrl() + "login/" + email + "/" + password);
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
         tempConnection.setRequestMethod("GET");
 
+
+        if (tempConnection.getResponseCode() == 200) {
+            String token = "";
+            try {
+                String response = GeneralMethods.getResponse(tempConnection);
+                JSONObject jsonObject = new JSONObject(response);
+                token = tempConnection.getHeaderField("LKN");
+
+                String id = jsonObject.isNull("id") ? null : jsonObject.getString("id");
+                String firstName = jsonObject.isNull("first_name") ? null : jsonObject.getString("first_name");
+                String lastName = jsonObject.isNull("last_name") ? null : jsonObject.getString("last_name");
+                String additionalName = jsonObject.isNull("additional_name") ? null : jsonObject.getString("additional_name");
+                String workType = jsonObject.isNull("workType") ? null : jsonObject.getString("workType");
+
+                GeneralMethods.saveUser(id, email, password, firstName, lastName, additionalName, workType, token);
+
+            } catch (Exception e) {
+                System.out.println("Error JSON");
+                e.printStackTrace();
+            }
+
+//            try {
+//                File file = new File("src/main/resources/assets/token.txt");
+//                FileWriter fileWriter = new FileWriter(file);
+//                fileWriter.write(token);
+//                fileWriter.close();
+//            } catch (IOException e) {
+//                System.out.println("ERROR in saving token");
+//                e.printStackTrace();
+//            }
+
+        }
         if (tempConnection.getResponseCode() == 200) {//go to home page
             return 1;
         } else if (tempConnection.getResponseCode() == 401) {

@@ -10,12 +10,10 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.sql.Date;
-import java.sql.Date;
 import java.time.LocalDate;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.json.JSONObject;
@@ -98,13 +96,13 @@ public class SignInController {
 
             if (firstName.length() == 0 || lastName.length() == 0 || email.length() == 0 || passWord.length() == 0 || repeatPassword.length() == 0 || userName.length() == 0) {
                 statusLabel.setText("Please fill all fields!!");
-            } else if (!isValidEmail(email)) {
+            } else if (!GeneralMethods.isValidEmail(email)) {
                 statusLabel.setText("Enter a valid email!!");
             } else if (!sameRepeatedPass()) {
                 statusLabel.setText("Repeated Pass is wrong!! ");
-            } else if (!validPass(passWord)) {
+            } else if (!GeneralMethods.validPass(passWord)) {
                 statusLabel.setText("Enter a valid pass");
-            } else if (!validUserNameComplete(userName)) {
+            } else if (!GeneralMethods.validUserName(userName)) {
                 statusLabelComplete.setText("Invalid username format!");
             } else {
                 int signInStatus1 = signInStatus();
@@ -148,75 +146,6 @@ public class SignInController {
         stage.show();
     }
 
-    public static boolean isValidEmail(String email) {
-        // List of recognized email domains
-        String[] validDomains = {
-                "gmail", "yahoo", "hotmail", "outlook", "aol", "icloud", "mail", "yandex", "zoho", "protonmail",
-                "gmx", "lycos", "comcast", "verizon", "att", "sbcglobal", "live", "msn", "me", "mac",
-                "mailinator", "hushmail", "runbox", "lavabit", "fastmail", "tutanota", "inbox", "mail.com"
-        };
-
-        // List of valid top-level domains (TLDs)
-        String[] validTLDs = {
-                ".com", ".org", ".net", ".edu", ".gov", ".mil", ".int", ".us", ".uk", ".ca", ".de", ".fr", ".au", ".ir",
-                ".io", ".tech", ".co", ".biz", ".info", ".mobi", ".site", ".online", ".xyz", ".club", ".space",
-                ".store", ".blog", ".asia", ".africa", ".ru", ".cn", ".jp", ".br", ".mx", ".es", ".it", ".nl", ".se",
-                ".no", ".fi"
-        };
-
-        // Check if the email contains '@'
-        int atIndex = email.indexOf('@');
-        if (atIndex == -1) {
-            return false;
-        }
-
-        // Check if the email contains '.' after '@'
-        int dotIndex = email.indexOf('.', atIndex);
-        if (dotIndex == -1) {
-            return false;
-        }
-
-        // Check that '@' is not at the start or end
-        if (atIndex == 0 || atIndex == email.length() - 1) {
-            return false;
-        }
-
-        // Check that '.' is not at the start or end
-        if (dotIndex == 0 || dotIndex == email.length() - 1) {
-            return false;
-        }
-
-        // Ensure there's something between '@' and '.'
-        if (dotIndex - atIndex < 2) {
-            return false;
-        }
-
-        // Extract the domain part between '@' and '.'
-        String domain = email.substring(atIndex + 1, dotIndex);
-
-        // Check if the extracted domain is in the list of valid domains
-        boolean domainValid = false;
-        for (String validDomain : validDomains) {
-            if (domain.equals(validDomain)) {
-                domainValid = true;
-                break;
-            }
-        }
-        if (!domainValid) {
-            return false;
-        }
-
-        // Check if the email ends with a valid TLD
-        boolean tldValid = false;
-        for (String validTLD : validTLDs) {
-            if (email.endsWith(validTLD)) {
-                tldValid = true;
-                break;
-            }
-        }
-
-        return tldValid;
-    }
 
     public boolean sameRepeatedPass() {
         if (passWord.equals(repeatPassword)) {
@@ -226,40 +155,15 @@ public class SignInController {
     }
 
 
-    public boolean validPass(String password) {
-        if (password.length() < 8) {
-            return false;
-        }
-
-        boolean hasLetter = false;
-        boolean hasNumber = false;
-
-        for (int i = 0; i < password.length(); i++) {
-            char c = password.charAt(i);
-            if (Character.isLetter(c)) {
-                hasLetter = true;
-            } else if (Character.isDigit(c)) {
-                hasNumber = true;
-            }
-
-            // If both conditions are met, no need to check further
-            if (hasLetter && hasNumber) {
-                return true;
-            }
-        }
-
-        return hasLetter && hasNumber;
-    }
-
     public int signInStatus() throws IOException {
 
-        //"http://localhost:8080"/login/email/password
+        //"http://localhost:8080"/user/creating1
 
         JSONObject json = new JSONObject();
         json.put("id", userName);
         json.put("email", email);
 
-        URL url = new URL("http://localhost:8080/" + "user/" + "creating1");
+        URL url = new URL(GeneralMethods.getFirstOfUrl() + "user/" + "creating1");
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
         tempConnection.setRequestMethod("GET");
         tempConnection.setDoOutput(true);
@@ -305,13 +209,10 @@ public class SignInController {
 
             if (additionalNameComplete.length() == 0 || !isJobType) {
                 statusLabelComplete.setText("Please fill completely!");
-            }
-
-            else {
+            } else {
                 int signInStatusCompleted1 = signInStatusCompleted();
                 if (signInStatusCompleted1 == 1) {
                     statusLabelComplete.setText("Account Successfully Created!");
-//
 
                     Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -347,21 +248,13 @@ public class SignInController {
         stage.show();
     }
 
-    public boolean validUserNameComplete(String username) {
-        for (int i = 0; i < username.length(); i++) {
-            char c = username.charAt(i);
-            if (!(Character.isLowerCase(c) || Character.isDigit(c) || c == '.' || c == '_')) {
-                return false;
-            }
-        }
-        return true;
-    }
-
 
     public int signInStatusCompleted() throws IOException {
 
-        //"http://localhost:8080"/login/email/password
+        //"http://localhost:8080"/user/creating2
+
         JSONObject json = new JSONObject();
+
         json.put("id", userName);
         json.put("email", email);
         json.put("first_name", firstName);
@@ -371,12 +264,14 @@ public class SignInController {
         json.put("join_date", Date.valueOf(LocalDate.now()));
         json.put("work_type", jobTypeComplete);
 
-        URL url = new URL("http://localhost:8080/" + "user/" + "creating2");
+        URL url = new URL(GeneralMethods.getFirstOfUrl() + "user/" + "creating2");
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
         tempConnection.setRequestMethod("GET");
         tempConnection.setDoOutput(true);
-        tempConnection.getOutputStream().write(json.toString().getBytes());
-        tempConnection.getOutputStream().close();
+        GeneralMethods.sendResponse(tempConnection, json.toString());
+
+        String response = GeneralMethods.getResponse(tempConnection);
+        GeneralMethods.saveUser(userName, email, firstName, lastName, passWord, additionalNameComplete, jobTypeComplete, response);
 
         if (tempConnection.getResponseCode() == 200) {//go to home page
             return 1;
