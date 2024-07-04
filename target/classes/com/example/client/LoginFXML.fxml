@@ -13,19 +13,19 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.LoginController">
    <left>
-      <AnchorPane prefHeight="500.0" prefWidth="212.4" style="-fx-background-color: #87CEF0;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="500.0" prefWidth="212.4" style="-fx-background-color: #FFAAAA;" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="35.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@pics/icons8-linkedin-256.png" />
+                  <Image url="@pics/icons8-linkedin-240.png" />
                </image>
             </ImageView>
-            <Button fx:id="signInButton" layoutX="69.0" layoutY="424.0" mnemonicParsing="false" onAction="#signInPressed" prefHeight="33.0" prefWidth="65.0" style="-fx-background-color: #FFFFFF;" text="Sign Up">
+            <Button fx:id="signInButton" layoutX="69.0" layoutY="424.0" mnemonicParsing="false" onAction="#signInPressed" prefHeight="33.0" prefWidth="65.0" style="-fx-background-color: #6C0A0A;" text="Sign Up" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Label alignment="CENTER" layoutX="30.0" layoutY="392.0" prefHeight="17.2" prefWidth="143.6" text="Don't have an account?">
+            <Label alignment="CENTER" layoutX="21.0" layoutY="392.0" prefHeight="17.0" prefWidth="162.0" text="Don't you have an account?">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -39,7 +39,7 @@
       </AnchorPane>
    </left>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B351FA;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #6C0A0A;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" layoutX="239.0" layoutY="38.0" prefHeight="40.0" prefWidth="138.0" text="Login" textFill="WHITE">
                <font>
@@ -48,7 +48,7 @@
             </Label>
             <VBox fillWidth="false" layoutX="183.0" layoutY="179.0" prefHeight="102.0" prefWidth="250.0" spacing="30.0">
                <children>
-                  <TextField fx:id="userNameTextField" prefHeight="33.2" prefWidth="250.0" style="-fx-background-color: #FFFFFF;" />
+                  <TextField fx:id="userNameTextField" prefHeight="33.2" prefWidth="250.0" />
                   <PasswordField fx:id="passwordField" prefHeight="33.2" prefWidth="250.0" />
                </children>
             </VBox>
@@ -67,12 +67,12 @@
                </children>
             </VBox>
             <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backPressed" prefHeight="30.4" prefWidth="53.6" style="-fx-background-color: #FFFFFF;" text="Back" />
-            <Button fx:id="logInButton" layoutX="231.0" layoutY="364.0" mnemonicParsing="false" onAction="#logIn" prefHeight="35.6" prefWidth="153.0" style="-fx-background-color: #FFFFFF;" text="Login">
+            <Button fx:id="logInButton" layoutX="231.0" layoutY="364.0" mnemonicParsing="false" onAction="#logIn" prefHeight="35.6" prefWidth="153.0" style="-fx-background-color: #FFAAAA;" text="Login">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Label fx:id="statusLabel" alignment="CENTER" layoutX="183.0" layoutY="107.0" prefHeight="33.0" prefWidth="250.0" textFill="#87cef0">
+            <Label fx:id="statusLabel" alignment="CENTER" layoutX="183.0" layoutY="107.0" prefHeight="33.0" prefWidth="250.0" textFill="#ffaaaa">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>

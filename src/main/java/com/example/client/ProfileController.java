@@ -75,12 +75,15 @@ public class ProfileController {
     private static Image profileImage = null;
     private static Image titleImage = null;
 
-    private static String userName;
+    private final String userName = "";
 
+//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////               username fix kon ba text fieldsh
+    ///////////////////////////////////////////////////////////////
 
     @FXML
-    public void homePressed(ActionEvent  event){
-        // go to home scene
+    public void homePressed(ActionEvent event) {
+        // go home scene
     }
 
     @FXML
@@ -104,8 +107,13 @@ public class ProfileController {
     }
 
     @FXML
-    public void editProfilePressed(ActionEvent event){
-    //got to edit profile
+    public void editProfilePressed(ActionEvent event) {
+        //got to edit profile
+    }
+
+    @FXML
+    public void myJobsSeaPressed(ActionEvent event) {
+        //got to myJobsSeaPressed sea more
     }
 
     @FXML
@@ -126,22 +134,26 @@ public class ProfileController {
         stage.show();
     }
 
+
     @FXML
-    public void myJobsSeaPressed(ActionEvent event) {
-        //got to myJobsSeaPressed sea more
+    public void signOutPressed(ActionEvent event) throws IOException {
+        Client.user = null;
+
+        Parent root = FXMLLoader.load(getClass().getResource("LogInFXML.fxml"));
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
-    public void signOutPressed(ActionEvent event){
-        //sign out
-    }
-    @FXML
-    public void settingPressed(ActionEvent event){
+    public void settingPressed(ActionEvent event) {
         //go to setting scene
     }
 
     @FXML
-    public void editProfileImagePressed(ActionEvent event){
+    public void editProfileImagePressed(ActionEvent event) {
         try {
             FileChooser fileChooser = new FileChooser();
             File file = fileChooser.showOpenDialog(new Stage());
