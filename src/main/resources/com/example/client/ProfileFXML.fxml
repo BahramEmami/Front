@@ -130,16 +130,16 @@
    <center>
       <AnchorPane prefHeight="430.0" prefWidth="200.0" style="-fx-background-color: #FFAAAA;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="titleImageImageView" fitHeight="101.0" fitWidth="700.0" pickOnBounds="true">
-               <image>
-                  <Image url="@pics/icons8-linkedin-150.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="profileImageImageview" fitHeight="100.0" fitWidth="100.0" layoutX="38.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@pics/icons8-linkedin-256.png" />
-               </image>
-            </ImageView>
+            <AnchorPane style="-fx-border-color: #6C0A0A; -fx-border-width: 2px 0px 2px 0px;">
+               <children>
+                  <ImageView fx:id="titleImageImageView" fitHeight="101.0" fitWidth="700.0" pickOnBounds="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="38.0" layoutY="48.0" style="-fx-border-color: #6C0A0A; -fx-border-width: 2px 2px 2px 2px;">
+               <children>
+                  <ImageView fx:id="profileImageImageview" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
             <AnchorPane layoutX="50.0" layoutY="229.0" prefHeight="30.0" prefWidth="600.0" style="-fx-border-color: #6C0A0A; -fx-border-radius: 20; -fx-border-width: 2px 2px 2px 2px;">
                <children>
                   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">

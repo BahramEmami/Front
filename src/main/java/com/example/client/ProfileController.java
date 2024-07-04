@@ -94,6 +94,15 @@ public class ProfileController {
     private static String conBirthdateView = "";
     private static String conAddressView = "";
     private static String conInstantMessageView = "";
+    /********************************************************/
+    private static String infoFirstName = "";
+    private static String infoLastName = "";
+    private static String infoEmail = "";
+    private static String infoWorkType = "";
+    private static String infoCountry = "";
+    private static String infoCity = "";
+    private static String infoAdditionalName = "";
+    private static String infoUserName = "";
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,8 +122,12 @@ public class ProfileController {
     }
 
     @FXML
-    public void newPostPressed(ActionEvent event) {
-        // go to newPost scene
+    public void newPostPressed(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("PostinFXML.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -212,8 +225,42 @@ public class ProfileController {
     /////////////////
 ////////////////
     @FXML
-    public void seeInfoPressed(ActionEvent event){
-        //go to see info
+    public void seeInfoPressed(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewInfoFXML.fxml"));
+        Parent root = loader.load();
+
+        // Get the controller associated with the FXML file
+        EditInfoController controller = loader.getController();
+
+        // Ensure fields are not null
+        if (controller.firstNameTextFieldView == null ||
+                controller.lastNameTextFieldView == null ||
+                controller.emailTextFieldView == null ||
+                controller.workTypeTextFieldView == null ||
+                controller.countryTextFieldView == null ||
+                controller.cityTextFieldView == null ||
+                controller.additionalTextFieldView == null ||
+                controller.userNameTextFieldView == null) {
+            System.out.println("One or more fields are not initialized!");
+            return;
+        }
+
+        // Initialize the stage and scene
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+        controller.firstNameTextFieldView.setText(infoFirstName);
+        controller.lastNameTextFieldView.setText(infoLastName);
+        controller.emailTextFieldView.setText(infoEmail);
+        controller.workTypeTextFieldView.setText(infoWorkType);
+        controller.countryTextFieldView.setText(infoCountry);
+        controller.cityTextFieldView.setText(infoCity);
+        controller.additionalTextFieldView.setText(infoAdditionalName);
+        controller.userNameTextFieldView.setText(infoUserName);
+
+
     }
 
 ////////////////////////
