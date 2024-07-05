@@ -219,6 +219,7 @@ public class ContactViewController {
         }
 //        birthdate = birthDateDatePickerEdit.getValue().toString();
         localDateBirthDate = birthDateDatePickerEdit.getValue();
+//        System.out.println((localDateBirthDate));
 
         address = addressTexFieldEdit.getText();
         instantMessage = instantMessageTextFieldEdit.getText();
@@ -311,10 +312,10 @@ public class ContactViewController {
         }
 
 
-        URL url = new URL(GeneralMethods.getFirstOfUrl() + "contact/" + "edit/" + Client.user.getID());
+        URL url = new URL(GeneralMethods.getFirstOfUrl() + "contact/" + "edit");
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
         tempConnection.setRequestMethod("GET");
-        tempConnection.setRequestProperty("LKN", Client.user.getID());
+        tempConnection.setRequestProperty("LKN", Client.user.getToken());
         tempConnection.setDoOutput(true);
         GeneralMethods.sendResponse(tempConnection, json.toString());
 

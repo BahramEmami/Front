@@ -95,7 +95,7 @@ public class ProfileController {
     private static String conEmailView = "";
     private static String conPhoneNumberView = "";
     private static String conPhoneTypeView = "";
-    private static LocalDate conBirthdateView;
+    private static String conBirthdateView = "";
     private static String conAddressView = "";
     private static String conInstantMessageView = "";
     /********************************************************/
@@ -242,7 +242,7 @@ public class ProfileController {
         controller.shareEmailTexField.setText(conEmailView);
         controller.phoneNumberTexField.setText(conPhoneNumberView);
         controller.phoneTypeTexField.setText(conPhoneTypeView);
-        controller.birthDateTexField.setText(String.valueOf((conBirthdateView)));
+        controller.birthDateTexField.setText(conBirthdateView);
         controller.addressTexField.setText(conAddressView);
         controller.instantMessageTextField.setText(conInstantMessageView);
     }
@@ -252,27 +252,30 @@ public class ProfileController {
         //"http://localhost:8080"/contact/view
 
 
-        URL url = new URL(GeneralMethods.getFirstOfUrl() + "contact/" + "view/" + Client.user.getID());
+        URL url = new URL(GeneralMethods.getFirstOfUrl() + "contact/" + "view" );
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
         tempConnection.setRequestMethod("GET");
+        tempConnection.setRequestProperty("LKN", Client.user.getToken());
+        tempConnection.setDoOutput(true);
 
         if (tempConnection.getResponseCode() == 200) {
-            String token = "";
+
             try {
+
                 String response = GeneralMethods.getResponse(tempConnection);
+//                System.out.println(response);
                 JSONObject jsonObject = new JSONObject(response);
-                token = tempConnection.getHeaderField("LKN");
 
 
-                userName = jsonObject.isNull("id") ? null : jsonObject.getString("id");
-                conProfileUrlView = jsonObject.isNull("profile_url") ? null : jsonObject.getString("profile_url");
-                conEmailView = jsonObject.isNull("email") ? null : jsonObject.getString("email");
-                conPhoneNumberView = jsonObject.isNull("phone_number") ? null : jsonObject.getString("phone_number");
-                conPhoneTypeView = jsonObject.isNull("phone_type") ? "mobile" : jsonObject.getString("phone_type");
-                conBirthdateView = jsonObject.isNull("birth_date") ? null : LocalDate.parse(jsonObject.getString("birth_date"));
+                userName = jsonObject.getString("id");
+                conProfileUrlView =  jsonObject.getString("profileURL");
+                conEmailView =  jsonObject.getString("shareEmail");
+                conPhoneNumberView = jsonObject.getString("phoneNumber");
+                conPhoneTypeView =  jsonObject.getString("numberType");
+                conBirthdateView =  jsonObject.getString("birthdate");
 //                                 birthday_policy = jsonObject.isNull("birthday_policy") ? "me" : jsonObject.getString("birthday_policy");
-                conAddressView = jsonObject.isNull("address") ? null : jsonObject.getString("address");
-                conInstantMessageView = jsonObject.isNull("instant_message") ? null : jsonObject.getString("instant_message");
+                conAddressView = jsonObject.getString("address");
+                conInstantMessageView = jsonObject.getString("instantMassaging");
             } catch (Exception e) {
                 System.out.println("Error JSON");
                 e.printStackTrace();
