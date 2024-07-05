@@ -167,8 +167,7 @@ public class SignInController {
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
         tempConnection.setRequestMethod("GET");
         tempConnection.setDoOutput(true);
-        tempConnection.getOutputStream().write(json.toString().getBytes());
-        tempConnection.getOutputStream().close();
+        GeneralMethods.sendResponse(tempConnection,json.toString());
 
 
         if (tempConnection.getResponseCode() == 200) {//go to home page

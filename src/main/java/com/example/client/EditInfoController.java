@@ -8,9 +8,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.json.JSONObject;
 
 import java.io.IOException;
-
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 
 
 public class EditInfoController {
@@ -53,43 +58,43 @@ public class EditInfoController {
     @FXML
     private Label statusEditInfoLabel;
 
-     static String firstName = "";
-     static String lastName = "";
-     static String email = "";
-     static String workType = "";
-     static String country = "";
-     static String city = "";
-     static String passWord = "";
-     static String repPassWord = "";
-     static String additoinalName = "";
-     static String userName = "";
+    static String firstName = "";
+    static String lastName = "";
+    static String email = "";
+    static String workType = "";
+    static String country = "";
+    static String city = "";
+    static String passWord = "";
+    static String repPassWord = "";
+    static String additoinalName = "";
+    static String userName = "";
 
     private static boolean isJobTypeSelected = false;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     @FXML
-     Button backToProfileViewInfo;
+    Button backToProfileViewInfo;
     @FXML
-     Button editInfoButton;
+    Button editInfoButton;
     @FXML
-     Button logoInfoView;
+    Button logoInfoView;
     @FXML
-     TextField firstNameTextFieldView;
+    TextField firstNameTextFieldView;
     @FXML
-     TextField lastNameTextFieldView;
+    TextField lastNameTextFieldView;
     @FXML
-     TextField emailTextFieldView;
+    TextField emailTextFieldView;
     @FXML
-     TextField workTypeTextFieldView;
+    TextField workTypeTextFieldView;
     @FXML
-     TextField countryTextFieldView;
+    TextField countryTextFieldView;
     @FXML
-     TextField cityTextFieldView;
+    TextField cityTextFieldView;
     @FXML
-     TextField additionalTextFieldView;
+    TextField additionalTextFieldView;
     @FXML
-     TextField userNameTextFieldView;
+    TextField userNameTextFieldView;
 
 
     private static String firstName_View = "";
@@ -106,10 +111,6 @@ public class EditInfoController {
     public void doneEditPressed(ActionEvent event) throws IOException {
 
         ////////////////////      set sql save
-
-
-
-
 
 
         if (wantToHireRadioButtonEdit.isSelected()) {
@@ -135,24 +136,16 @@ public class EditInfoController {
             passWord = passwordPassFieldEdit.getText();
             repPassWord = repPassPassFieldEdit.getText();
             additoinalName = additionalTextFieldEdit.getText();
-            userName = userNameTextFieldEdit.getText();
+            userName = Client.user.getID();
 
 
-            if (!isValidEmail(email) && email.length() != 0) {
-                statusEditInfoLabel.setText("Invalid email");
-            } else if (!validUserName(userName)) {
-                statusEditInfoLabel.setText("Invalid username");
-            } else if (!validPass(passWord)) {
+            if (!GeneralMethods.validPass(passWord) && passWord.length() != 0) {
                 statusEditInfoLabel.setText("Invalid Password");
             } else if (!sameRepeatedPass()) {
                 statusEditInfoLabel.setText("RepPass is Wrong");
-            } else if (!checkUniqueEmail(email)) {
-                statusEditInfoLabel.setText("Email exists");
-            } else if (!checkUniqueUserName(userName)) {
-                statusEditInfoLabel.setText("Username exists");
-            }
-
-            else if (editInfoStatus() == 1) {
+            } else if (!GeneralMethods.isValidEmail(email)) {
+                statusEditInfoLabel.setText("Invalid Email");
+            } else if (editInfoStatus() == 1) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewInfoFXML.fxml"));
                 Parent root = loader.load();
 
@@ -270,7 +263,7 @@ public class EditInfoController {
         country = countryTextFieldView.getText();
         city = cityTextFieldView.getText();
         additoinalName = additionalTextFieldView.getText();
-        userName = userNameTextFieldView.getText();
+        userName = Client.user.getID();
         // Set the fields with existing data
         controller.firstNameTextFieldEdit.setText(firstName);
         controller.lastNameTextFieldEdit.setText(lastName);
@@ -290,43 +283,7 @@ public class EditInfoController {
 
 
     ///////////////////////////////
-    public boolean validUserName(String username) {
-        for (int i = 0; i < username.length(); i++) {
-            char c = username.charAt(i);
-            if (!(Character.isLowerCase(c) || Character.isDigit(c) || c == '.' || c == '_')) {
-                return false;
-            }
-        }
-        return true;
-    }
 
-    public boolean validPass(String password) {
-        if (password.length() < 8 && password.length() != 0) {
-            return false;
-        }
-        else if(password.length() == 0){
-            return true;
-        }
-
-        boolean hasLetter = false;
-        boolean hasNumber = false;
-
-        for (int i = 0; i < password.length(); i++) {
-            char c = password.charAt(i);
-            if (Character.isLetter(c)) {
-                hasLetter = true;
-            } else if (Character.isDigit(c)) {
-                hasNumber = true;
-            }
-
-            // If both conditions are met, no need to check further
-            if (hasLetter && hasNumber) {
-                return true;
-            }
-        }
-
-        return hasLetter && hasNumber;
-    }
 
     public boolean sameRepeatedPass() {
         if (passWord.equals(repPassWord)) {
@@ -335,100 +292,92 @@ public class EditInfoController {
         return false;
     }
 
-    public static boolean isValidEmail(String email) {
-        // List of recognized email domains
-        String[] validDomains = {
-                "gmail", "yahoo", "hotmail", "outlook", "aol", "icloud", "mail", "yandex", "zoho", "protonmail",
-                "gmx", "lycos", "comcast", "verizon", "att", "sbcglobal", "live", "msn", "me", "mac",
-                "mailinator", "hushmail", "runbox", "lavabit", "fastmail", "tutanota", "inbox", "mail.com"
-        };
 
-        // List of valid top-level domains (TLDs)
-        String[] validTLDs = {
-                ".com", ".org", ".net", ".edu", ".gov", ".mil", ".int", ".us", ".uk", ".ca", ".de", ".fr", ".au", ".ir",
-                ".io", ".tech", ".co", ".biz", ".info", ".mobi", ".site", ".online", ".xyz", ".club", ".space",
-                ".store", ".blog", ".asia", ".africa", ".ru", ".cn", ".jp", ".br", ".mx", ".es", ".it", ".nl", ".se",
-                ".no", ".fi"
-        };
+    public int editInfoStatus() throws IOException {
 
-        // Check if the email contains '@'
-        int atIndex = email.indexOf('@');
-        if (atIndex == -1) {
-            return false;
+
+        JSONObject json = new JSONObject();
+
+        json.put("id", Client.user.getID());
+        json.put("email", email);
+        json.put("first_name", firstName);
+        json.put("last_name", lastName);
+        json.put("password", passWord);
+        json.put("additional_name", additoinalName);
+        json.put("city", city);
+        json.put("country", country);
+//        ///////////////////////////////////////////////profession
+
+
+        json.put("profession", "null");
+        json.put("work_type", workType);
+
+//        System.out.println(json.toString());
+
+
+        URL url1 = new URL(GeneralMethods.getFirstOfUrl() + "user/" + "creating1");
+        HttpURLConnection tempConnection1 = (HttpURLConnection) url1.openConnection();
+        tempConnection1.setRequestMethod("GET");
+        tempConnection1.setDoOutput(true);
+        GeneralMethods.sendResponse(tempConnection1, json.toString());
+
+        if (tempConnection1.getResponseCode() == 200) {//go to home page
+            System.out.println("Accepted id and email");
+        } else if (tempConnection1.getResponseCode() == 402) {
+            statusEditInfoLabel.setText("Email Is Used!");
+            return 0;
+        } else if (tempConnection1.getResponseCode() == 400) {
+            System.out.println("Wrong input");
+            return 0;
         }
 
-        // Check if the email contains '.' after '@'
-        int dotIndex = email.indexOf('.', atIndex);
-        if (dotIndex == -1) {
-            return false;
+
+        URL url2 = new URL(GeneralMethods.getFirstOfUrl() + "user/" + "updating/");
+        HttpURLConnection tempConnection2 = (HttpURLConnection) url2.openConnection();
+        tempConnection2.setRequestMethod("GET");
+        tempConnection2.setDoOutput(true);
+        GeneralMethods.sendResponse(tempConnection2, json.toString());
+
+
+        if (tempConnection2.getResponseCode() == 200) {
+            System.out.println("Info Changed");
+            return 1;
+        } else if (tempConnection2.getResponseCode() != 200) {
+            System.out.println("Info Not Changed");
+            return 0;
         }
 
-        // Check that '@' is not at the start or end
-        if (atIndex == 0 || atIndex == email.length() - 1) {
-            return false;
-        }
-
-        // Check that '.' is not at the start or end
-        if (dotIndex == 0 || dotIndex == email.length() - 1) {
-            return false;
-        }
-
-        // Ensure there's something between '@' and '.'
-        if (dotIndex - atIndex < 2) {
-            return false;
-        }
-
-        // Extract the domain part between '@' and '.'
-        String domain = email.substring(atIndex + 1, dotIndex);
-
-        // Check if the extracted domain is in the list of valid domains
-        boolean domainValid = false;
-        for (String validDomain : validDomains) {
-            if (domain.equals(validDomain)) {
-                domainValid = true;
-                break;
-            }
-        }
-        if (!domainValid) {
-            return false;
-        }
-
-        // Check if the email ends with a valid TLD
-        boolean tldValid = false;
-        for (String validTLD : validTLDs) {
-            if (email.endsWith(validTLD)) {
-                tldValid = true;
-                break;
-            }
-        }
-
-        return tldValid;
-    }
-
-
-    public boolean checkUniqueEmail(String email) {
-        return true;
-    }
-
-    public boolean checkUniqueUserName(String cUserName) {
-        return true;
-    }
-
-    public int editInfoStatus() {
         return 1;
     }
 
     @FXML
     public void deleteAccount(ActionEvent event) throws IOException {
+
+
+        //it goes to start scene
+
+        URL url = new URL(GeneralMethods.getFirstOfUrl() + "user/" + "deleteMyAccount/" + Client.user.getID() + "/" + Client.user.getPassWord());
+        HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
+        tempConnection.setRequestMethod("GET");
+        tempConnection.setDoOutput(true);
+        System.out.println(url.toString());
+
+
+        if (tempConnection.getResponseCode() == 200) {
+            System.out.println("Account deleted :(");
+            System.out.println(GeneralMethods.getResponse(tempConnection));
+        } else if (tempConnection.getResponseCode() != 200) {
+            System.out.println(GeneralMethods.getResponse(tempConnection));
+
+        }
+
+        Client.user = null;
+
         Parent root = FXMLLoader.load(getClass().getResource("StartFXML.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
-
-        //it goes to start scene
-        //code to delete account
     }
 
 

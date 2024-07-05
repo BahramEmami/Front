@@ -214,7 +214,6 @@ public class ProfileController {
         }
 
 
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ContactViewFXML.fxml"));
         Parent root = loader.load();
 
@@ -253,7 +252,7 @@ public class ProfileController {
         //"http://localhost:8080"/contact/view
 
 
-        URL url = new URL(GeneralMethods.getFirstOfUrl() + "contact/" + "view" );
+        URL url = new URL(GeneralMethods.getFirstOfUrl() + "contact/" + "view");
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
         tempConnection.setRequestMethod("GET");
         tempConnection.setRequestProperty("LKN", Client.user.getToken());
@@ -267,16 +266,22 @@ public class ProfileController {
 //                System.out.println(response);
                 JSONObject jsonObject = new JSONObject(response);
 
-
-                userName = jsonObject.getString("id");
-                conProfileUrlView =  jsonObject.getString("profileURL");
-                conEmailView =  jsonObject.getString("shareEmail");
-                conPhoneNumberView = jsonObject.getString("phoneNumber");
-                conPhoneTypeView =  jsonObject.getString("numberType");
-                conBirthdateView =  jsonObject.getString("birthdate");
-//                                 birthday_policy = jsonObject.isNull("birthday_policy") ? "me" : jsonObject.getString("birthday_policy");
-                conAddressView = jsonObject.getString("address");
-                conInstantMessageView = jsonObject.getString("instantMassaging");
+//                userName = jsonObject.getString("id");
+//                conProfileUrlView = jsonObject.getString("profileURL");
+//                conEmailView = jsonObject.getString("shareEmail");
+//                conPhoneNumberView = jsonObject.getString("phoneNumber");
+//                conPhoneTypeView = jsonObject.getString("numberType");
+//                conBirthdateView = jsonObject.getString("birthdate");
+//                conAddressView = jsonObject.getString("address");
+//                conInstantMessageView = jsonObject.getString("instantMassaging");
+                userName =  jsonObject.getString("id");
+                conProfileUrlView = jsonObject.isNull("profileURL") ? null : jsonObject.getString("profileURL");
+                conEmailView = jsonObject.isNull("shareEmail") ? null : jsonObject.getString("shareEmail");
+                conPhoneNumberView = jsonObject.isNull("phoneNumber") ? null : jsonObject.getString("phoneNumber");
+                conPhoneTypeView = jsonObject.getString("numberType");
+                conBirthdateView = jsonObject.isNull("birthdate") ? null : jsonObject.getString("birthdate");
+                conAddressView = jsonObject.isNull("address") ? null : jsonObject.getString("address");
+                conInstantMessageView = jsonObject.isNull("instantMassaging") ? null : jsonObject.getString("instantMassaging");
             } catch (Exception e) {
                 System.out.println("Error JSON");
                 e.printStackTrace();
@@ -294,10 +299,21 @@ public class ProfileController {
             return 10;
     }
 
-    /////////////////
-////////////////
     @FXML
     public void seeInfoPressed(ActionEvent event) throws IOException {
+
+
+        if (viewInfo() == 1) {
+            System.out.println("Done");
+        } else if (viewInfo() == -1) {
+            System.out.println("Error");
+        } else if (viewInfo() == 0) {
+            System.out.println("First Time");
+        } else if (viewInfo() == 10) {
+            System.out.println(10);
+        }
+
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewInfoFXML.fxml"));
         Parent root = loader.load();
 
@@ -329,14 +345,74 @@ public class ProfileController {
         controller.workTypeTextFieldView.setText(infoWorkType);
         controller.countryTextFieldView.setText(infoCountry);
         controller.cityTextFieldView.setText(infoCity);
+        //////////////////////////////////////////////////////profession
+//        controller.professionTextFieldView.setText(infoProfession);
         controller.additionalTextFieldView.setText(infoAdditionalName);
         controller.userNameTextFieldView.setText(infoUserName);
 
 
     }
 
-////////////////////////
-////////////////////////////
+    public int viewInfo() throws IOException {
+
+        //"http://localhost:8080"/contact/view
+
+
+        URL url = new URL(GeneralMethods.getFirstOfUrl() + "user/" + "view");
+        HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
+        tempConnection.setRequestMethod("GET");
+        tempConnection.setRequestProperty("LKN", Client.user.getToken());
+        tempConnection.setDoOutput(true);
+
+        if (tempConnection.getResponseCode() == 200) {
+
+            try {
+
+                String response = GeneralMethods.getResponse(tempConnection);
+//                System.out.println(response);
+                JSONObject jsonObject = new JSONObject(response);
+
+
+                infoFirstName = jsonObject.getString("firstName");
+                infoLastName = jsonObject.getString("lastName");
+                infoEmail = jsonObject.getString("email");
+                infoWorkType = jsonObject.getString("workType");
+
+
+                infoCountry = jsonObject.isNull("country") ? null : jsonObject.getString("country");
+                infoCity = jsonObject.isNull("city") ? null : jsonObject.getString("city");
+
+
+//                infoProfession = jsonObject.isNull("profession") ? null : jsonObject.getString("profession");
+
+
+                //////////////////////////////////////////
+                //////////////////////////////////////
+                //////////////////////////////////////
+
+
+//                if (jsonObject.getString("profession") != null) {
+//                    profession = jsonObject.getString("profession");
+//                }
+
+                infoAdditionalName = jsonObject.getString("additionalName");
+                infoUserName = jsonObject.getString("id");
+            } catch (Exception e) {
+                System.out.println("Error JSON");
+                e.printStackTrace();
+            }
+        }
+
+
+        if (tempConnection.getResponseCode() == 200) {      //go to home page
+            return 1;
+        } else if (tempConnection.getResponseCode() == 400) {
+            return 0;
+        } else if (tempConnection.getResponseCode() == 404) {
+            return -1;
+        } else// nothing
+            return 10;
+    }
 
     @FXML
     public void signOutPressed(ActionEvent event) throws IOException {
