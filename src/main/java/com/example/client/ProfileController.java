@@ -15,11 +15,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.time.LocalDate;
 
 public class ProfileController {
     private Stage stage;
@@ -75,7 +79,7 @@ public class ProfileController {
     private static Image profileImage = null;
     private static Image titleImage = null;
 
-    private final String userName = "";
+    private static String userName = "";
 
     /////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////for showing infos in education and contact and info
@@ -91,7 +95,7 @@ public class ProfileController {
     private static String conEmailView = "";
     private static String conPhoneNumberView = "";
     private static String conPhoneTypeView = "";
-    private static String conBirthdateView = "";
+    private static LocalDate conBirthdateView;
     private static String conAddressView = "";
     private static String conInstantMessageView = "";
     /********************************************************/
@@ -160,10 +164,6 @@ public class ProfileController {
         //////////////////////////////////   get sql show
 
 
-
-
-
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("EducationFXML.fxml"));
         Parent root = loader.load();
 
@@ -196,17 +196,22 @@ public class ProfileController {
         controller.finishDateText.setText(eduFinishDateView);
         controller.descriptionText.setText(eduDescriptionView);
     }
-/////////////////
+
+    /////////////////
 ////////////////
     @FXML
     public void connectWithMeSeaPressed(ActionEvent event) throws IOException {
 
         //////////////////////      get sql show
-
-
-
-
-
+        if (viewContact() == 1) {
+            System.out.println("Done");
+        } else if (viewContact() == -1) {
+            System.out.println("Error");
+        } else if (viewContact() == 0) {
+            System.out.println("Error0");
+        } else if (viewContact() == 10) {
+            System.out.println(10);
+        }
 
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ContactViewFXML.fxml"));
@@ -237,10 +242,54 @@ public class ProfileController {
         controller.shareEmailTexField.setText(conEmailView);
         controller.phoneNumberTexField.setText(conPhoneNumberView);
         controller.phoneTypeTexField.setText(conPhoneTypeView);
-        controller.birthDateTexField.setText(conBirthdateView);
+        controller.birthDateTexField.setText(String.valueOf((conBirthdateView)));
         controller.addressTexField.setText(conAddressView);
         controller.instantMessageTextField.setText(conInstantMessageView);
     }
+
+    public int viewContact() throws IOException {
+
+        //"http://localhost:8080"/contact/view
+
+
+        URL url = new URL(GeneralMethods.getFirstOfUrl() + "contact/" + "view/" + Client.user.getID());
+        HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
+        tempConnection.setRequestMethod("GET");
+
+        if (tempConnection.getResponseCode() == 200) {
+            String token = "";
+            try {
+                String response = GeneralMethods.getResponse(tempConnection);
+                JSONObject jsonObject = new JSONObject(response);
+                token = tempConnection.getHeaderField("LKN");
+
+
+                userName = jsonObject.isNull("id") ? null : jsonObject.getString("id");
+                conProfileUrlView = jsonObject.isNull("profile_url") ? null : jsonObject.getString("profile_url");
+                conEmailView = jsonObject.isNull("email") ? null : jsonObject.getString("email");
+                conPhoneNumberView = jsonObject.isNull("phone_number") ? null : jsonObject.getString("phone_number");
+                conPhoneTypeView = jsonObject.isNull("phone_type") ? "mobile" : jsonObject.getString("phone_type");
+                conBirthdateView = jsonObject.isNull("birth_date") ? null : LocalDate.parse(jsonObject.getString("birth_date"));
+//                                 birthday_policy = jsonObject.isNull("birthday_policy") ? "me" : jsonObject.getString("birthday_policy");
+                conAddressView = jsonObject.isNull("address") ? null : jsonObject.getString("address");
+                conInstantMessageView = jsonObject.isNull("instant_message") ? null : jsonObject.getString("instant_message");
+            } catch (Exception e) {
+                System.out.println("Error JSON");
+                e.printStackTrace();
+            }
+        }
+
+
+        if (tempConnection.getResponseCode() == 200) {      //go to home page
+            return 1;
+        } else if (tempConnection.getResponseCode() == 400) {
+            return 0;
+        } else if (tempConnection.getResponseCode() == 404) {
+            return -1;
+        } else// nothing
+            return 10;
+    }
+
     /////////////////
 ////////////////
     @FXML
