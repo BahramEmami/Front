@@ -189,11 +189,51 @@ public class ContactViewController {
 
     @FXML
     private void backToContactViewPressed(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ContactViewFXML.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ContactViewFXML.fxml"));
+        Parent root = loader.load();
+
+        // Get the controller associated with the FXML file
+        ContactViewController controller = loader.getController();
+
+        // Ensure fields are not null
+        if (controller.profileURLTexField == null ||
+                controller.shareEmailTexField == null ||
+                controller.phoneNumberTexField == null ||
+                controller.phoneTypeTexField == null ||
+                controller.birthDateTexField == null ||
+                controller.addressTexField == null ||
+                controller.instantMessageTextField == null) {
+            System.out.println("One or more fields are not initialized!");
+            return;
+        }
+
+        // Initialize the stage and scene
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+
+
+        // Set the fields with existing data
+        controller.profileURLTexField.setText(profileURL);
+        controller.shareEmailTexField.setText(shareEmail);
+        controller.phoneNumberTexField.setText(phoneNumber);
+        if (phoneType.contains("mobi")) {
+            controller.phoneTypeTexField.setText("mobile");
+        } else if (phoneType.contains("hom")) {
+            controller.phoneTypeTexField.setText("home");
+        } else if (phoneType.contains("wo")) {
+            controller.phoneTypeTexField.setText("work");
+        }
+        controller.addressTexField.setText(address);
+        controller.instantMessageTextField.setText(instantMessage);
+        if (birthdatePolicy.contains("me")) {
+            birthdatePolicy = "me";
+        } else if (birthdatePolicy.contains("con")) {
+            birthdatePolicy = "contacts";
+        } else if (birthdatePolicy.contains("eve")) {
+            birthdatePolicy = "everyone";
+        }
     }
 
     ////////////////////////

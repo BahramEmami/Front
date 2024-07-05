@@ -57,6 +57,8 @@ public class EditInfoController {
     private RadioButton wantToProvideServiceRadioButtonEdit;
     @FXML
     private Label statusEditInfoLabel;
+    @FXML
+    private TextField professionTextFieldEdit;
 
     static String firstName = "";
     static String lastName = "";
@@ -68,6 +70,7 @@ public class EditInfoController {
     static String repPassWord = "";
     static String additoinalName = "";
     static String userName = "";
+    static String profession = "";
 
     private static boolean isJobTypeSelected = false;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -95,6 +98,8 @@ public class EditInfoController {
     TextField additionalTextFieldView;
     @FXML
     TextField userNameTextFieldView;
+    @FXML
+    TextField professionTextFieldView;
 
 
     private static String firstName_View = "";
@@ -105,6 +110,20 @@ public class EditInfoController {
     private static String city_View = "";
     private static String additoinalName_View = ".";
     private static String userName_View = "";
+
+
+
+
+
+    @FXML
+    private Button secondDeleteAccountButton;
+    @FXML
+    private PasswordField deleteAccountPassFiled;
+    @FXML
+    private Label deleteAccountStatusLabel;
+    @FXML
+    private Button deleteAccountCancelButton;
+
 
 
     @FXML
@@ -133,9 +152,12 @@ public class EditInfoController {
             email = emailTextFieldEdit.getText();
             country = countryTextFieldEdit.getText();
             city = cityTextFieldEdit.getText();
-            passWord = passwordPassFieldEdit.getText();
-            repPassWord = repPassPassFieldEdit.getText();
+            if (passwordPassFieldEdit.getText().length() != 0 && passwordPassFieldEdit.getText().equals(repPassPassFieldEdit.getText())) {
+                passWord = passwordPassFieldEdit.getText();
+                repPassWord = repPassPassFieldEdit.getText();
+            }
             additoinalName = additionalTextFieldEdit.getText();
+            profession = professionTextFieldEdit.getText();
             userName = Client.user.getID();
 
 
@@ -160,7 +182,8 @@ public class EditInfoController {
                         controller.countryTextFieldView == null ||
                         controller.cityTextFieldView == null ||
                         controller.additionalTextFieldView == null ||
-                        controller.userNameTextFieldView == null) {
+                        controller.userNameTextFieldView == null ||
+                        controller.professionTextFieldView == null) {
                     System.out.println("One or more fields are not initialized!");
                     return;
                 }
@@ -185,6 +208,7 @@ public class EditInfoController {
                 controller.countryTextFieldView.setText(country);
                 controller.cityTextFieldView.setText(city);
                 controller.additionalTextFieldView.setText(additoinalName);
+                controller.professionTextFieldView.setText(profession);
                 controller.userNameTextFieldView.setText(userName);
 
             }
@@ -195,26 +219,7 @@ public class EditInfoController {
 
     @FXML
     public void backToViewPressed(ActionEvent event) throws IOException {
-        if (wantToHireRadioButtonEdit.isSelected()) {
-            workType = "want_to_hired";
-            //isJobTypeSelected = true;
-        } else if (lookingForJobRadioButtonEdit.isSelected()) {
-            workType = "looking_for_job";
-            //isJobTypeSelected = true;
-        } else if (wantToProvideServiceRadioButtonEdit.isSelected()) {
-            workType = "want_to_provide_service";
-            //isJobTypeSelected = true;
-        }
 
-        firstName = firstNameTextFieldEdit.getText();
-        lastName = lastNameTextFieldEdit.getText();
-        email = emailTextFieldEdit.getText();
-        country = countryTextFieldEdit.getText();
-        city = cityTextFieldEdit.getText();
-        passWord = passwordPassFieldEdit.getText();
-        repPassWord = repPassPassFieldEdit.getText();
-        additoinalName = additionalTextFieldEdit.getText();
-        userName = Client.user.getID();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewInfoFXML.fxml"));
         Parent root = loader.load();
@@ -230,7 +235,8 @@ public class EditInfoController {
                 controller.countryTextFieldView == null ||
                 controller.cityTextFieldView == null ||
                 controller.additionalTextFieldView == null ||
-                controller.userNameTextFieldView == null) {
+                controller.userNameTextFieldView == null ||
+                controller.professionTextFieldView == null) {
             System.out.println("One or more fields are not initialized!");
             return;
         }
@@ -245,29 +251,19 @@ public class EditInfoController {
         controller.firstNameTextFieldView.setText(firstName);
         controller.lastNameTextFieldView.setText(lastName);
         controller.emailTextFieldView.setText(email);
-        if (wantToHireRadioButtonEdit.isSelected()) {
+        if (workType.contains("hire")) {
             controller.workTypeTextFieldView.setText("Want to hire");
-        } else if (lookingForJobRadioButtonEdit.isSelected()) {
+        } else if (workType.contains("job")) {
             controller.workTypeTextFieldView.setText("Looking for job");
-        } else if (wantToProvideServiceRadioButtonEdit.isSelected()) {
+        } else if (workType.contains("service")) {
             controller.workTypeTextFieldView.setText("Want to provide service");
         }
         controller.countryTextFieldView.setText(country);
         controller.cityTextFieldView.setText(city);
         controller.additionalTextFieldView.setText(additoinalName);
+        controller.professionTextFieldView.setText(profession);
         controller.userNameTextFieldView.setText(userName);
 
-
-
-
-
-
-
-//        Parent root = FXMLLoader.load(getClass().getResource("ViewInfoFXML.fxml"));
-//        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
     }
 
     @FXML
@@ -312,7 +308,8 @@ public class EditInfoController {
                 controller.countryTextFieldEdit == null ||
                 controller.cityTextFieldEdit == null ||
                 controller.additionalTextFieldEdit == null ||
-                controller.userNameTextFieldEdit == null) {
+                controller.userNameTextFieldEdit == null ||
+                controller.professionTextFieldView == null) {
             System.out.println("One or more fields are not initialized!");
             return;
         }
@@ -331,6 +328,7 @@ public class EditInfoController {
         country = countryTextFieldView.getText();
         city = cityTextFieldView.getText();
         additoinalName = additionalTextFieldView.getText();
+        profession  = professionTextFieldView.getText();
         userName = Client.user.getID();
         // Set the fields with existing data
         controller.firstNameTextFieldEdit.setText(firstName);
@@ -346,6 +344,7 @@ public class EditInfoController {
         controller.countryTextFieldEdit.setText(country);
         controller.cityTextFieldEdit.setText(city);
         controller.additionalTextFieldEdit.setText(additoinalName);
+        controller.professionTextFieldEdit.setText(profession);
         controller.userNameTextFieldEdit.setText(userName);
     }
 
@@ -420,32 +419,80 @@ public class EditInfoController {
 
     @FXML
     public void deleteAccount(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("DeleteAccountFXML.fxml"));
+        Parent root = loader.load();
+
+        // Get the controller associated with the FXML file
+        EditInfoController controller = loader.getController();
+
+        // Ensure fields are not null
+        if (controller.deleteAccountPassFiled == null) {
+            System.out.println("One or more fields are not initialized!");
+            return;
+        }
+
+        // Initialize the stage and scene
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+
 
 
         //it goes to start scene
 
-        URL url = new URL(GeneralMethods.getFirstOfUrl() + "user/" + "deleteMyAccount/" + Client.user.getID() + "/" + Client.user.getPassWord());
-        HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
-        tempConnection.setRequestMethod("GET");
-        tempConnection.setDoOutput(true);
-        System.out.println(url.toString());
+//        URL url = new URL(GeneralMethods.getFirstOfUrl() + "user/" + "deleteMyAccount/" + Client.user.getID() + "/" + Client.user.getPassWord());
+//        HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
+//        tempConnection.setRequestMethod("GET");
+//        tempConnection.setDoOutput(true);
+//        System.out.println(url.toString());
+//
+//
+//        if (tempConnection.getResponseCode() == 200) {
+//            System.out.println("Account deleted :(");
+//            System.out.println(GeneralMethods.getResponse(tempConnection));
+//        } else if (tempConnection.getResponseCode() != 200) {
+//            System.out.println(GeneralMethods.getResponse(tempConnection));
+//
+//        }
+//
+//        Client.user = null;
 
+//        Parent root = FXMLLoader.load(getClass().getResource("StartFXML.fxml"));
+//        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
+    }
 
-        if (tempConnection.getResponseCode() == 200) {
-            System.out.println("Account deleted :(");
-            System.out.println(GeneralMethods.getResponse(tempConnection));
-        } else if (tempConnection.getResponseCode() != 200) {
-            System.out.println(GeneralMethods.getResponse(tempConnection));
-
+    @FXML
+    public void secondDeleteAccountPressed(ActionEvent event) throws IOException {
+        //delete account
+        if(!deleteAccountPassFiled.getText().equals(passWord)){
+            deleteAccountStatusLabel.setText("Wrong Password");
         }
+        else{
+            //delete account
+            Parent root = FXMLLoader.load(getClass().getResource("StartFXML.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+    }
 
-        Client.user = null;
-
-        Parent root = FXMLLoader.load(getClass().getResource("StartFXML.fxml"));
+    @FXML
+    public void cancelPressed(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("EditInfoFXML.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void setPassWord(String pass){
+        passWord = pass;
     }
 
 

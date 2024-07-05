@@ -216,20 +216,6 @@
                   </Button>
                </children>
             </AnchorPane>
-            <Button fx:id="editProfileButton" layoutX="620.0" layoutY="98.0" mnemonicParsing="false" onAction="#editProfilePressed" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #6C0A0A;">
-               <graphic>
-                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@pics/icons8-edit-50.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Label layoutX="616.0" layoutY="141.0" text="Edit Profile">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
             <Button fx:id="editTitleImageButton" layoutX="653.0" layoutY="14.0" mnemonicParsing="false" onAction="#editTitleImagePressed" style="-fx-background-color: #6C0A0A;">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
