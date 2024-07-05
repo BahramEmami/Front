@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
@@ -66,110 +67,120 @@
                                 </AnchorPane>
                             </top>
                             <bottom>
-                                <AnchorPane prefHeight="430.0" prefWidth="200.0" style="-fx-background-color: #FFAAAA;" BorderPane.alignment="CENTER">
-                                    <children>
-                                        <VBox layoutX="119.0" layoutY="1.0" prefHeight="412.0" prefWidth="500.0" spacing="15.0" style="-fx-border-color: #6C0A0A; -fx-border-width: 2px 2px 2px 0px; -fx-border-radius: 10;">
-                                            <children>
-                                                <TextField fx:id="firstNameTextFieldEdit" prefHeight="26.0" prefWidth="479.0" style="-fx-background-color: #FFFFFF;" text=" " />
-                                                <TextField fx:id="lastNameTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
-                                                <TextField fx:id="emailTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
-                                                <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="200.0" spacing="30.0">
-                                                    <children>
-                                                        <RadioButton fx:id="wantToHireRadioButtonEdit" mnemonicParsing="false" text="Want to hire">
-                                                            <font>
-                                                                <Font name="System Bold" size="12.0" />
-                                                            </font>
-                                                            <toggleGroup>
-                                                                <ToggleGroup fx:id="workTypeEdit" />
-                                                            </toggleGroup>
-                                                        </RadioButton>
-                                                        <RadioButton fx:id="lookingForJobRadioButtonEdit" mnemonicParsing="false" text="looking for job" toggleGroup="$workTypeEdit">
-                                                            <font>
-                                                                <Font name="System Bold" size="12.0" />
-                                                            </font>
-                                                        </RadioButton>
-                                                        <RadioButton fx:id="wantToProvideServiceRadioButtonEdit" mnemonicParsing="false" text="want to provide service" toggleGroup="$workTypeEdit">
-                                                            <font>
-                                                                <Font name="System Bold" size="12.0" />
-                                                            </font>
-                                                        </RadioButton>
-                                                    </children>
-                                                </HBox>
-                                                <TextField fx:id="countryTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
-                                                <TextField fx:id="cityTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
-                                                <PasswordField fx:id="passwordPassFieldEdit" />
-                                                <PasswordField fx:id="repPassPassFieldEdit" />
-                                                <TextField fx:id="additionalTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
-                                                <TextField fx:id="userNameTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
-                                            </children>
-                                            <padding>
-                                                <Insets top="10.0" />
-                                            </padding>
-                                        </VBox>
-                                        <VBox layoutX="19.0" layoutY="1.2" prefHeight="410.0" prefWidth="100.0" spacing="15.0" style="-fx-border-color: #6C0A0A; -fx-border-width: 2px 0px 2px 2px; -fx-border-radius: 10;" AnchorPane.topAnchor="1.2">
-                                            <children>
-                                                <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="First Name">
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="Last Name">
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="Email">
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="Work type">
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="Country">
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="City">
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="Password">
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label alignment="CENTER" prefHeight="26.0" prefWidth="100.0" text="Repeat password">
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label alignment="CENTER" prefHeight="26.0" prefWidth="100.0" text="Additional name">
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label alignment="CENTER" prefHeight="26.0" prefWidth="100.0" text="User Name">
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                            <padding>
-                                                <Insets top="10.0" />
-                                            </padding>
-                                        </VBox>
-                              <Button fx:id="deleteAccountButton" layoutX="620.0" layoutY="383.0" mnemonicParsing="false" onAction="#deleteAccount" style="-fx-background-color: #6C0A0A;" text="Delete account" textFill="WHITE">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Button>
-                                    </children>
-                                </AnchorPane>
+                        <ScrollPane BorderPane.alignment="CENTER">
+                           <content>
+                                      <AnchorPane prefHeight="600.0" prefWidth="683.0" style="-fx-background-color: #FFAAAA;">
+                                          <children>
+                                              <VBox layoutX="119.0" layoutY="1.0" prefHeight="412.0" prefWidth="508.0" spacing="25.0" style="-fx-border-color: #6C0A0A; -fx-border-width: 2px 2px 2px 0px; -fx-border-radius: 10;">
+                                                  <children>
+                                                      <TextField fx:id="firstNameTextFieldEdit" prefHeight="26.0" prefWidth="479.0" style="-fx-background-color: #FFFFFF;" text=" " />
+                                                      <TextField fx:id="lastNameTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
+                                                      <TextField fx:id="emailTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="486.0" spacing="30.0">
+                                                          <children>
+                                                              <RadioButton fx:id="wantToHireRadioButtonEdit" mnemonicParsing="false" text="Want to hire">
+                                                                  <font>
+                                                                      <Font name="System Bold" size="12.0" />
+                                                                  </font>
+                                                                  <toggleGroup>
+                                                                      <ToggleGroup fx:id="workTypeEdit" />
+                                                                  </toggleGroup>
+                                                              </RadioButton>
+                                                              <RadioButton fx:id="lookingForJobRadioButtonEdit" mnemonicParsing="false" text="looking for job" toggleGroup="$workTypeEdit">
+                                                                  <font>
+                                                                      <Font name="System Bold" size="12.0" />
+                                                                  </font>
+                                                              </RadioButton>
+                                                              <RadioButton fx:id="wantToProvideServiceRadioButtonEdit" mnemonicParsing="false" text="want to provide service" toggleGroup="$workTypeEdit">
+                                                                  <font>
+                                                                      <Font name="System Bold" size="12.0" />
+                                                                  </font>
+                                                              </RadioButton>
+                                                          </children>
+                                                      </HBox>
+                                                      <TextField fx:id="countryTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
+                                                      <TextField fx:id="cityTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
+                                                      <PasswordField fx:id="passwordPassFieldEdit" />
+                                                      <PasswordField fx:id="repPassPassFieldEdit" />
+                                                      <TextField fx:id="additionalTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
+                                                      <TextField fx:id="userNameTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
+                                          <TextField fx:id="professionTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
+                                                  </children>
+                                                  <padding>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                  </padding>
+                                              </VBox>
+                                              <VBox layoutX="25.0" layoutY="1.2" prefHeight="545.2" prefWidth="100.0" spacing="25.0" style="-fx-border-color: #6C0A0A; -fx-border-width: 2px 0px 2px 2px; -fx-border-radius: 10;" AnchorPane.topAnchor="1.2">
+                                                  <children>
+                                                      <Label alignment="CENTER" prefHeight="25.2" prefWidth="95.0" text="First Name">
+                                                          <font>
+                                                              <Font name="System Bold Italic" size="12.0" />
+                                                          </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" prefHeight="25.2" prefWidth="95.0" text="Last Name">
+                                                          <font>
+                                                              <Font name="System Bold Italic" size="12.0" />
+                                                          </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" prefHeight="25.2" prefWidth="95.0" text="Email">
+                                                          <font>
+                                                              <Font name="System Bold Italic" size="12.0" />
+                                                          </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" prefHeight="17.2" prefWidth="95.0" text="Work type">
+                                                          <font>
+                                                              <Font name="System Bold Italic" size="12.0" />
+                                                          </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" prefHeight="25.2" prefWidth="95.0" text="Country">
+                                                          <font>
+                                                              <Font name="System Bold Italic" size="12.0" />
+                                                          </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="City">
+                                                          <font>
+                                                              <Font name="System Bold Italic" size="12.0" />
+                                                          </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" prefHeight="25.2" prefWidth="95.0" text="Password">
+                                                          <font>
+                                                              <Font name="System Bold Italic" size="12.0" />
+                                                          </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" prefHeight="25.2" prefWidth="100.0" text="Repeat password">
+                                                          <font>
+                                                              <Font name="System Bold Italic" size="12.0" />
+                                                          </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" prefHeight="25.2" prefWidth="100.0" text="Additional name">
+                                                          <font>
+                                                              <Font name="System Bold Italic" size="12.0" />
+                                                          </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" prefHeight="25.2" prefWidth="100.0" text="User Name">
+                                                          <font>
+                                                              <Font name="System Bold Italic" size="12.0" />
+                                                          </font>
+                                                      </Label>
+                                          <Label alignment="CENTER" prefHeight="26.0" prefWidth="95.0" text="Profession">
+                                             <font>
+                                                <Font name="System Bold Italic" size="12.0" />
+                                             </font>
+                                          </Label>
+                                                  </children>
+                                                  <padding>
+                                                      <Insets top="10.0" />
+                                                  </padding>
+                                              </VBox>
+                                    <Button fx:id="deleteAccountButton" layoutX="310.0" layoutY="560.0" mnemonicParsing="false" onAction="#deleteAccount" style="-fx-background-color: #6C0A0A;" text="Delete account" textFill="WHITE">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Button>
+                                          </children>
+                                      </AnchorPane>
+                           </content>
+                        </ScrollPane>
                             </bottom>
                         </BorderPane>
                     </children>

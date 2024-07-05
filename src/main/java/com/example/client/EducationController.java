@@ -255,11 +255,39 @@ public class EducationController {
 
     @FXML
     public void backToEducationPressed(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("EducationFXML.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EducationFXML.fxml"));
+        Parent root = loader.load();
+
+        // Get the controller associated with the FXML file
+        EducationController controller = loader.getController();
+
+        // Ensure fields are not null
+        if (controller.instituteText == null ||
+                controller.fieldOfStudyText == null ||
+                controller.gradeText == null ||
+                controller.activitiesDoneText == null ||
+                controller.startDateText == null ||
+                controller.finishDateText == null ||
+                controller.descriptionText == null) {
+            System.out.println("One or more fields are not initialized!");
+            return;
+        }
+
+        // Initialize the stage and scene
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+
+
+        // Set the fields with existing data
+        controller.instituteText.setText(institute);
+        controller.fieldOfStudyText.setText(fieldOfStudy);
+        controller.gradeText.setText(grade);
+        controller.activitiesDoneText.setText(activitiesDone);
+        controller.startDateText.setText(startDate);
+        controller.finishDateText.setText(finishDate);
+        controller.descriptionText.setText(description);
     }
 
     @FXML

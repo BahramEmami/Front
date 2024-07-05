@@ -49,8 +49,7 @@ public class ProfileController {
     private ImageView titleImageImageView;
     @FXML
     private ImageView profileImageImageview;
-    @FXML
-    private Button editProfileButton;
+
 
     @FXML
     private Button educationSeaMore;
@@ -108,6 +107,16 @@ public class ProfileController {
     private static String infoAdditionalName = "";
     private static String infoUserName = "";
 
+    /**
+     *
+     *
+     * Add This Tow
+     *
+     *
+     */
+    private static String infoPassword = "";
+    private static String infoProfession = "";
+
 
     //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -144,10 +153,7 @@ public class ProfileController {
         // go to message scene
     }
 
-    @FXML
-    public void editProfilePressed(ActionEvent event) {
-        //got to edit profile
-    }
+
 
     @FXML
     public void myJobsSeaPressed(ActionEvent event) {
@@ -328,7 +334,8 @@ public class ProfileController {
                 controller.countryTextFieldView == null ||
                 controller.cityTextFieldView == null ||
                 controller.additionalTextFieldView == null ||
-                controller.userNameTextFieldView == null) {
+                controller.userNameTextFieldView == null||
+                controller.professionTextFieldView == null) {
             System.out.println("One or more fields are not initialized!");
             return;
         }
@@ -339,6 +346,7 @@ public class ProfileController {
         stage.setScene(scene);
         stage.show();
 
+        controller.setPassWord(infoPassword);
         controller.firstNameTextFieldView.setText(infoFirstName);
         controller.lastNameTextFieldView.setText(infoLastName);
         controller.emailTextFieldView.setText(infoEmail);
@@ -348,6 +356,7 @@ public class ProfileController {
         //////////////////////////////////////////////////////profession
 //        controller.professionTextFieldView.setText(infoProfession);
         controller.additionalTextFieldView.setText(infoAdditionalName);
+        controller.professionTextFieldView.setText(infoProfession);
         controller.userNameTextFieldView.setText(infoUserName);
 
 
