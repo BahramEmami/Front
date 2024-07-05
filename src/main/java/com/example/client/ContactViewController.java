@@ -282,7 +282,6 @@ public class ContactViewController {
         } else if (editContact() == 10) {
 
         }
-        /////بقیه شرظای لازم از ظرف دیتا بیس رو بزن
     }
 
     /////////////////////////////
@@ -306,7 +305,7 @@ public class ContactViewController {
         json.put("address", address);
         json.put("instant_message", instantMessage);
         if (birthDateDatePickerEdit.getValue() == null) {
-            json.put("birth_date", Date.valueOf(LocalDate.now()));
+            json.put("birth_date", Date.valueOf(LocalDate.of(1, 1 , 1)));
         }else if (birthDateDatePickerEdit.getValue() != null) {
             json.put("birth_date", Date.valueOf(localDateBirthDate));
         }

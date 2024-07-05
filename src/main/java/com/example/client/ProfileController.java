@@ -208,10 +208,11 @@ public class ProfileController {
         } else if (viewContact() == -1) {
             System.out.println("Error");
         } else if (viewContact() == 0) {
-            System.out.println("Error0");
+            System.out.println("First Time");
         } else if (viewContact() == 10) {
             System.out.println(10);
         }
+
 
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ContactViewFXML.fxml"));
