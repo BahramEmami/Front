@@ -195,11 +195,79 @@ public class EditInfoController {
 
     @FXML
     public void backToViewPressed(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ViewInfoFXML.fxml"));
+        if (wantToHireRadioButtonEdit.isSelected()) {
+            workType = "want_to_hired";
+            //isJobTypeSelected = true;
+        } else if (lookingForJobRadioButtonEdit.isSelected()) {
+            workType = "looking_for_job";
+            //isJobTypeSelected = true;
+        } else if (wantToProvideServiceRadioButtonEdit.isSelected()) {
+            workType = "want_to_provide_service";
+            //isJobTypeSelected = true;
+        }
+
+        firstName = firstNameTextFieldEdit.getText();
+        lastName = lastNameTextFieldEdit.getText();
+        email = emailTextFieldEdit.getText();
+        country = countryTextFieldEdit.getText();
+        city = cityTextFieldEdit.getText();
+        passWord = passwordPassFieldEdit.getText();
+        repPassWord = repPassPassFieldEdit.getText();
+        additoinalName = additionalTextFieldEdit.getText();
+        userName = Client.user.getID();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewInfoFXML.fxml"));
+        Parent root = loader.load();
+
+        // Get the controller associated with the FXML file
+        EditInfoController controller = loader.getController();
+
+        // Ensure fields are not null
+        if (controller.firstNameTextFieldView == null ||
+                controller.lastNameTextFieldView == null ||
+                controller.emailTextFieldView == null ||
+                controller.workTypeTextFieldView == null ||
+                controller.countryTextFieldView == null ||
+                controller.cityTextFieldView == null ||
+                controller.additionalTextFieldView == null ||
+                controller.userNameTextFieldView == null) {
+            System.out.println("One or more fields are not initialized!");
+            return;
+        }
+
+        // Initialize the stage and scene
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+
+
+        controller.firstNameTextFieldView.setText(firstName);
+        controller.lastNameTextFieldView.setText(lastName);
+        controller.emailTextFieldView.setText(email);
+        if (wantToHireRadioButtonEdit.isSelected()) {
+            controller.workTypeTextFieldView.setText("Want to hire");
+        } else if (lookingForJobRadioButtonEdit.isSelected()) {
+            controller.workTypeTextFieldView.setText("Looking for job");
+        } else if (wantToProvideServiceRadioButtonEdit.isSelected()) {
+            controller.workTypeTextFieldView.setText("Want to provide service");
+        }
+        controller.countryTextFieldView.setText(country);
+        controller.cityTextFieldView.setText(city);
+        controller.additionalTextFieldView.setText(additoinalName);
+        controller.userNameTextFieldView.setText(userName);
+
+
+
+
+
+
+
+//        Parent root = FXMLLoader.load(getClass().getResource("ViewInfoFXML.fxml"));
+//        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
     }
 
     @FXML
@@ -268,11 +336,11 @@ public class EditInfoController {
         controller.firstNameTextFieldEdit.setText(firstName);
         controller.lastNameTextFieldEdit.setText(lastName);
         controller.emailTextFieldEdit.setText(email);
-        if (workTypeTextFieldView.getText().equals("Want to hire")) {
+        if (workTypeTextFieldView.getText().contains("hire")) {
             controller.wantToHireRadioButtonEdit.fire();
-        } else if (workTypeTextFieldView.getText().equals("Looking for job")) {
+        } else if (workTypeTextFieldView.getText().contains("job")) {
             controller.lookingForJobRadioButtonEdit.fire();
-        } else if (workTypeTextFieldView.getText().equals("Want to provide service")) {
+        } else if (workTypeTextFieldView.getText().contains("provide")) {
             controller.wantToProvideServiceRadioButtonEdit.fire();
         }
         controller.countryTextFieldEdit.setText(country);
