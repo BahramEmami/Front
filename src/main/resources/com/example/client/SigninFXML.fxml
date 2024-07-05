@@ -98,9 +98,9 @@
                   <Font name="System Bold" size="16.0" />
                </font></Button>
             <Button fx:id="backButton" layoutX="420.0" layoutY="17.0" mnemonicParsing="false" onAction="#backPressed" prefHeight="30.4" prefWidth="53.6" style="-fx-background-color: #FFFFFF;" text="Back" />
-            <Label fx:id="statusLabel" alignment="CENTER" layoutX="14.0" layoutY="13.0" prefHeight="33.0" prefWidth="250.0" textFill="#b351fa">
+            <Label fx:id="statusLabel" alignment="CENTER" layoutX="14.0" layoutY="13.0" prefHeight="33.0" prefWidth="250.0" textFill="RED">
                <font>
-                  <Font name="System Bold" size="21.0" />
+                  <Font name="System Bold" size="17.0" />
                </font>
             </Label>
          </children>
