@@ -107,14 +107,7 @@ public class ProfileController {
     private static String infoAdditionalName = "";
     private static String infoUserName = "";
 
-    /**
-     *
-     *
-     * Add This Tow
-     *
-     *
-     */
-    private static String infoPassword = "";
+    private static String infoPassword = Client.user.getPassWord();
     private static String infoProfession = "";
 
 
@@ -160,8 +153,6 @@ public class ProfileController {
         //got to myJobsSeaPressed sea more
     }
 
-    /////////////////
-////////////////
 
     @FXML
     public void educationSeaMorePressed(ActionEvent event) throws IOException {
@@ -281,13 +272,16 @@ public class ProfileController {
 //                conAddressView = jsonObject.getString("address");
 //                conInstantMessageView = jsonObject.getString("instantMassaging");
                 userName =  jsonObject.getString("id");
-                conProfileUrlView = jsonObject.isNull("profileURL") ? null : jsonObject.getString("profileURL");
-                conEmailView = jsonObject.isNull("shareEmail") ? null : jsonObject.getString("shareEmail");
-                conPhoneNumberView = jsonObject.isNull("phoneNumber") ? null : jsonObject.getString("phoneNumber");
+                conProfileUrlView = jsonObject.isNull("profileURL") ? "" : jsonObject.getString("profileURL");
+                conEmailView = jsonObject.isNull("shareEmail") ? " " : jsonObject.getString("shareEmail");
+                conPhoneNumberView = jsonObject.isNull("phoneNumber") ? " " : jsonObject.getString("phoneNumber");
                 conPhoneTypeView = jsonObject.getString("numberType");
-                conBirthdateView = jsonObject.isNull("birthdate") ? null : jsonObject.getString("birthdate");
-                conAddressView = jsonObject.isNull("address") ? null : jsonObject.getString("address");
-                conInstantMessageView = jsonObject.isNull("instantMassaging") ? null : jsonObject.getString("instantMassaging");
+                conBirthdateView = jsonObject.isNull("birthdate") ? " " : jsonObject.getString("birthdate");
+                if (conBirthdateView.equals("0001-01-01")){
+                    conBirthdateView = "";
+                }
+                conAddressView = jsonObject.isNull("address") ? " " : jsonObject.getString("address");
+                conInstantMessageView = jsonObject.isNull("instantMassaging") ? "" : jsonObject.getString("instantMassaging");
             } catch (Exception e) {
                 System.out.println("Error JSON");
                 e.printStackTrace();
@@ -353,8 +347,7 @@ public class ProfileController {
         controller.workTypeTextFieldView.setText(infoWorkType);
         controller.countryTextFieldView.setText(infoCountry);
         controller.cityTextFieldView.setText(infoCity);
-        //////////////////////////////////////////////////////profession
-//        controller.professionTextFieldView.setText(infoProfession);
+        controller.professionTextFieldView.setText(infoProfession);
         controller.additionalTextFieldView.setText(infoAdditionalName);
         controller.professionTextFieldView.setText(infoProfession);
         controller.userNameTextFieldView.setText(infoUserName);
@@ -386,24 +379,9 @@ public class ProfileController {
                 infoLastName = jsonObject.getString("lastName");
                 infoEmail = jsonObject.getString("email");
                 infoWorkType = jsonObject.getString("workType");
-
-
-                infoCountry = jsonObject.isNull("country") ? null : jsonObject.getString("country");
-                infoCity = jsonObject.isNull("city") ? null : jsonObject.getString("city");
-
-
-//                infoProfession = jsonObject.isNull("profession") ? null : jsonObject.getString("profession");
-
-
-                //////////////////////////////////////////
-                //////////////////////////////////////
-                //////////////////////////////////////
-
-
-//                if (jsonObject.getString("profession") != null) {
-//                    profession = jsonObject.getString("profession");
-//                }
-
+                infoCountry = jsonObject.isNull("country") ? "" : jsonObject.getString("country");
+                infoCity = jsonObject.isNull("city") ? "" : jsonObject.getString("city");
+                infoProfession = jsonObject.isNull("profession") ? "" : jsonObject.getString("profession");
                 infoAdditionalName = jsonObject.getString("additionalName");
                 infoUserName = jsonObject.getString("id");
             } catch (Exception e) {

@@ -103,7 +103,7 @@ public class SignInController {
             } else if (!GeneralMethods.validPass(passWord)) {
                 statusLabel.setText("Enter a valid pass");
             } else if (!GeneralMethods.validUserName(userName)) {
-                statusLabelComplete.setText("Invalid username format!");
+                statusLabel.setText("Invalid username format!");
             } else {
                 int signInStatus1 = signInStatus();
                 if (signInStatus1 == 1) {
@@ -163,20 +163,27 @@ public class SignInController {
         json.put("id", userName);
         json.put("email", email);
 
-        URL url = new URL(GeneralMethods.getFirstOfUrl() + "user/" + "creating1");
-        HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
-        tempConnection.setRequestMethod("GET");
-        tempConnection.setDoOutput(true);
-        GeneralMethods.sendResponse(tempConnection,json.toString());
+        URL url1 = new URL(GeneralMethods.getFirstOfUrl() + "user/" + "checkingId");
+        HttpURLConnection tempConnection1 = (HttpURLConnection) url1.openConnection();
+        tempConnection1.setRequestMethod("GET");
+        tempConnection1.setDoOutput(true);
+        GeneralMethods.sendResponse(tempConnection1,json.toString());
 
 
-        if (tempConnection.getResponseCode() == 200) {//go to home page
+        URL url2 = new URL(GeneralMethods.getFirstOfUrl() + "user/" + "checkingEmail");
+        HttpURLConnection tempConnection2 = (HttpURLConnection) url2.openConnection();
+        tempConnection2.setRequestMethod("GET");
+        tempConnection2.setDoOutput(true);
+        GeneralMethods.sendResponse(tempConnection2, json.toString());
+
+
+        if (tempConnection1.getResponseCode() == 200 && tempConnection2.getResponseCode() ==200) {//go to home page
             return 1;
-        } else if (tempConnection.getResponseCode() == 401) {
+        } else if (tempConnection1.getResponseCode() == 401) {
             return -1;
-        } else if (tempConnection.getResponseCode() == 402) {
+        } else if (tempConnection2.getResponseCode() == 402) {
             return -2;
-        } else if (tempConnection.getResponseCode() == 400) {
+        } else if (tempConnection1.getResponseCode() == 400 || tempConnection2.getResponseCode() == 400) {
             return 0;
         } else// nothing
             return 10;
