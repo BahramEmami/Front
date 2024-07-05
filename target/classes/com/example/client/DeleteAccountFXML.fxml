@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #6C0A0A;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.EditInfoController">
+   <children>
+      <PasswordField fx:id="deleteAccountPassFiled" layoutX="175.0" layoutY="137.0" />
+      <Label alignment="CENTER" layoutX="40.0" layoutY="78.0" text="Enter your password in order to delete account" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Button fx:id="secondDeleteAccountButton" layoutX="192.0" layoutY="224.0" mnemonicParsing="false" onAction="#secondDeleteAccountPressed" style="-fx-background-color: #FFAAAA;" text="Delete my account" />
+      <Label fx:id="deleteAccountStatusLabel" alignment="CENTER" layoutX="26.0" layoutY="186.0" prefHeight="38.0" prefWidth="448.0" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="deleteAccountCancelButton" layoutX="434.0" layoutY="260.0" mnemonicParsing="false" onAction="#cancelPressed" style="-fx-background-color: #FFAAAA;" text="Cancel" />
+   </children>
+</AnchorPane>

@@ -112,9 +112,6 @@ public class EditInfoController {
     private static String userName_View = "";
 
 
-
-
-
     @FXML
     private Button secondDeleteAccountButton;
     @FXML
@@ -123,7 +120,6 @@ public class EditInfoController {
     private Label deleteAccountStatusLabel;
     @FXML
     private Button deleteAccountCancelButton;
-
 
 
     @FXML
@@ -161,7 +157,7 @@ public class EditInfoController {
             userName = Client.user.getID();
 
 
-            if (!GeneralMethods.validPass(passWord) && passWord.length() != 0) {
+            if (!isValidInfoPass(passwordPassFieldEdit.getText())) {
                 statusEditInfoLabel.setText("Invalid Password");
             } else if (!sameRepeatedPass()) {
                 statusEditInfoLabel.setText("RepPass is Wrong");
@@ -309,7 +305,7 @@ public class EditInfoController {
                 controller.cityTextFieldEdit == null ||
                 controller.additionalTextFieldEdit == null ||
                 controller.userNameTextFieldEdit == null ||
-                controller.professionTextFieldView == null) {
+                controller.professionTextFieldEdit == null) {
             System.out.println("One or more fields are not initialized!");
             return;
         }
@@ -328,7 +324,7 @@ public class EditInfoController {
         country = countryTextFieldView.getText();
         city = cityTextFieldView.getText();
         additoinalName = additionalTextFieldView.getText();
-        profession  = professionTextFieldView.getText();
+        profession = professionTextFieldView.getText();
         userName = Client.user.getID();
         // Set the fields with existing data
         controller.firstNameTextFieldEdit.setText(firstName);
@@ -353,7 +349,7 @@ public class EditInfoController {
 
 
     public boolean sameRepeatedPass() {
-        if (passWord.equals(repPassWord)) {
+        if (passwordPassFieldEdit.getText().equals(repPassPassFieldEdit.getText())) {
             return true;
         }
         return false;
@@ -373,33 +369,31 @@ public class EditInfoController {
         json.put("additional_name", additoinalName);
         json.put("city", city);
         json.put("country", country);
-//        ///////////////////////////////////////////////profession
-
-
-        json.put("profession", "null");
+        json.put("profession", profession);
         json.put("work_type", workType);
 
 //        System.out.println(json.toString());
 
+        if (!email.equals(Client.user.getEmail())) {
+            URL url1 = new URL(GeneralMethods.getFirstOfUrl() + "user/" + "checkingEmail");
+            HttpURLConnection tempConnection1 = (HttpURLConnection) url1.openConnection();
+            tempConnection1.setRequestMethod("GET");
+            tempConnection1.setRequestProperty("LKN", Client.user.getToken());
+            tempConnection1.setDoOutput(true);
+            GeneralMethods.sendResponse(tempConnection1, json.toString());
 
-        URL url1 = new URL(GeneralMethods.getFirstOfUrl() + "user/" + "creating1");
-        HttpURLConnection tempConnection1 = (HttpURLConnection) url1.openConnection();
-        tempConnection1.setRequestMethod("GET");
-        tempConnection1.setDoOutput(true);
-        GeneralMethods.sendResponse(tempConnection1, json.toString());
-
-        if (tempConnection1.getResponseCode() == 200) {//go to home page
-            System.out.println("Accepted id and email");
-        } else if (tempConnection1.getResponseCode() == 402) {
-            statusEditInfoLabel.setText("Email Is Used!");
-            return 0;
-        } else if (tempConnection1.getResponseCode() == 400) {
-            System.out.println("Wrong input");
-            return 0;
+            if (tempConnection1.getResponseCode() == 200) {//go to home page
+                System.out.println("Accepted id and email");
+            } else if (tempConnection1.getResponseCode() == 402) {
+                statusEditInfoLabel.setText("Email Is Used!");
+                return 0;
+            } else if (tempConnection1.getResponseCode() == 400) {
+                System.out.println("Wrong input");
+                return 0;
+            }
         }
 
-
-        URL url2 = new URL(GeneralMethods.getFirstOfUrl() + "user/" + "updating/");
+        URL url2 = new URL(GeneralMethods.getFirstOfUrl() + "user/" + "updating");
         HttpURLConnection tempConnection2 = (HttpURLConnection) url2.openConnection();
         tempConnection2.setRequestMethod("GET");
         tempConnection2.setDoOutput(true);
@@ -438,8 +432,6 @@ public class EditInfoController {
         stage.show();
 
 
-
-
         //it goes to start scene
 
 //        URL url = new URL(GeneralMethods.getFirstOfUrl() + "user/" + "deleteMyAccount/" + Client.user.getID() + "/" + Client.user.getPassWord());
@@ -469,10 +461,9 @@ public class EditInfoController {
     @FXML
     public void secondDeleteAccountPressed(ActionEvent event) throws IOException {
         //delete account
-        if(!deleteAccountPassFiled.getText().equals(passWord)){
+        if (!deleteAccountPassFiled.getText().equals(Client.user.getPassWord())) {
             deleteAccountStatusLabel.setText("Wrong Password");
-        }
-        else{
+        } else {
             //delete account
             Parent root = FXMLLoader.load(getClass().getResource("StartFXML.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -484,16 +475,41 @@ public class EditInfoController {
 
     @FXML
     public void cancelPressed(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("EditInfoFXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void setPassWord(String pass){
+    public void setPassWord(String pass) {
         passWord = pass;
     }
 
+    public boolean isValidInfoPass(String pass) {
+        if (pass.length() < 8 && pass.length() != 0) {
+            return false;
+        } else if(pass.length() == 0){
+            return true ;
+        }
+        boolean hasLetter = false;
+        boolean hasNumber = false;
+
+        for (int i = 0; i < pass.length(); i++) {
+            char c = pass.charAt(i);
+            if (Character.isLetter(c)) {
+                hasLetter = true;
+            } else if (Character.isDigit(c)) {
+                hasNumber = true;
+            }
+
+            // If both conditions are met, no need to check further
+            if (hasLetter && hasNumber) {
+                return true;
+            }
+        }
+
+        return hasLetter && hasNumber;
+    }
 
 }
