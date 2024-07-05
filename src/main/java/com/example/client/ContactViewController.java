@@ -30,25 +30,25 @@ public class ContactViewController {
     @FXML
     private Button editContactButton;
     @FXML
-     TextField profileURLTexField;
+    TextField profileURLTexField;
     @FXML
-     TextField shareEmailTexField;
+    TextField shareEmailTexField;
     @FXML
-     TextField phoneNumberTexField;
+    TextField phoneNumberTexField;
     @FXML
-     TextField phoneTypeTexField;
+    TextField phoneTypeTexField;
     @FXML
-     TextField birthDateTexField;
+    TextField birthDateTexField;
     @FXML
-     TextField addressTexField;
+    TextField addressTexField;
     @FXML
-     TextField instantMessageTextField;
+    TextField instantMessageTextField;
 
     private static String profileURL = "";
     private static String shareEmail = "";
     private static String phoneNumber = "";
     private static String phoneType = "mobile";
-    private static String birthdate = "" ;
+    private static String birthdate = "";
     private static LocalDate localDateBirthDate;/////////////////////////
     private static String birthdatePolicy = "me";
     private static String address = "";
@@ -74,14 +74,14 @@ public class ContactViewController {
     private RadioButton workRadioButton;
 
 
-    private static String profileURLEdit = "";
-    private static String shareEmailEdit = "";
-    private static String phoneNumberEdit = "";
+    private static String profileURLEdit = " ";
+    private static String shareEmailEdit = " ";
+    private static String phoneNumberEdit = " ";
     private static String phoneTypeEdit = "mobile";
-    private static String birthdateEdit = "";
+    private static String birthdateEdit = " ";
     private static String birthdatePolicyEdit = "me";
-    private static String addressEdit = "";
-    private static String instantMessageEdit = "";
+    private static String addressEdit = " ";
+    private static String instantMessageEdit = " ";
     ///////////////////////////
     //////////////////////////
     ////////////////////////////
@@ -98,8 +98,6 @@ public class ContactViewController {
 
     @FXML
     private RadioButton everyOneRadioButton;
-
-
 
 
     private static boolean isPhoneTypeSelected = false;
@@ -135,7 +133,6 @@ public class ContactViewController {
         instantMessage = instantMessageTextField.getText();
 
 
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ContactEditFXML.fxml"));
         Parent root = loader.load();
 
@@ -152,8 +149,8 @@ public class ContactViewController {
                 controller.birthDateDatePickerEdit == null ||
                 controller.addressTexFieldEdit == null ||
                 controller.instantMessageTextFieldEdit == null ||
-                controller.justMeRadioButton == null||
-                controller.myContactsRadioButton == null||
+                controller.justMeRadioButton == null ||
+                controller.myContactsRadioButton == null ||
                 controller.everyOneRadioButton == null) {
             System.out.println("One or more fields are not initialized!");
             return;
@@ -164,7 +161,6 @@ public class ContactViewController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
 
 
         // Set the fields with existing data
@@ -199,7 +195,8 @@ public class ContactViewController {
         stage.setScene(scene);
         stage.show();
     }
-////////////////////////
+
+    ////////////////////////
 //////////////////////////
 /////////////////////////
 /////////////////////////
@@ -210,29 +207,24 @@ public class ContactViewController {
         ////////////////      set sql save
 
 
-
-
-
         profileURL = profileURLTexFieldEdit.getText();
         shareEmail = shareEmailTexFieldEdit.getText();
         phoneNumber = phoneNumberTexFieldEdit.getText();
-        if(mobileRadioButton.isSelected()){
+        if (mobileRadioButton.isSelected()) {
             phoneType = "mobile";
-        }
-        else if(homeRadioButton.isSelected()){
+        } else if (homeRadioButton.isSelected()) {
             phoneType = "home";
-        }
-        else if(workRadioButton.isSelected()){
+        } else if (workRadioButton.isSelected()) {
             phoneType = "work";
         }
-        birthdate = birthDateDatePickerEdit.getValue().toString();
+//        birthdate = birthDateDatePickerEdit.getValue().toString();
         localDateBirthDate = birthDateDatePickerEdit.getValue();
+
         address = addressTexFieldEdit.getText();
         instantMessage = instantMessageTextFieldEdit.getText();
 
 
-
-        if(editContact() == 1){
+        if (editContact() == 1) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ContactViewFXML.fxml"));
             Parent root = loader.load();
 
@@ -264,37 +256,29 @@ public class ContactViewController {
             controller.phoneNumberTexField.setText(phoneNumber);
             if (mobileRadioButton.isSelected()) {
                 controller.phoneTypeTexField.setText("mobile");
-            }
-            else if (homeRadioButton.isSelected()) {
+            } else if (homeRadioButton.isSelected()) {
                 controller.phoneTypeTexField.setText("home");
-            }
-            else if (workRadioButton.isSelected()) {
+            } else if (workRadioButton.isSelected()) {
                 controller.phoneTypeTexField.setText("work");
             }
             controller.addressTexField.setText(address);
             controller.instantMessageTextField.setText(instantMessage);
             if (justMeRadioButton.isSelected()) {
                 birthdatePolicy = "me";
-            }
-            else if (myContactsRadioButton.isSelected()) {
+            } else if (myContactsRadioButton.isSelected()) {
                 birthdatePolicy = "contacts";
-            }
-            else if (everyOneRadioButton.isSelected()) {
+            } else if (everyOneRadioButton.isSelected()) {
                 birthdatePolicy = "everyone";
             }
-        }
+        } else if (editContact() == 0) {
+            System.out.println("asdasasdasdasd");
+        } else if (editContact() == -9) {
+            System.out.println("asdasasdasdasdsde5353435354");
 
+        } else if (editContact() == -1) {
+            System.out.println("asdasasdasdasdsde5353435354sdfwt3w35w;ergjj;wierjpgjerg");
 
-        else if(editContact() == 0){
-
-        }
-        else if(editContact() == -9){
-
-        }
-        else if(editContact() == -1){
-
-        }
-        else if(editContact() == 10){
+        } else if (editContact() == 10) {
 
         }
         /////بقیه شرظای لازم از ظرف دیتا بیس رو بزن
@@ -311,20 +295,26 @@ public class ContactViewController {
         //"http://localhost:8080"/contact/edit
 
         JSONObject json = new JSONObject();
+
         json.put("id", Client.user.getID());
         json.put("profile_url", profileURL);
         json.put("email", shareEmail);
         json.put("phone_number", phoneNumber);
         json.put("phone_type", phoneType);
-        json.put("birth_date", Date.valueOf(birthdate));
         json.put("birthday_policy", birthdatePolicy);
         json.put("address", address);
         json.put("instant_message", instantMessage);
+        if (birthDateDatePickerEdit.getValue() == null) {
+            json.put("birth_date", Date.valueOf(LocalDate.now()));
+        }else if (birthDateDatePickerEdit.getValue() != null) {
+            json.put("birth_date", Date.valueOf(localDateBirthDate));
+        }
 
-        URL url = new URL(GeneralMethods.getFirstOfUrl() + "contact/" + "edit");
+
+        URL url = new URL(GeneralMethods.getFirstOfUrl() + "contact/" + "edit/" + Client.user.getID());
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
         tempConnection.setRequestMethod("GET");
-        tempConnection.setRequestProperty("LKN", Client.user.getToken());
+        tempConnection.setRequestProperty("LKN", Client.user.getID());
         tempConnection.setDoOutput(true);
         GeneralMethods.sendResponse(tempConnection, json.toString());
 
@@ -346,7 +336,7 @@ public class ContactViewController {
         //"http://localhost:8080"/contact/view
 
 
-        URL url = new URL(GeneralMethods.getFirstOfUrl() + "contact/" + "view");
+        URL url = new URL(GeneralMethods.getFirstOfUrl() + "contact/" + "view/" + Client.user.getID());
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
         tempConnection.setRequestMethod("GET");
         String token = "";
