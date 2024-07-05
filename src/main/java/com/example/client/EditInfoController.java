@@ -140,8 +140,8 @@ public class EditInfoController {
         }
 
 
-        if (firstNameTextFieldEdit.getText().length() == 0 || lastNameTextFieldEdit.getText().length() == 0 || emailTextFieldEdit.getText().length() == 0 || additionalTextFieldEdit.getText().length() == 0 || userNameTextFieldEdit.getText().length() == 0 || !isJobTypeSelected) {
-            statusEditInfoLabel.setText("Fill all fields");
+        if (firstNameTextFieldEdit.getText().length() == 0 || lastNameTextFieldEdit.getText().length() == 0 || emailTextFieldEdit.getText().length() == 0 || additionalTextFieldEdit.getText().length() == 0 || !isJobTypeSelected) {
+            statusEditInfoLabel.setText("Fill required fields");
         } else {
             firstName = firstNameTextFieldEdit.getText();
             lastName = lastNameTextFieldEdit.getText();
