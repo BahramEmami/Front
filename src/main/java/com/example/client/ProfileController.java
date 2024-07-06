@@ -83,10 +83,10 @@ public class ProfileController {
 
     /////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////for showing infos in education and contact and info
-    private static String eduInstituteView = "";
-    private static String eduFieldOfStudeView = "";
+    private static String eduInstituteView = " ";
+    private static String eduFieldOfStudeView = " ";
     private static float eduGradeView = 0;
-    private static String eduActivitiesDoneView = "";
+    private static String eduActivitiesDoneView = " ";
     private static String eduStartDateView = "";
     private static String eduFinishDateView = "";
     private static String eduDescriptionView = "";
@@ -219,8 +219,9 @@ public class ProfileController {
             try {
 
                 String response = GeneralMethods.getResponse(tempConnection);
-//                System.out.println(response);
+                System.out.println(response);
                 JSONObject jsonObject = new JSONObject(response);
+                System.out.println(jsonObject.toString());
 
 
                 eduInstituteView = jsonObject.isNull("instituteName") ? "" :  jsonObject.getString("instituteName");
@@ -318,7 +319,7 @@ public class ProfileController {
             try {
 
                 String response = GeneralMethods.getResponse(tempConnection);
-//                System.out.println(response);
+//                System.out.println(response + "123");
                 JSONObject jsonObject = new JSONObject(response);
 
 //                userName = jsonObject.getString("id");

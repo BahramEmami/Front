@@ -15,8 +15,10 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.json.JSONObject;
 
+import javax.xml.transform.Source;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.Socket;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -29,23 +31,23 @@ public class EducationController {
     @FXML
     Button backToProfileButton;
     @FXML
-     TextField instituteText;
+    TextField instituteText;
     @FXML
-     TextField fieldOfStudyText;
+    TextField fieldOfStudyText;
     @FXML
-     TextField gradeText;
+    TextField gradeText;
     @FXML
-     TextField activitiesDoneText;
+    TextField activitiesDoneText;
     @FXML
-     TextField startDateText;
+    TextField startDateText;
     @FXML
-     TextField finishDateText;
+    TextField finishDateText;
     @FXML
-     TextArea descriptionText;
+    TextArea descriptionText;
     @FXML
-     Button addEducationButton;
+    Button addEducationButton;
     @FXML
-     Button editEducationButton;
+    Button editEducationButton;
 
     private static String institute = "";
     private static String fieldOfStudy = "";
@@ -105,15 +107,13 @@ public class EducationController {
     @FXML
     private Button logoEducationAdd;
 
-    private static String instituteAdd= "";
+    private static String instituteAdd = "";
     private static String fieldOfStudyAdd = "";
     private static String gradeAdd = "";
     private static String activitiesDoneAdd = "";
     private static String startDateAdd = "";
     private static String finishDateAdd = "";
     private static String descriptionAdd = "";
-
-
 
 
     @FXML
@@ -124,8 +124,9 @@ public class EducationController {
         stage.setScene(scene);
         stage.show();
     }
+
     @FXML
-    public void backToProfilePressed(ActionEvent event ) throws IOException {
+    public void backToProfilePressed(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -187,30 +188,30 @@ public class EducationController {
         stage.setScene(scene);
         stage.show();
     }
+
     public int editEducation() throws IOException {
 
         //"http://localhost:8080"/education/edit
 
         JSONObject json = new JSONObject();
 
+//        System.out.println(Client.user.getID());
         json.put("id", Client.user.getID());
         json.put("institute", institute);
         json.put("field_study", fieldOfStudy);
         json.put("education_description", description);
-        json.put("activity_description", activitiesDone);
+        json.put("activity_descreption", activitiesDone);
         json.put("grade", grade);
         if (startDateDatePicker.getValue() == null) {
-            json.put("start_date", Date.valueOf(LocalDate.of(1, 1 , 1)));
-        }if (finishDateDatePicker.getValue() == null) {
-            json.put("finish_date", Date.valueOf(LocalDate.of(1, 1 , 1)));
-        } if (startDateDatePicker.getValue() != null) {
+            json.put("start_date", Date.valueOf(LocalDate.of(1, 1, 1)));
+        } else if (startDateDatePicker.getValue() != null) {
             json.put("start_date", Date.valueOf(startDateLocal));
         }
-        if (finishDateDatePicker.getValue() != null) {
+        if (finishDateDatePicker.getValue() == null) {
+            json.put("finish_date", Date.valueOf(LocalDate.of(1, 1, 1)));
+        } else if (finishDateDatePicker.getValue() != null) {
             json.put("finish_date", Date.valueOf(finishDateLocal));
         }
-
-
         URL url = new URL(GeneralMethods.getFirstOfUrl() + "education/" + "edit");
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
         tempConnection.setRequestMethod("GET");
@@ -235,10 +236,7 @@ public class EducationController {
     public void doneEditPressed(ActionEvent event) throws IOException {
 
 
-
         ////////////////////       set sql save
-
-
 
 
         institute = instituteTextEdit.getText();
@@ -248,8 +246,7 @@ public class EducationController {
         description = descriptionTextEdit.getText();
         try {
             startDate = startDateDatePicker.getValue().toString();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             startDate = "";
         }
         try {
@@ -259,10 +256,9 @@ public class EducationController {
         }
         startDateLocal = startDateDatePicker.getValue();
         finishDateLocal = startDateDatePicker.getValue();
-        try{
+        try {
             startDateString = startDateDatePicker.getValue().toString();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             startDateString = "";
         }
         try {
@@ -306,7 +302,7 @@ public class EducationController {
             controller.startDateText.setText(startDate);
             controller.finishDateText.setText(finishDate);
             controller.descriptionText.setText(description);
-        }  else if (editEducation() == 0) {
+        } else if (editEducation() == 0) {
             System.out.println("error1");
         } else if (editEducation() == -9) {
             System.out.println("error2");
@@ -357,15 +353,14 @@ public class EducationController {
     }
 
     @FXML
-    public void doneAddPressed(ActionEvent event){
+    public void doneAddPressed(ActionEvent event) {
         institute = instituteTextAdd.getText();
-        fieldOfStudy =fieldOfStudyTextAdd.getText();
+        fieldOfStudy = fieldOfStudyTextAdd.getText();
         grade = gradeTextAdd.getText();
         activitiesDone = activitiesDoneTextAdd.getText();
         try {
             startDate = startDateDatePickerAdd.getValue().toString();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             startDate = "";
         }
         try {
