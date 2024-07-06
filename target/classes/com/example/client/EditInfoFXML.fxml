@@ -103,7 +103,7 @@
                                                       <PasswordField fx:id="passwordPassFieldEdit" />
                                                       <PasswordField fx:id="repPassPassFieldEdit" />
                                                       <TextField fx:id="additionalTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
-                                                      <TextField fx:id="userNameTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
+                                                      <TextField fx:id="userNameTextFieldEdit" editable="false" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
                                           <TextField fx:id="professionTextFieldEdit" prefHeight="26.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF;" text=" " />
                                                   </children>
                                                   <padding>

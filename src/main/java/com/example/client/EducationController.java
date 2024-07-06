@@ -13,8 +13,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 
 public class EducationController {
     private Stage stage;
@@ -49,6 +54,8 @@ public class EducationController {
     private static String startDate = "";
     private static String finishDate = "";
     private static String description = "";
+    static LocalDate startDateLocal;
+    static LocalDate finishDateLocal;
 
 
     @FXML
@@ -178,6 +185,49 @@ public class EducationController {
         stage.setScene(scene);
         stage.show();
     }
+    public int editEducation() throws IOException {
+
+        //"http://localhost:8080"/education/edit
+
+        JSONObject json = new JSONObject();
+
+        json.put("id", Client.user.getID());
+        json.put("institute", institute);
+        json.put("field_study", fieldOfStudy);
+        json.put("education_description", description);
+        json.put("activity_description", activitiesDone);
+        json.put("grade", grade);
+        if (startDateDatePicker.getValue() == null) {
+            json.put("start_date", Date.valueOf(LocalDate.of(1, 1 , 1)));
+        }if (finishDateDatePicker.getValue() == null) {
+            json.put("finish_date", Date.valueOf(LocalDate.of(1, 1 , 1)));
+        } if (startDateDatePicker.getValue() != null) {
+            json.put("start_date", Date.valueOf(startDateLocal));
+        }
+        if (finishDateDatePicker.getValue() != null) {
+            json.put("finish_date", Date.valueOf(finishDateLocal));
+        }
+
+
+        URL url = new URL(GeneralMethods.getFirstOfUrl() + "education/" + "edit");
+        HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
+        tempConnection.setRequestMethod("GET");
+        tempConnection.setRequestProperty("LKN", Client.user.getToken());
+        tempConnection.setDoOutput(true);
+        GeneralMethods.sendResponse(tempConnection, json.toString());
+
+        if (tempConnection.getResponseCode() == 200) {      //go to home page
+            return 1;
+        } else if (tempConnection.getResponseCode() == 400) {
+            return 0;
+        } else if (tempConnection.getResponseCode() == 401) {
+            return -9;
+        } else if (tempConnection.getResponseCode() == 404) {
+            return -1;
+        } else// nothing
+            return 10;
+    }
+
 
     @FXML
     public void doneEditPressed(ActionEvent event) throws IOException {
@@ -205,6 +255,8 @@ public class EducationController {
         } catch (Exception e) {
             finishDate = "";
         }
+        startDateLocal = .getValue();
+        finishDateLocal = .getValue();
 
 
         if (editEducation() == 1) {
@@ -241,16 +293,17 @@ public class EducationController {
             controller.startDateText.setText(startDate);
             controller.finishDateText.setText(finishDate);
             controller.descriptionText.setText(description);
-        } else if (editEducation() == 0) {
-
+        }  else if (editEducation() == 0) {
+            System.out.println("error1");
         } else if (editEducation() == -9) {
+            System.out.println("error2");
 
         } else if (editEducation() == -1) {
+            System.out.println("error3");
 
         } else if (editEducation() == 10) {
-
+            System.out.println("!!!");
         }
-        /////بقیه شرظای لازم از ظرف دیتا بیس رو بزن
     }
 
     @FXML
@@ -313,7 +366,4 @@ public class EducationController {
     }
 
 
-    public int editEducation(){
-        return 1;
-    }
 }

@@ -257,11 +257,13 @@ public class ContactViewController {
         } else if (workRadioButton.isSelected()) {
             phoneType = "work";
         }
-        try{
-        birthdate = birthDateDatePickerEdit.getValue().toString();}catch (Exception e){
-            birthdate= "";
+        try {
+            birthdate = birthDateDatePickerEdit.getValue().toString();
+        } catch (Exception e) {
+            birthdate = "";
 
-        }        localDateBirthDate = birthDateDatePickerEdit.getValue();
+        }
+        localDateBirthDate = birthDateDatePickerEdit.getValue();
 //        System.out.println((localDateBirthDate));
 
         address = addressTexFieldEdit.getText();
@@ -299,9 +301,9 @@ public class ContactViewController {
             controller.shareEmailTexField.setText(shareEmail);
             controller.phoneNumberTexField.setText(phoneNumber);
 
-                controller.birthDateTexField.setText(birthdate);
+            controller.birthDateTexField.setText(birthdate);
 
-                if (mobileRadioButton.isSelected()) {
+            if (mobileRadioButton.isSelected()) {
                 controller.phoneTypeTexField.setText("mobile");
             } else if (homeRadioButton.isSelected()) {
                 controller.phoneTypeTexField.setText("home");
@@ -351,8 +353,9 @@ public class ContactViewController {
         json.put("address", address);
         json.put("instant_message", instantMessage);
         if (birthDateDatePickerEdit.getValue() == null) {
-            json.put("birth_date", Date.valueOf(LocalDate.of(1, 1 , 1)));
-        } if (birthDateDatePickerEdit.getValue() != null) {
+            json.put("birth_date", Date.valueOf(LocalDate.of(1, 1, 1)));
+        }
+        if (birthDateDatePickerEdit.getValue() != null) {
             json.put("birth_date", Date.valueOf(localDateBirthDate));
         }
 

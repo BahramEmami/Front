@@ -22,6 +22,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 
@@ -84,7 +85,7 @@ public class ProfileController {
     /////////////////////////////////////for showing infos in education and contact and info
     private static String eduInstituteView = "";
     private static String eduFieldOfStudeView = "";
-    private static String eduGradeView = "";
+    private static float eduGradeView = 0;
     private static String eduActivitiesDoneView = "";
     private static String eduStartDateView = "";
     private static String eduFinishDateView = "";
@@ -158,8 +159,15 @@ public class ProfileController {
     public void educationSeaMorePressed(ActionEvent event) throws IOException {
 
 
-        //////////////////////////////////   get sql show
-
+        if (viewEdu() == 1) {
+            System.out.println("Done");
+        } else if (viewEdu() == -1) {
+            System.out.println("Error");
+        } else if (viewEdu() == 0) {
+            System.out.println("First Time");
+        } else if (viewEdu() == 10) {
+            System.out.println(10);
+        }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("EducationFXML.fxml"));
         Parent root = loader.load();
@@ -187,11 +195,61 @@ public class ProfileController {
 
         controller.instituteText.setText(eduInstituteView);
         controller.fieldOfStudyText.setText(eduFieldOfStudeView);
-        controller.gradeText.setText(eduGradeView);
+        controller.gradeText.setText(String.valueOf(eduGradeView));
         controller.activitiesDoneText.setText(eduActivitiesDoneView);
         controller.startDateText.setText(eduStartDateView);
         controller.finishDateText.setText(eduFinishDateView);
         controller.descriptionText.setText(eduDescriptionView);
+    }
+
+    private int viewEdu() throws IOException {
+
+
+        //"http://localhost:8080"/education/view
+
+
+        URL url = new URL(GeneralMethods.getFirstOfUrl() + "education/" + "view");
+        HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();
+        tempConnection.setRequestMethod("GET");
+        tempConnection.setRequestProperty("LKN", Client.user.getToken());
+        tempConnection.setDoOutput(true);
+
+        if (tempConnection.getResponseCode() == 200) {
+
+            try {
+
+                String response = GeneralMethods.getResponse(tempConnection);
+//                System.out.println(response);
+                JSONObject jsonObject = new JSONObject(response);
+
+
+                eduInstituteView = jsonObject.isNull("instituteName") ? "" :  jsonObject.getString("instituteName");
+                eduFieldOfStudeView = jsonObject.isNull("fieldOfStudy") ? "" : jsonObject.getString("fieldOfStudy");
+                eduGradeView = jsonObject.isNull("grade") ? 0 : jsonObject.getFloat("grade");
+                eduActivitiesDoneView = jsonObject.isNull("educationalActivitiesDescription") ? " " : jsonObject.getString("educationalActivitiesDescription");
+                eduStartDateView = jsonObject.isNull("educationStartDate") ? " " : jsonObject.getString("educationStartDate");
+                eduFinishDateView = jsonObject.isNull("educationFinishDate") ? " " : jsonObject.getString("educationFinishDate");
+                if (eduStartDateView.equals("0001-01-01")){
+                    eduStartDateView = "";
+                }if (eduFinishDateView.equals("0001-01-01")){
+                    eduFinishDateView = "";
+                }
+                eduDescriptionView = jsonObject.isNull("educationalDescription") ? "" : jsonObject.getString("educationalDescription");
+            } catch (Exception e) {
+                System.out.println("Error JSON");
+                e.printStackTrace();
+            }
+        }
+
+
+        if (tempConnection.getResponseCode() == 200) {      //go to home page
+            return 1;
+        } else if (tempConnection.getResponseCode() == 400) {
+            return 0;
+        } else if (tempConnection.getResponseCode() == 404) {
+            return -1;
+        } else// nothing
+            return 10;
     }
 
     /////////////////
