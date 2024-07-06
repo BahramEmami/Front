@@ -56,6 +56,8 @@ public class EducationController {
     private static String description = "";
     static LocalDate startDateLocal;
     static LocalDate finishDateLocal;
+    private static String startDateString = "";
+    private static String finishDateString = "";
 
 
     @FXML
@@ -255,8 +257,19 @@ public class EducationController {
         } catch (Exception e) {
             finishDate = "";
         }
-        startDateLocal = .getValue();
-        finishDateLocal = .getValue();
+        startDateLocal = startDateDatePicker.getValue();
+        finishDateLocal = startDateDatePicker.getValue();
+        try{
+            startDateString = startDateDatePicker.getValue().toString();
+        }
+        catch (Exception e){
+            startDateString = "";
+        }
+        try {
+            finishDateString = startDateDatePicker.getValue().toString();
+        } catch (Exception e) {
+            finishDateString = "";
+        }
 
 
         if (editEducation() == 1) {
