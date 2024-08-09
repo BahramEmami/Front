@@ -358,7 +358,7 @@ public class ContactViewController {
         if (birthDateDatePickerEdit.getValue() != null) {
             json.put("birth_date", Date.valueOf(localDateBirthDate));
         }
-
+//        System.out.println(json);
 
         URL url = new URL(GeneralMethods.getFirstOfUrl() + "contact/" + "edit");
         HttpURLConnection tempConnection = (HttpURLConnection) url.openConnection();

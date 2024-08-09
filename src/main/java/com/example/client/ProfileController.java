@@ -319,8 +319,8 @@ public class ProfileController {
             try {
 
                 String response = GeneralMethods.getResponse(tempConnection);
-//                System.out.println(response + "123");
                 JSONObject jsonObject = new JSONObject(response);
+                System.out.println(jsonObject);
 
 //                userName = jsonObject.getString("id");
 //                conProfileUrlView = jsonObject.getString("profileURL");

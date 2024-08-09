@@ -220,6 +220,7 @@ public class EducationController {
         GeneralMethods.sendResponse(tempConnection, json.toString());
 
         if (tempConnection.getResponseCode() == 200) {      //go to home page
+            System.out.println();
             return 1;
         } else if (tempConnection.getResponseCode() == 400) {
             return 0;

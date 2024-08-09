@@ -170,8 +170,7 @@ public class LoginController {
                 e.printStackTrace();
             }
             try {
-
-                File file = new File("src/main/resources/com/example/assets/token.txt");
+                File file = new File("C:\\Users\\iliya\\OneDrive\\Desktop\\LinkedIn\\Front\\src\\main\\resources\\com\\example\\client\\assets\\token.txt");
                 FileWriter fileWriter = new FileWriter(file);
                 fileWriter.write(token);
                 fileWriter.close();
@@ -222,15 +221,15 @@ public class LoginController {
                 e.printStackTrace();
             }
 
-//            try {
-//                File file = new File("src/main/resources/assets/token.txt");
-//                FileWriter fileWriter = new FileWriter(file);
-//                fileWriter.write(token);
-//                fileWriter.close();
-//            } catch (IOException e) {
-//                System.out.println("ERROR in saving token");
-//                e.printStackTrace();
-//            }
+            try {
+                File file = new File("C:\\Users\\iliya\\OneDrive\\Desktop\\LinkedIn\\Front\\src\\main\\resources\\com\\example\\client\\assets\\token.txt");
+                FileWriter fileWriter = new FileWriter(file);
+                fileWriter.write(token);
+                fileWriter.close();
+            } catch (IOException e) {
+                System.out.println("ERROR in saving token");
+                e.printStackTrace();
+            }
 
         }
         if (tempConnection.getResponseCode() == 200) {//go to home page
@@ -250,7 +249,7 @@ public class LoginController {
 //        try {
 //
 //
-//            File file = new File("src/main/resources/com/example/assets/token.txt");
+//            File file = new File("C:\\Users\\iliya\\OneDrive\\Desktop\\LinkedIn\\Front\\src\\main\\resources\\com\\example\\client\\assets\\token.txt");
 //            FileReader fileReader = new FileReader(file);
 //            BufferedReader bufferedReader = new BufferedReader(fileReader);
 //            String token = bufferedReader.readLine();
@@ -267,18 +266,19 @@ public class LoginController {
 //                    String lastName = jsonObject.isNull("last_name") ? null : jsonObject.getString("last_name");
 //                    String additionalName = jsonObject.isNull("additional_name") ? null : jsonObject.getString("additional_name");
 //                    String country = jsonObject.isNull("workType") ? null : jsonObject.getString("country");
-//                        try {
-//                            Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
-//                            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//                            scene = new Scene(root);
-//                            stage.setScene(scene);
-//                            stage.show();
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
+//                    try {
+////                            statusLabel.setText("Successfully entered!");
+//                        Parent root = FXMLLoader.load(getClass().getResource("ProfileFXML.fxml"));
+//                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//                        scene = new Scene(root);
+//                        stage.setScene(scene);
+//                        stage.show();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
 //                    }
 //                }
-//            } catch (ProtocolException ex) {
+//            }
+//        } catch (ProtocolException ex) {
 //            throw new RuntimeException(ex);
 //        } catch (MalformedURLException ex) {
 //            throw new RuntimeException(ex);
@@ -286,15 +286,16 @@ public class LoginController {
 //            throw new RuntimeException(ex);
 //        } catch (IOException ex) {
 //            throw new RuntimeException(ex);
-//        }
-//    } catch (FileNotFoundException e) {
+//        } catch (FileNotFoundException e) {
 //            System.out.println("file not found");
 //        } catch (Exception e) {
 //            System.out.println("connection failed");
 //            e.printStackTrace();
 //        }
+//
+//
+//    }
 
 
-    }
-
+}
 
